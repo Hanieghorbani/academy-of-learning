@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function LandingCounter({ count }) {
+export default function LandingCounter({ limit }) {
   const [courseCounter, setCourseCounter] = useState(0);
 
   useEffect(() => {
@@ -8,7 +8,7 @@ export default function LandingCounter({ count }) {
       setCourseCounter((prevCount) => prevCount + 1);
     }, 1);
 
-    if (courseCounter === count) {
+    if (courseCounter === limit) {
       clearInterval(interval);
     }
 

@@ -1,11 +1,14 @@
-import React from "react"
+import React, { useEffect, useContext } from "react"
 import "./Navbar.css"
-import {AiOutlineSearch} from 'react-icons/ai'
-import {HiOutlineShoppingCart} from 'react-icons/hi'
-import {IoIosArrowDown} from 'react-icons/io'
+import { AiOutlineSearch } from "react-icons/ai"
+import { HiOutlineShoppingCart } from "react-icons/hi"
+import { IoIosArrowDown } from "react-icons/io"
 import { Link } from "react-router-dom"
-
+import AuthContext from "../../userContext/authContext"
 export default function Navbar() {
+  const contextData = useContext(AuthContext)
+
+  console.log(contextData.userInfos.name)
   return (
     <div className="main-header">
       <div className="container-fluid">
@@ -19,16 +22,18 @@ export default function Navbar() {
 
             <ul className="main-header__menu">
               <li className="main-header__item">
-                <Link to={'/index'} className="main-header__link">
+                <Link to={"/index"} className="main-header__link">
                   صفحه اصلی
                 </Link>
               </li>
 
               <li className="main-header__item">
-                <Link to={'/categoryInfo/frontend'} className="main-header__link">
+                <Link
+                  to={"/categoryInfo/frontend"}
+                  className="main-header__link"
+                >
                   فرانت اند
-        
-                  <IoIosArrowDown className="main-header__link-icon"/>
+                  <IoIosArrowDown className="main-header__link-icon" />
                   <ul className="main-header__dropdown">
                     <li className="main-header__dropdown-item">
                       <a href="#" className="main-header__dropdown-link">
@@ -61,7 +66,7 @@ export default function Navbar() {
               <li className="main-header__item">
                 <a href="#" className="main-header__link">
                   امنیت
-                  <IoIosArrowDown className="main-header__link-icon"/>
+                  <IoIosArrowDown className="main-header__link-icon" />
                   <ul className="main-header__dropdown">
                     <li className="main-header__dropdown-item">
                       <a href="#" className="main-header__dropdown-link">
@@ -87,9 +92,12 @@ export default function Navbar() {
                 </a>
               </li>
               <li className="main-header__item">
-                <Link to={'/articleInfo/:articleName'} className="main-header__link">
+                <Link
+                  to={"/articleInfo/:articleName"}
+                  className="main-header__link"
+                >
                   مقالات
-                  <IoIosArrowDown className="main-header__link-icon"/>
+                  <IoIosArrowDown className="main-header__link-icon" />
                   <ul className="main-header__dropdown">
                     <li className="main-header__dropdown-item">
                       <a href="#" className="main-header__dropdown-link">
@@ -112,7 +120,7 @@ export default function Navbar() {
               <li className="main-header__item">
                 <a href="#" className="main-header__link">
                   پایتون
-                  <IoIosArrowDown className="main-header__link-icon"/>
+                  <IoIosArrowDown className="main-header__link-icon" />
                   <ul className="main-header__dropdown">
                     <li className="main-header__dropdown-item">
                       <a href="#" className="main-header__dropdown-link">
@@ -142,14 +150,25 @@ export default function Navbar() {
 
           <div className="main-header__left">
             <a href="#" className="main-header__search-btn">
-            <AiOutlineSearch className="main-header__search-icon"/>
+              <AiOutlineSearch className="main-header__search-icon" />
             </a>
             <a href="#" className="main-header__cart-btn">
-            <HiOutlineShoppingCart className="main-header__cart-icon"/>
+              <HiOutlineShoppingCart className="main-header__cart-icon" />
             </a>
-            <Link to={'/login'} className="main-header__profile">
-              <span className="main-header__profile-text">حانیه قربانی</span>
-            </Link>
+
+            {contextData.isLoggedIn ? (
+              <Link to={"/login"} className="main-header__profile">
+                <span className="main-header__profile-text">
+                  {contextData.userInfos.name}
+                </span>
+              </Link>
+            ) : (
+              <Link to={"/login"} className="main-header__profile">
+                <span className="main-header__profile-text">
+                  ورود / ثبت نام
+                </span>
+              </Link>
+            )}
           </div>
         </div>
       </div>

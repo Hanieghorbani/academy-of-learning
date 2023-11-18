@@ -1,4 +1,5 @@
-import React from "react"
+import React,{useContext} from "react"
+import "./Register.css"
 import { Link } from "react-router-dom"
 import Footer from "../../Components/Footer/Footer"
 import Button from "../../Components/Form/Button"
@@ -11,15 +12,17 @@ import {
   maxValidator,
   emailValidator,
 } from "../../validators/rules"
-import { FaEye, FaEnvelope, FaUserPlus } from "react-icons/fa"
-import { BiSolidTimeFive, BiSolidUser } from "react-icons/bi"
-import { MdInput } from "react-icons/md"
-
-import "./Register.css"
+import { FaEye, FaEnvelope, FaUserPlus, FaRegUserCircle } from "react-icons/fa"
+import { BiSolidUser } from "react-icons/bi"
+import AuthContext from "../../userContext/authContext"
 
 export default function Register() {
   const [formState, onInputHandler] = useForm(
     {
+      registerName: {
+        value: "",
+        isValid: false,
+      },
       registerEmail: {
         value: "",
         isValid: false,
@@ -32,12 +35,44 @@ export default function Register() {
         value: "",
         isValid: false,
       },
+      registerConfirmPassword: {
+        value: "",
+        isValid: false,
+      },
     },
     false
   )
+  const contextData = useContext(AuthContext)
+
   const registerNewUser = (event) => {
     event.preventDefault()
-    console.log("User Register")
+    if (
+      formState.inputs.registerPassword.value ===
+      formState.inputs.registerConfirmPassword.value
+    ) {
+      console.log("User Register")
+      const newUser = {
+        name: formState.inputs.registerName.value,
+        username: formState.inputs.registerUsername.value,
+        email: formState.inputs.registerEmail.value,
+        password: formState.inputs.registerPassword.value,
+        confirmPassword: formState.inputs.registerConfirmPassword.value,
+      }
+      fetch(`http://localhost:4000/v1/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+          contextData.login(result.user,result.accessToken)
+        })
+    } else {
+      console.log("confirm pass is not match")
+    }
   }
 
   return (
@@ -52,13 +87,29 @@ export default function Register() {
           </span>
           <div className="login__new-member">
             <span className="login__new-member-text">
-              قبلا ثبت‌نام کرده‌اید؟{" "}
+              قبلا ثبت‌نام کرده‌اید؟
             </span>
             <Link className="login__new-member-link" to="/login">
               وارد شوید
             </Link>
           </div>
           <form action="#" className="login-form">
+            <div className="login-form__username">
+              <Input
+                id="registerName"
+                type="text"
+                placeholder="نام و نام خانوادگی"
+                className="login-form__username-input"
+                element="input"
+                onInputHandler={onInputHandler}
+                validations={[
+                  requiredValidator(),
+                  minValidator(8),
+                  maxValidator(20),
+                ]}
+              />
+              <FaRegUserCircle className="login-form__username-icon" />
+            </div>
             <div className="login-form__username">
               <Input
                 id="registerUsername"
@@ -83,7 +134,11 @@ export default function Register() {
                 className="login-form__username-input"
                 element="input"
                 onInputHandler={onInputHandler}
-                validations={[requiredValidator(), emailValidator()]}
+                validations={[
+                  requiredValidator(),
+                  maxValidator(25),
+                  emailValidator(),
+                ]}
               />
               <FaEnvelope className="login-form__password-icon " />
             </div>
@@ -92,6 +147,23 @@ export default function Register() {
                 id="registerPassword"
                 type="password"
                 placeholder="رمز عبور"
+                className="login-form__password-input"
+                element="input"
+                onInputHandler={onInputHandler}
+                validations={[
+                  requiredValidator(),
+                  minValidator(8),
+                  maxValidator(18),
+                ]}
+              />
+              <i className="login-form__password-icon fa fa-lock-open"></i>
+              <FaEye className="login-form__password-icon" />
+            </div>
+            <div className="login-form__password">
+              <Input
+                id="registerConfirmPassword"
+                type="password"
+                placeholder="تکرار رمز عبور"
                 className="login-form__password-input"
                 element="input"
                 onInputHandler={onInputHandler}
