@@ -7,7 +7,7 @@ import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 
 const routes = [
-    { path: '/index', element: <Index /> },
+    { path: '/', element: <Index /> },
     { path: '/courseInfo/:courseName', element: <CourseInfo /> },
     { path: '/categoryInfo/:categoryName', element: <Category /> },
     { path: '/articleInfo/:articleName', element: <ArticleInfo /> },

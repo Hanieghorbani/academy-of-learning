@@ -83,12 +83,7 @@ export default function Register() {
                 className="login-form__username-input"
                 element="input"
                 onInputHandler={onInputHandler}
-                validations={[
-                  requiredValidator(),
-                  minValidator(8),
-                  maxValidator(20),
-                  emailValidator(),
-                ]}
+                validations={[requiredValidator(), emailValidator()]}
               />
               <FaEnvelope className="login-form__password-icon " />
             </div>
