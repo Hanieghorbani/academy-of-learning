@@ -67,8 +67,7 @@ export default function Register() {
       })
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
-          contextData.login(result.user,result.accessToken)
+          contextData.login(result.accessToken)
         })
     } else {
       console.log("confirm pass is not match")

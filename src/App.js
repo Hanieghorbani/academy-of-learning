@@ -14,6 +14,16 @@ export default function App() {
     setToken(token)
     setIsLoggedIn(true)
     setUserInfos(userInfos)
+    // fetch("http://localhost:4000/v1/auth/me", {
+    //   method: "GET",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((user) => {
+    //     setUserInfos(user)
+    //   })
     localStorage.setItem("user", JSON.stringify({ token }))
   }, [])
 
@@ -24,23 +34,21 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-   
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
     if (localStorageToken) {
       fetch(`http://localhost:4000/v1/auth/me`, {
         method: "GET",
         headers: {
-          'Authorization': `Brearer ${localStorageToken.token}`,
-        }
+          Authorization: `Brearer ${localStorageToken.token}`,
+        },
       })
         .then((res) => res.json())
         .then((userDatas) => {
           setIsLoggedIn(true)
           setUserInfos(userDatas)
-          
         })
     }
-  }, [login])
+  }, [token])
   return (
     <AuthContext.Provider
       value={{

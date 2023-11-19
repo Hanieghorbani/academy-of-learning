@@ -7,8 +7,6 @@ import { Link } from "react-router-dom"
 import AuthContext from "../../userContext/authContext"
 export default function Navbar() {
   const contextData = useContext(AuthContext)
-
-  console.log(contextData.userInfos.name)
   return (
     <div className="main-header">
       <div className="container-fluid">

@@ -1,25 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Footer from "../../Components/Footer/Footer";
-import Button from "../../Components/Form/Button";
-import Input from "../../Components/Form/Input";
-import Header from '../../Components/Header/Header'
-import { useForm } from "../../hooks/useForm";
-import {
-  FaEye,
-} from "react-icons/fa"
-import { BiSolidTimeFive, BiSolidUser } from "react-icons/bi"
-import { MdInput } from "react-icons/md";
-
+import React, { useContext } from "react"
+import { Link, json } from "react-router-dom"
+import Footer from "../../Components/Footer/Footer"
+import Button from "../../Components/Form/Button"
+import Input from "../../Components/Form/Input"
+import Header from "../../Components/Header/Header"
+import { useForm } from "../../hooks/useForm"
+import { FaEye } from "react-icons/fa"
+import { BiSolidUser } from "react-icons/bi"
+import { MdInput } from "react-icons/md"
+import swal from "sweetalert"
 import {
   requiredValidator,
   minValidator,
   maxValidator,
-  emailValidator,
-} from "../../validators/rules";
-import "./Login.css";
-
+} from "../../validators/rules"
+import "./Login.css"
+import AuthContext from "../../userContext/authContext"
+import { useNavigate } from "react-router-dom"
 export default function Login() {
+  const navigate = useNavigate()
+
+  const contextData = useContext(AuthContext)
   const [formState, onInputHandler] = useForm(
     {
       loginUsername: {
@@ -32,12 +33,59 @@ export default function Login() {
       },
     },
     false
-  );
+  )
 
   const userLogin = (e) => {
-    e.preventDefault();
-    console.log("User Login");
-  };
+    e.preventDefault()
+    const userInfo = {
+      identifier: formState.inputs.loginUsername.value,
+      password: formState.inputs.loginPassword.value,
+    }
+
+    fetch("http://localhost:4000/v1/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          return res.text().then((text) => {
+            throw new Error(text)
+          })
+        }
+      })
+      .then((result) => {
+        contextData.login({}, result.accessToken)
+        swal({
+          text: " شما با موفقیت وارد حساب کاربری خود شدید",
+          icon: "success",
+          dangerMode: false,
+          buttons: "ورود به پنل",
+        }).then((value) => {
+          navigate("/")
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+        {
+        }
+        swal({
+          text:
+            err == 'Error: "there is no user with this email or username"'
+              ? "نام کاربری اشتباه است"
+              : "رمز عبور اشتباه است",
+          icon: "error",
+          dangerMode: true,
+          buttons: "تلاش مجدد",
+        }).then((value) => {
+          navigate("/login")
+        })
+      })
+  }
 
   return (
     <>
@@ -70,7 +118,7 @@ export default function Login() {
                 ]}
                 onInputHandler={onInputHandler}
               />
-              <BiSolidUser className="login-form__username-icon"/>
+              <BiSolidUser className="login-form__username-icon" />
             </div>
             <div className="login-form__password">
               <Input
@@ -87,20 +135,17 @@ export default function Login() {
                 onInputHandler={onInputHandler}
               />
 
-              <FaEye className="login-form__password-icon"/>
-
+              <FaEye className="login-form__password-icon" />
             </div>
             <Button
               className={`login-form__btn ${
-                formState.isFormValid
-                  ? "bg-success"
-                  : "bg-danger"
+                formState.isFormValid ? "bg-success" : "bg-danger"
               }`}
               type="submit"
               onClick={userLogin}
               disabled={!formState.isFormValid}
             >
-              <MdInput className="login-form__btn-icon"/>
+              <MdInput className="login-form__btn-icon" />
               <span className="login-form__btn-text">ورود</span>
             </Button>
             <div className="login-form__password-setting">
@@ -140,5 +185,5 @@ export default function Login() {
 
       <Footer />
     </>
-  );
+  )
 }
