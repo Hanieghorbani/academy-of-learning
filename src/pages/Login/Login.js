@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { Link, json } from "react-router-dom"
 import Footer from "../../Components/Footer/Footer"
 import Button from "../../Components/Form/Button"
@@ -17,10 +17,12 @@ import {
 import "./Login.css"
 import AuthContext from "../../userContext/authContext"
 import { useNavigate } from "react-router-dom"
+import ReCAPTCHA from "react-google-recaptcha"
 export default function Login() {
   const navigate = useNavigate()
 
   const contextData = useContext(AuthContext)
+  const [isVarifyRecaptcha, setIsVarifyRecaptcha] = useState(false)
   const [formState, onInputHandler] = useForm(
     {
       loginUsername: {
@@ -70,9 +72,6 @@ export default function Login() {
         })
       })
       .catch((err) => {
-        console.log(err)
-        {
-        }
         swal({
           text:
             err == 'Error: "there is no user with this email or username"'
@@ -137,13 +136,20 @@ export default function Login() {
 
               <FaEye className="login-form__password-icon" />
             </div>
+
+            <ReCAPTCHA
+              sitekey="6LdplhQpAAAAAHk9zONwQxXMxr8P3BMceKCxN8Iv"
+              onChange={() => setIsVarifyRecaptcha(true)}
+            />
             <Button
               className={`login-form__btn ${
-                formState.isFormValid ? "bg-success" : "bg-danger"
+                formState.isFormValid && isVarifyRecaptcha
+                  ? "bg-success"
+                  : "bg-danger"
               }`}
               type="submit"
               onClick={userLogin}
-              disabled={!formState.isFormValid}
+              disabled={!formState.isFormValid || !isVarifyRecaptcha}
             >
               <MdInput className="login-form__btn-icon" />
               <span className="login-form__btn-text">ورود</span>
