@@ -14,16 +14,6 @@ export default function App() {
     setToken(token)
     setIsLoggedIn(true)
     setUserInfos(userInfos)
-    // fetch("http://localhost:4000/v1/auth/me", {
-    //   method: "GET",
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((user) => {
-    //     setUserInfos(user)
-    //   })
     localStorage.setItem("user", JSON.stringify({ token }))
   }, [])
 

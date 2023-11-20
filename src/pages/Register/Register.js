@@ -1,4 +1,4 @@
-import React,{useContext} from "react"
+import React, { useContext } from "react"
 import "./Register.css"
 import { Link } from "react-router-dom"
 import Footer from "../../Components/Footer/Footer"
@@ -6,6 +6,8 @@ import Button from "../../Components/Form/Button"
 import Input from "../../Components/Form/Input"
 import Header from "../../Components/Header/Header"
 import { useForm } from "../../hooks/useForm"
+import swal from "sweetalert"
+import { useNavigate } from "react-router-dom"
 import {
   requiredValidator,
   minValidator,
@@ -17,6 +19,7 @@ import { BiSolidUser } from "react-icons/bi"
 import AuthContext from "../../userContext/authContext"
 
 export default function Register() {
+  const navigate = useNavigate()
   const [formState, onInputHandler] = useForm(
     {
       registerName: {
@@ -65,9 +68,36 @@ export default function Register() {
         },
         body: JSON.stringify(newUser),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.ok) {
+            return res.json()
+          } else {
+            return res.text().then((text) => {
+              throw new Error(text)
+            })
+          }
+        })
         .then((result) => {
-          contextData.login(result.accessToken)
+          contextData.login({}, result.accessToken)
+          console.log(formState.inputs)
+          swal({
+            text: " شما با موفقیت وارد حساب کاربری خود شدید",
+            icon: "success",
+            dangerMode: false,
+            buttons: "ورود به پنل",
+          }).then((value) => {
+            navigate("/")
+          })
+        })
+        .catch((err) => {
+          swal({
+            text: "این کاربر قبلا ثبت نام کرده",
+            icon: "error",
+            dangerMode: true,
+            buttons: "ورود",
+          }).then((value) => {
+            navigate("/login")
+          })
         })
     } else {
       console.log("confirm pass is not match")

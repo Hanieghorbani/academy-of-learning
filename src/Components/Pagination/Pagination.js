@@ -13,7 +13,7 @@ export default function Pagination() {
           </a>
         </li>
         <li className="courses__pagination-item">
-          <a href="#" className="courses__pagination-link">
+          <a href="#" className="courses__pagination-link courses__pagination-link--active">
             1
           </a>
         </li>
@@ -25,7 +25,7 @@ export default function Pagination() {
         <li className="courses__pagination-item">
           <a
             href="#"
-            className="courses__pagination-link courses__pagination-link--active"
+            className="courses__pagination-link"
           >
             3
           </a>

@@ -1,23 +1,70 @@
-import React from "react"
+import React, {  useEffect, useState } from "react"
 import "./CourseInfo.css"
 import Header from "../../Components/Header/Header"
 import Footer from "../../Components/Footer/Footer"
-import CourseDetailsBox from '../../Components/CourseDetailBox/CourseDetailBox'
+import CourseDetailsBox from "../../Components/CourseDetailBox/CourseDetailBox"
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb"
 import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea"
+import swal from "sweetalert"
+
 import { Accordion } from "react-bootstrap"
 import { BsTelegram, BsFacebook } from "react-icons/bs"
-import { BiLogoTwitter} from "react-icons/bi"
-import {
-  FaGraduationCap,
-  FaEye,
-  FaLink,
-  FaYoutube
-} from "react-icons/fa"
-import { AiFillInfoCircle, AiFillWechat } from "react-icons/ai"
+import { BiLogoTwitter } from "react-icons/bi"
+import { FaGraduationCap, FaEye, FaLink, FaYoutube } from "react-icons/fa"
+import { AiFillWechat } from "react-icons/ai"
 import { PiStudentBold } from "react-icons/pi"
-import { GiChart } from "react-icons/gi"
+import { useParams, useNavigate } from "react-router-dom"
 export default function CourseInfo() {
+  const navigate = useNavigate()
+  const [comments, setComments] = useState([])
+  const [sessions, setSessions] = useState([])
+  const [categoryID, setCategoryID] = useState([])
+  const [courseInfos, setCourseInfos] = useState({})
+  const [creator, setCreator] = useState([])
+  const [updatedAt, setUpdatedAt] = useState("")
+  const [createdAt, setCreatedAt] = useState("")
+  const parametr = useParams()
+  useEffect(() => {
+    const localStorageToken = JSON.parse(localStorage.getItem("user"))
+    fetch(`http://localhost:4000/v1/courses/${parametr.courseName}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${
+          localStorageToken ? localStorageToken.token : "null"
+        }`,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        } else {
+          return res.text().then((text) => {
+            throw new Error(text)
+          })
+        }
+      })
+      .then((result) => {
+        console.log(result)
+        setComments(result.comments)
+        setSessions(result.sessions)
+        setCategoryID(result.categoryID)
+        setCourseInfos(result)
+        setUpdatedAt(result.updatedAt)
+        setCreatedAt(result.categoryID.createdAt)
+        setCreator(result.creator)
+      })
+      .catch((err) => {
+        swal({
+          title: "دوره یافت نشد",
+          text: "این دوره صرفا جهت پر شدن منو اضافه شده.لظفا یک دوره دیگر را انتخاب کنید",
+          icon: "error",
+          dangerMode: true,
+          buttons: "صفحه اصلی",
+        }).then((value) => {
+          navigate("/")
+        })
+      })
+  }, [parametr])
   return (
     <div>
       <Header />
@@ -42,19 +89,10 @@ export default function CourseInfo() {
           <div className="row">
             <div className="col-6">
               <a href="#" className="course-info__link">
-                آموزش برنامه نویسی فرانت اند
+                {categoryID.title}
               </a>
-              <h1 className="course-info__title">
-                آموزش 20 کتابخانه جاوااسکریپت برای بازار کار
-              </h1>
-              <p className="course-info__text">
-                امروزه کتابخانه‌ها کد نویسی را خیلی آسان و لذت بخش تر کرده اند.
-                به قدری که حتی امروزه هیچ شرکت برنامه نویسی پروژه های خود را با
-                Vanilla Js پیاده سازی نمی کند و همیشه از کتابخانه ها و فریمورک
-                های موجود استفاده می کند. پس شما هم اگه میخواید یک برنامه نویس
-                عالی فرانت اند باشید، باید کتابخانه های کاربردی که در بازار کار
-                استفاده می شوند را به خوبی بلد باشید
-              </p>
+              <h1 className="course-info__title">{courseInfos.name}</h1>
+              <p className="course-info__text">{courseInfos.description}</p>
               <div className="course-info__social-media">
                 <a href="#" className="course-info__social-media-item">
                   <BsTelegram className="course-info__icon" />
@@ -71,7 +109,7 @@ export default function CourseInfo() {
             <div className="col-6">
               <video
                 src=""
-                poster="/images/courses/js_project.png"
+                poster={courseInfos.cover}
                 className="course-info__video"
                 controls
               ></video>
@@ -90,22 +128,26 @@ export default function CourseInfo() {
                   <div className="row">
                     <CourseDetailsBox
                       title={"وضعیت دوره:"}
-                      desc={"به اتمام رسیده"}
+                      desc={
+                        courseInfos.isComplete
+                          ? "به اتمام رسیده"
+                          : "درحال برگزاری"
+                      }
                       icon={"FaGraduationCap"}
                     />
                     <CourseDetailsBox
-                      title={"مدت زمان"}
-                      desc={"19 ساعت"}
+                      title={"تاریخ برگزاری"}
+                      desc={createdAt.slice(0, 10)}
                       icon={"BiSolidTimeFive"}
                     />
                     <CourseDetailsBox
                       title={"آخرین بروزرسانی:"}
-                      desc={"1401/03/02"}
+                      desc={updatedAt.slice(0, 10)}
                       icon={"FaCalendarAlt"}
                     />
                     <CourseDetailsBox
                       title={"روش پشتیبانی"}
-                      desc={"آنلاین"}
+                      desc={courseInfos.support}
                       icon={"BiSolidUser"}
                     />
                     <CourseDetailsBox
@@ -221,125 +263,64 @@ export default function CourseInfo() {
                   <div className="introduction__topic">
                     <Accordion defaultActiveKey="0">
                       <Accordion.Item eventKey="0" className="accordion">
-                        <Accordion.Header> معرفی دوره</Accordion.Header>
-                        <Accordion.Body>
-                          <div
-                            id="collapseOne"
-                            className="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample"
-                          >
-                            <div className="accordion-body introduction__accordion-body">
-                              <div className="introduction__accordion-right">
-                                <span className="introduction__accordion-count">
-                                  1
-                                </span>
-                                <FaYoutube  className="introduction__accordion-icon"/>
-                                <a
-                                  href="#"
-                                  className="introduction__accordion-link"
-                                >
-                                  معرفی دوره + چرا یادگیری کتابخانه ها ضروری
-                                  است؟
-                                </a>
-                              </div>
-                              <div className="introduction__accordion-left">
-                                <span className="introduction__accordion-time">
-                                  18:34
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
-                    <Accordion defaultActiveKey="0">
-                      <Accordion.Item eventKey="0" className="accordion">
                         <Accordion.Header>پیش نیاز های دوره</Accordion.Header>
-                        <Accordion.Body>
-                          <div
-                            id="collapseOne"
-                            className="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample"
-                          >
-                            <div className="accordion-body introduction__accordion-body">
-                              <div className="introduction__accordion-right">
-                                <span className="introduction__accordion-count">
-                                  1
-                                </span>
-                                <FaYoutube  className="introduction__accordion-icon"/>
-                                <a
-                                  href="#"
-                                  className="introduction__accordion-link"
+                        {sessions.length != 0 ? (
+                          <>
+                            {sessions.map((session, index) => (
+                              <Accordion.Body key={session.id}>
+                                <div
+                                  id="collapseOne"
+                                  className="accordion-collapse collapse show"
+                                  aria-labelledby="headingOne"
+                                  data-bs-parent="#accordionExample"
                                 >
-                                  کتابخانه چیست ؟
-                                </a>
-                              </div>
-                              <div className="introduction__accordion-left">
-                                <span className="introduction__accordion-time">
-                                  18:34
-                                </span>
+                                  <div className="accordion-body introduction__accordion-body">
+                                    <div className="introduction__accordion-right">
+                                      <span className="introduction__accordion-count">
+                                        {index + 1}
+                                      </span>
+                                      <FaYoutube className="introduction__accordion-icon" />
+                                      <a
+                                        href="#"
+                                        className="introduction__accordion-link"
+                                      >
+                                        {session.title}
+                                      </a>
+                                    </div>
+                                    <div className="introduction__accordion-left">
+                                      <span className="introduction__accordion-time">
+                                        18:34
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Accordion.Body>
+                            ))}
+                          </>
+                        ) : (
+                          <Accordion.Body>
+                            <div
+                              id="collapseOne"
+                              className="accordion-collapse collapse show"
+                              aria-labelledby="headingOne"
+                              data-bs-parent="#accordionExample"
+                            >
+                              <div className="accordion-body introduction__accordion-body">
+                                <div className="introduction__accordion-right">
+                                  <a
+                                    href="#"
+                                    className="introduction__accordion-link"
+                                  >
+                                    برای این دوره هنوز ویدیویی ضبط نشده !
+                                  </a>
+                                </div>
+                                <div className="introduction__accordion-left">
+                                  <span className="introduction__accordion-time"></span>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </Accordion.Body>
-                        <Accordion.Body>
-                          <div
-                            id="collapseOne"
-                            className="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample"
-                          >
-                            <div className="accordion-body introduction__accordion-body">
-                              <div className="introduction__accordion-right">
-                                <span className="introduction__accordion-count">
-                                  2
-                                </span>
-                                <FaYoutube  className="introduction__accordion-icon"/>
-                                <a
-                                  href="#"
-                                  className="introduction__accordion-link"
-                                >
-                                  فرق کتابخانه با فریمورک
-                                </a>
-                              </div>
-                              <div className="introduction__accordion-left">
-                                <span className="introduction__accordion-time">
-                                  11:43
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </Accordion.Body>
-                        <Accordion.Body>
-                          <div
-                            id="collapseOne"
-                            className="accordion-collapse collapse show"
-                            aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample"
-                          >
-                            <div className="accordion-body introduction__accordion-body">
-                              <div className="introduction__accordion-right">
-                                <span className="introduction__accordion-count">
-                                  3
-                                </span>
-                                <FaYoutube  className="introduction__accordion-icon"/>
-                                <a
-                                  href="#"
-                                  className="introduction__accordion-link"
-                                >
-                                  حل تمرین جلسه قبل
-                                </a>
-                              </div>
-                              <div className="introduction__accordion-left">
-                                <span className="introduction__accordion-time">
-                                  28:56
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </Accordion.Body>
+                          </Accordion.Body>
+                        )}
                       </Accordion.Item>
                     </Accordion>
                   </div>
@@ -353,12 +334,13 @@ export default function CourseInfo() {
                     <div className="techer-details__header-right">
                       <img
                         src="/images/info/teacher.jfif"
+                        // src={creator.profile}
                         alt="Teacher Profile"
                         className="techer-details__header-img"
                       />
                       <div className="techer-details__header-titles">
                         <a href="#" className="techer-details__header-link">
-                          محمدامین سعیدی راد
+                          {creator ? creator.name : "نا معلوم"}
                         </a>
                         <span className="techer-details__header-skill">
                           Front End & Back End Developer
@@ -378,7 +360,7 @@ export default function CourseInfo() {
                 </div>
 
                 {/* Finish Teacher Details  */}
-                <CommentsTextArea />
+                <CommentsTextArea comments={comments} />
               </div>
             </div>
             <div className="col-4">
@@ -386,8 +368,14 @@ export default function CourseInfo() {
                 <div className="course-info">
                   <div className="course-info__register">
                     <span className="course-info__register-title">
-                      <FaGraduationCap className="course-info__register-icon ms-3" />
-                      دانشجوی دوره هستید
+                      {courseInfos.isUserRegisteredToThisCourse ? (
+                        <>
+                          <FaGraduationCap className="course-info__register-icon ms-3" />
+                          دانشجو دوره هستید
+                        </>
+                      ) : (
+                        "ثبت نام در دوره"
+                      )}
                     </span>
                   </div>
                 </div>
@@ -399,14 +387,17 @@ export default function CourseInfo() {
                         <span className="course-info__total-sale-text">
                           تعداد دانشجو :
                         </span>
-                        <span className="course-info__total-sale-number">178</span>
+                        <span className="course-info__total-sale-number">
+                          {courseInfos.courseStudentsCount}
+                        </span>
                       </div>
                     </div>
                     <div className="course-info__bottom">
                       <div className="course-info__total-comment">
                         <AiFillWechat className="course-info__total-comment-icon" />
                         <span className="course-info__total-comment-text">
-                          67 دیدگاه
+                          {comments.length}
+                          دیدگاه
                         </span>
                       </div>
                       <div className="course-info__total-view">
@@ -421,14 +412,18 @@ export default function CourseInfo() {
                 <div className="course-info">
                   <div className="course-info__header-short-url">
                     <FaLink className="course-info__short-url-icon" />
-                    <span className="course-info__short-url-text">لینک کوتاه</span>
+                    <span className="course-info__short-url-text">
+                      لینک کوتاه
+                    </span>
                   </div>
                   <span className="course-info__short-url">
                     https://sabzlearn.ir/?p=117472
                   </span>
                 </div>
                 <div className="course-info">
-                  <span className="course-info__topic-title">سرفصل های دوره</span>
+                  <span className="course-info__topic-title">
+                    سرفصل های دوره
+                  </span>
                   <span className="course-info__topic-text">
                     برای مشاهده و یا دانلود دوره روی کلمه
                     <a
@@ -442,7 +437,9 @@ export default function CourseInfo() {
                   </span>
                 </div>
                 <div className="course-info">
-                  <span className="course-info__courses-title">دوره های مرتبط</span>
+                  <span className="course-info__courses-title">
+                    دوره های مرتبط
+                  </span>
                   <ul className="course-info__courses-list">
                     <li className="course-info__courses-list-item">
                       <a href="#" className="course-info__courses-link">
