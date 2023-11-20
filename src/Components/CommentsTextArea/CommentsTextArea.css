@@ -152,10 +152,10 @@
   color: #7d7e7f;
   transition: all 400ms ease;
 }
-.comments__score-input:hover {
+/* .comments__score-input:hover {
   background-color: #1e83f0;
   color: var(--white-color);
-}
+} */
 .comments__respond-title {
   font-size: 1.5rem;
   color: #6c757d;

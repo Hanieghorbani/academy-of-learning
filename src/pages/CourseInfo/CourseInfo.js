@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./CourseInfo.css"
 import Header from "../../Components/Header/Header"
 import Footer from "../../Components/Footer/Footer"
@@ -64,7 +64,31 @@ export default function CourseInfo() {
           navigate("/")
         })
       })
-  }, [parametr])
+  },[parametr])
+
+  const submitComment = (score,contentComment) => {
+    const localStorageToken = JSON.parse(localStorage.getItem("user"))
+    fetch(`http://localhost:4000/v1/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorageToken.token}`,
+      },
+      body: JSON.stringify({
+        body: contentComment,
+        courseShortName: parametr.courseName,
+        score:score
+      }),
+    }).then((res) => {
+      if (!res.oK) {
+        console.log(res.text())
+      }else{
+        res.json()
+      }
+    }).then(result=>{
+      console.log(result);
+    })
+  }
   return (
     <div>
       <Header />
@@ -109,7 +133,7 @@ export default function CourseInfo() {
             <div className="col-6">
               <video
                 src=""
-                poster={courseInfos.cover}
+                poster={`/images/courses/${courseInfos.cover}`}
                 className="course-info__video"
                 controls
               ></video>
@@ -360,7 +384,10 @@ export default function CourseInfo() {
                 </div>
 
                 {/* Finish Teacher Details  */}
-                <CommentsTextArea comments={comments} />
+                <CommentsTextArea
+                  comments={comments}
+                  submitComment={submitComment}
+                />
               </div>
             </div>
             <div className="col-4">
