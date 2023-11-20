@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import CircleSpinner from "../CircleSpinner/CircleSpinner"
-
 import "./CourseBox.css"
 import { Link } from "react-router-dom"
 import { FaChalkboardTeacher, FaUsers, FaArrowLeft } from "react-icons/fa"
@@ -8,7 +7,6 @@ export default function CourseBox(props) {
   const [isImgShow, setIsImgShow] = useState(false)
 
   const onImageLoaded = () => setIsImgShow(true)
-  console.log(props)
   let scroeArr = []
   for (let i = 0; i <= props.courseAverageScore; i++) {
     scroeArr.push(i)
