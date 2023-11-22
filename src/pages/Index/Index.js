@@ -11,7 +11,6 @@ import Landing from "../../Components/Landing/Landing";
 import "./Index.css";
 
 export default function Index(props) {
-  const [show, setModalShow] = useState(true);
 
   return (
     <>

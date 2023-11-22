@@ -10,7 +10,13 @@ import swal from "sweetalert"
 import { Accordion } from "react-bootstrap"
 import { BsTelegram, BsFacebook } from "react-icons/bs"
 import { BiLogoTwitter } from "react-icons/bi"
-import { FaGraduationCap, FaEye, FaLink, FaYoutube } from "react-icons/fa"
+import {
+  FaGraduationCap,
+  FaEye,
+  FaLink,
+  FaYoutube,
+  FaChalkboardTeacher,
+} from "react-icons/fa"
 import { AiFillWechat } from "react-icons/ai"
 import { PiStudentBold } from "react-icons/pi"
 import { useParams, useNavigate } from "react-router-dom"
@@ -45,7 +51,6 @@ export default function CourseInfo() {
         }
       })
       .then((result) => {
-        console.log(result)
         setComments(result.comments)
         setSessions(result.sessions)
         setCategoryID(result.categoryID)
@@ -67,7 +72,7 @@ export default function CourseInfo() {
       })
   }, [parametr])
 
-  const submitComment = (score, contentComment,clearCommentTextArea) => {
+  const submitComment = (score, contentComment, clearCommentTextArea) => {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
     fetch(`http://localhost:4000/v1/comments`, {
       method: "POST",
@@ -88,7 +93,7 @@ export default function CourseInfo() {
           icon: "success",
           dangerMode: false,
           buttons: "تایید",
-        }).then(res=>{
+        }).then((res) => {
           clearCommentTextArea()
         })
       })
@@ -376,7 +381,7 @@ export default function CourseInfo() {
                       </div>
                     </div>
                     <div className="techer-details__header-left">
-                      <i className="fas fa-chalkboard-teacher techer-details__header-icon"></i>
+                      <FaChalkboardTeacher className="techer-details__header-icon" />
                       <span className="techer-details__header-name">مدرس</span>
                     </div>
                   </div>

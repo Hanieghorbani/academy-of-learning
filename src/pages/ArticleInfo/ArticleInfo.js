@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Header from "../../Components/Header/Header"
 import Footer from "./../../Components/Footer/Footer"
 import Breadcrumb from "./../../Components/Breadcrumb/Breadcrumb"
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io"
 
 import "./ArticleInfo.css"
 import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea"
@@ -17,8 +17,26 @@ import {
   FaArrowRight,
   FaArrowLeft,
 } from "react-icons/fa"
+import { useParams } from "react-router-dom"
 
-export default function ArticleInfo() {
+export default function ArticleInfo({props}) {
+  const {articleName} = useParams()
+  const [article,setArticle] = useState({})
+  const [creator,setCreator] = useState([])
+   useEffect(()=>{
+    const localStorageToken = JSON.parse(localStorage.getItem('user'))
+    fetch(`http://localhost:4000/v1/articles/${articleName}`,{
+      method:'GET',
+      headers:{
+        'Authorization' : `Bearer ${localStorageToken.token}`
+      }
+    }).then(res=>res.json()).then(result=>{
+      setArticle(result)
+      setCreator(result.creator)
+      console.log(result);
+      
+    })
+   },[])
   return (
     <>
       <Header />
@@ -45,34 +63,29 @@ export default function ArticleInfo() {
             <div className="col-8">
               <div className="article">
                 <h1 className="article__title">
-                  معرفی بهترین سایت آموزش جاوا اسکریپت [ تجربه محور ] + آموزش
-                  رایگان
+                  {article.title}
                 </h1>
                 <div className="article__header">
                   <div className="article-header__category article-header__item">
                     <CiFileOn className="article-header__icon" />
                     <a href="#" className="article-header__text">
-                      جاوا اسکریپت
+                     {article.categoryID.title}
                     </a>
                   </div>
                   <div className="article-header__category article-header__item">
                     <FaUser className="article-header__icon" />
 
                     <span className="article-header__text">
-                      ارسال شده توسط قدیر
+                      ارسال شده توسط:{creator.name}
+
                     </span>
                   </div>
                   <div className="article-header__category article-header__item">
                     <CiTimer className="article-header__icon" />
 
                     <span className="article-header__text">
-                      ارسال شده توسط قدیر
+                    منتشر شده در تاریخ: {article.createdAt.slice(0,10)} 
                     </span>
-                  </div>
-                  <div className="article-header__category article-header__item">
-                    <FaEye className="article-header__icon" />
-
-                    <span className="article-header__text"> 2.14k بازدید</span>
                   </div>
                 </div>
                 <img
@@ -226,7 +239,7 @@ export default function ArticleInfo() {
                 </div>
               </div>
 
-              <div className="suggestion-articles">
+              <div className="suggestion-">
                 <div className="row">
                   <div className="col-6">
                     <div className="suggestion-articles__right suggestion-articles__content">
@@ -253,7 +266,10 @@ export default function ArticleInfo() {
                 </div>
               </div>
 
-              <CommentsTextArea />
+              {/* <CommentsTextArea
+                comments={comments}
+                submitComment={submitComment}
+              /> */}
             </div>
             <div className="col-4">
               <div className="courses-info">
@@ -314,35 +330,37 @@ export default function ArticleInfo() {
                 </div>
 
                 <div className="course-info">
-                  <span className="course-info__courses-title">دسترسی سریع</span>
+                  <span className="course-info__courses-title">
+                    دسترسی سریع
+                  </span>
                   <ul className="sidebar-articles__list">
                     <li className="sidebar-articles__item">
-                      <IoIosArrowBack className="sidebar-articles__icon"/>
-                      
+                      <IoIosArrowBack className="sidebar-articles__icon" />
+
                       <a href="#" className="sidebar-articles__link">
                         صفحه اصلی
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         فرانت اند
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         امنیت
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         پایتون
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         مهارت های نرم
                       </a>
@@ -351,7 +369,9 @@ export default function ArticleInfo() {
                 </div>
 
                 <div className="course-info">
-                  <span className="course-info__courses-title">مقاله های جدید</span>
+                  <span className="course-info__courses-title">
+                    مقاله های جدید
+                  </span>
                   <ul className="last-articles__list">
                     <li className="last-articles__item">
                       <a href="#" className="last-articles__link">
@@ -392,31 +412,31 @@ export default function ArticleInfo() {
                   </span>
                   <ul className="sidebar-articles__list">
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         صفحه اصلی
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         فرانت اند
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         امنیت
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         پایتون
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         مهارت های نرم
                       </a>
@@ -425,34 +445,36 @@ export default function ArticleInfo() {
                 </div>
 
                 <div className="course-info">
-                  <span className="course-info__courses-title">دوره های جدید</span>
+                  <span className="course-info__courses-title">
+                    دوره های جدید
+                  </span>
                   <ul className="sidebar-articles__list">
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         صفحه اصلی
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         فرانت اند
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         امنیت
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         پایتون
                       </a>
                     </li>
                     <li className="sidebar-articles__item">
-                    <IoIosArrowBack className="sidebar-articles__icon"/>
+                      <IoIosArrowBack className="sidebar-articles__icon" />
                       <a href="#" className="sidebar-articles__link">
                         مهارت های نرم
                       </a>
