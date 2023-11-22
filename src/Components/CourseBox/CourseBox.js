@@ -7,10 +7,8 @@ export default function CourseBox(props) {
   const [isImgShow, setIsImgShow] = useState(false)
 
   const onImageLoaded = () => setIsImgShow(true)
-  let scroeArr = []
-  for (let i = 0; i <= props.courseAverageScore; i++) {
-    scroeArr.push(i)
-  }
+  let scroeArr = Array(props.courseAverageScore).fill(1)
+
   return (
     <div className="col-4">
       <div className="course-box">

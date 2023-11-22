@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import Header from "../../Components/Header/Header"
 import Footer from "../../Components/Footer/Footer"
 import CourseBox from "../../Components/CourseBox/CourseBox"
-import Pagenation from "../../Components/Pagination/Pagination"
+import Pagination from "../../Components/Pagination/Pagination"
 import { AiOutlineSearch, AiOutlineAppstore } from "react-icons/ai"
 import { HiMenuAlt2 } from "react-icons/hi"
 import { BsChevronDown } from "react-icons/bs"
@@ -81,7 +81,7 @@ export default function Category() {
                     {courses.map((course) => (
                       <CourseBox {...course} />
                     ))}
-                    <Pagenation />
+                    <Pagination />
                   </>
                 ) : (
                   <div className="alert alert-warning">

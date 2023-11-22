@@ -7,7 +7,12 @@ import { Link } from "react-router-dom"
 export default function CommentsTextArea({ comments, submitComment }) {
   const contextData = useContext(AuthContext)
   const [contentComment, setContentComment] = useState("")
-  const [score, setScore] = useState(null)
+  const [score, setScore] = useState('امتیاز خود را انتخاب کنید')
+
+  function clearCommentTextArea(){
+    setContentComment('')
+    setScore('امتیاز خود را انتخاب کنید')
+  }
   return (
     <div className="comments">
       <div className="comments__header">
@@ -88,6 +93,7 @@ export default function CommentsTextArea({ comments, submitComment }) {
               <select
                 className="comments__score-input w-100"
                 onChange={(e) => setScore(e.target.value)}
+                value={score}
               >
                 <option className="comments__score-input-text">
                   امتیاز خود را انتخاب کنید
@@ -111,7 +117,7 @@ export default function CommentsTextArea({ comments, submitComment }) {
             <button
               type="submit"
               className="comments__respond-btn"
-              onClick={() => submitComment(score, contentComment)}
+              onClick={() => submitComment(score, contentComment,clearCommentTextArea)}
             >
               ارسال
             </button>

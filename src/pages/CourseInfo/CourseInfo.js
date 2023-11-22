@@ -14,6 +14,7 @@ import { FaGraduationCap, FaEye, FaLink, FaYoutube } from "react-icons/fa"
 import { AiFillWechat } from "react-icons/ai"
 import { PiStudentBold } from "react-icons/pi"
 import { useParams, useNavigate } from "react-router-dom"
+
 export default function CourseInfo() {
   const navigate = useNavigate()
   const [comments, setComments] = useState([])
@@ -64,9 +65,9 @@ export default function CourseInfo() {
           navigate("/")
         })
       })
-  },[parametr])
+  }, [parametr])
 
-  const submitComment = (score,contentComment) => {
+  const submitComment = (score, contentComment,clearCommentTextArea) => {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
     fetch(`http://localhost:4000/v1/comments`, {
       method: "POST",
@@ -77,17 +78,20 @@ export default function CourseInfo() {
       body: JSON.stringify({
         body: contentComment,
         courseShortName: parametr.courseName,
-        score:score
+        score: score,
       }),
-    }).then((res) => {
-      if (!res.oK) {
-        console.log(res.text())
-      }else{
-        res.json()
-      }
-    }).then(result=>{
-      console.log(result);
     })
+      .then((res) => res.json())
+      .then((result) => {
+        swal({
+          title: "نظر شما پس از بررسی و تایید مدیر ثبت خواهد شد",
+          icon: "success",
+          dangerMode: false,
+          buttons: "تایید",
+        }).then(res=>{
+          clearCommentTextArea()
+        })
+      })
   }
   return (
     <div>
