@@ -30,10 +30,10 @@ export default function CourseInfo() {
   const [creator, setCreator] = useState([])
   const [updatedAt, setUpdatedAt] = useState("")
   const [createdAt, setCreatedAt] = useState("")
-  const parametr = useParams()
+  const {courseName} = useParams()
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
-    fetch(`http://localhost:4000/v1/courses/${parametr.courseName}`, {
+    fetch(`http://localhost:4000/v1/courses/${courseName}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${
@@ -70,7 +70,7 @@ export default function CourseInfo() {
           navigate("/")
         })
       })
-  }, [parametr])
+  }, [courseName])
 
   const submitComment = (score, contentComment, clearCommentTextArea) => {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
@@ -82,7 +82,7 @@ export default function CourseInfo() {
       },
       body: JSON.stringify({
         body: contentComment,
-        courseShortName: parametr.courseName,
+        courseShortName: courseName,
         score: score,
       }),
     })
@@ -106,13 +106,13 @@ export default function CourseInfo() {
           { id: 1, title: "خانه", to: "/" },
           {
             id: 2,
-            title: "آموزش برنامه نویسی فرانت اند",
-            to: "/categoryInfo/frontend",
+            title: `آموزش ${categoryID.title}`,
+            to: `/category-info/${categoryID.name}/1`,
           },
           {
             id: 3,
-            title: "دوره متخصص جاوا اسکریپت",
-            to: "/courseInfo/js-expert",
+            title: courseInfos.name,
+            to: `/course-info/${courseName}`,
           },
         ]}
       />

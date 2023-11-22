@@ -1,17 +1,22 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { FaRegComment, FaCheck, FaChevronDown } from "react-icons/fa"
 import "./CommentsTextArea.css"
 import Pagination from "../Pagination/Pagination"
 import AuthContext from "../../userContext/authContext"
 import { Link } from "react-router-dom"
+
 export default function CommentsTextArea({ comments, submitComment }) {
   const contextData = useContext(AuthContext)
   const [contentComment, setContentComment] = useState("")
-  const [score, setScore] = useState('امتیاز خود را انتخاب کنید')
-
-  function clearCommentTextArea(){
-    setContentComment('')
-    setScore('امتیاز خود را انتخاب کنید')
+  const [shownComments, setShownComments] = useState([])
+  const [score, setScore] = useState("امتیاز خود را انتخاب کنید")
+  
+  useEffect(()=>{
+    console.log(shownComments);
+  },[])
+  function clearCommentTextArea() {
+    setContentComment("")
+    setScore("امتیاز خود را انتخاب کنید")
   }
   return (
     <div className="comments">
@@ -60,7 +65,12 @@ export default function CommentsTextArea({ comments, submitComment }) {
                 </div>
               </div>
             ))}
-            <Pagination />
+            {/* <Pagination
+              items={comments}
+              itemsCount={2}
+              pathname={`/course-info`}
+              setShownCourses={setShownComments}
+            /> */}
           </>
         )}
       </div>
@@ -104,7 +114,7 @@ export default function CommentsTextArea({ comments, submitComment }) {
                 <option className="comments__score-input-text">4</option>
                 <option className="comments__score-input-text">5</option>
               </select>
-                {/* <FaChevronDown className="comments__input-icon" /> */}
+              {/* <FaChevronDown className="comments__input-icon" /> */}
             </div>
             <div className="comments__respond-content">
               <div className="comments__respond-title">دیدگاه شما *</div>
@@ -117,7 +127,9 @@ export default function CommentsTextArea({ comments, submitComment }) {
             <button
               type="submit"
               className="comments__respond-btn"
-              onClick={() => submitComment(score, contentComment,clearCommentTextArea)}
+              onClick={() =>
+                submitComment(score, contentComment, clearCommentTextArea)
+              }
             >
               ارسال
             </button>

@@ -26,18 +26,21 @@ export default function Pagination({
             <FaArrowRight className="courses__pagination-icon" />
           </Link>
         </li> */}
-        {Array(pageCount).fill("H").map((numPage, index) => (
-          <li key={index} className="courses__pagination-item">
-            <Link
-              to={`${pathname}/${index + 1}`}
-              className={`courses__pagination-link ${
-                index + 1 == Number(page) && "courses__pagination-link--active"
-              }`}
-            >
-              {index + 1}
-            </Link>
-          </li>
-        ))}
+        {Array(pageCount)
+          .fill("H")
+          .map((numPage, index) => (
+            <li key={index} className="courses__pagination-item">
+              <Link
+                to={`${pathname}/${index + 1}`}
+                className={`courses__pagination-link ${
+                  index + 1 == Number(page) &&
+                  "courses__pagination-link--active"
+                }`}
+              >
+                {index + 1}
+              </Link>
+            </li>
+          ))}
         {/* <li className="courses__pagination-item">
           <Link
             to={`${pathname}/${Number(page) + 1}`}
