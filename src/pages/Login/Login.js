@@ -17,10 +17,12 @@ import {
 import "./Login.css"
 import AuthContext from "../../userContext/authContext"
 import { useNavigate } from "react-router-dom"
+import { MdVisibility, MdVisibilityOff } from "react-icons/md"
+
 import ReCAPTCHA from "react-google-recaptcha"
 export default function Login() {
   const navigate = useNavigate()
-
+  const [isShowPass, setIsShowPass] = useState(false)
   const contextData = useContext(AuthContext)
   const [isVarifyRecaptcha, setIsVarifyRecaptcha] = useState(false)
   const [formState, onInputHandler] = useForm(
@@ -123,7 +125,7 @@ export default function Login() {
               <Input
                 element="input"
                 id="loginPassword"
-                type="password"
+                type={isShowPass ? "text" : "password"}
                 className="login-form__password-input"
                 placeholder="رمز عبور"
                 validations={[
@@ -134,7 +136,17 @@ export default function Login() {
                 onInputHandler={onInputHandler}
               />
 
-              <FaEye className="login-form__password-icon" />
+              {isShowPass ? (
+                <MdVisibilityOff
+                  className="login-form__password-icon"
+                  onClick={() => setIsShowPass(false)}
+                />
+              ) : (
+                <MdVisibility
+                  className="login-form__password-icon"
+                  onClick={() => setIsShowPass(true)}
+                />
+              )}
             </div>
 
             <ReCAPTCHA

@@ -35,12 +35,9 @@ export default function ArticleInfo() {
       .then((res) => {
         if (res.ok) {
           return res.json()
-        } else {
-          console.log(res)
         }
       })
       .then((result) => {
-        console.log(result)
         setArticle(result)
         setCreator(result.creator)
         setLoading(false)

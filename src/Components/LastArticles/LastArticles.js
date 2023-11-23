@@ -14,7 +14,6 @@ export default function LastArticles() {
         Authorization: `Bearer ${localStorageToken.token}`,
       },
     }).then((res) => res.json()).then(result=>{
-      console.log(result);
       setArticles(result)
     })
   }, [])

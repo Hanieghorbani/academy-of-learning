@@ -18,9 +18,6 @@ export default function LastCourses() {
       .then((data) => {
         setCourses(data)
       })
-      .catch((err) => {
-        console.log(err)
-      })
   }, [])
   return (
     <>

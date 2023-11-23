@@ -61,5 +61,5 @@ export default function Input(props) {
       />
     )
 
-  return <div>{element}</div>
+  return <div className="inputParnet">{element}</div>
 }

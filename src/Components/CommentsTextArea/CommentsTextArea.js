@@ -11,9 +11,6 @@ export default function CommentsTextArea({ comments, submitComment }) {
   const [shownComments, setShownComments] = useState([])
   const [score, setScore] = useState("امتیاز خود را انتخاب کنید")
   
-  useEffect(()=>{
-    console.log(shownComments);
-  },[])
   function clearCommentTextArea() {
     setContentComment("")
     setScore("امتیاز خود را انتخاب کنید")

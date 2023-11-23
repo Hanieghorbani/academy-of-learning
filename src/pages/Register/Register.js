@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import "./Register.css"
 import { Link } from "react-router-dom"
 import Footer from "../../Components/Footer/Footer"
@@ -14,12 +14,15 @@ import {
   maxValidator,
   emailValidator,
 } from "../../validators/rules"
-import { FaEye, FaEnvelope, FaUserPlus, FaRegUserCircle } from "react-icons/fa"
+import { MdVisibility, MdVisibilityOff } from "react-icons/md"
+import { FaEnvelope, FaUserPlus, FaRegUserCircle } from "react-icons/fa"
 import { BiSolidUser } from "react-icons/bi"
 import AuthContext from "../../userContext/authContext"
 
 export default function Register() {
   const navigate = useNavigate()
+  const [isShowPass, setIsShowPass] = useState(false)
+  const [isShowConfirmPass, setIsShowConfirmPass] = useState(false)
   const [formState, onInputHandler] = useForm(
     {
       registerName: {
@@ -53,7 +56,6 @@ export default function Register() {
       formState.inputs.registerPassword.value ===
       formState.inputs.registerConfirmPassword.value
     ) {
-      console.log("User Register")
       const newUser = {
         name: formState.inputs.registerName.value,
         username: formState.inputs.registerUsername.value,
@@ -79,7 +81,6 @@ export default function Register() {
         })
         .then((result) => {
           contextData.login({}, result.accessToken)
-          console.log(formState.inputs)
           swal({
             text: " شما با موفقیت وارد حساب کاربری خود شدید",
             icon: "success",
@@ -100,7 +101,12 @@ export default function Register() {
           })
         })
     } else {
-      console.log("confirm pass is not match")
+      swal({
+        text: "تکرار رمز عبور اشتباه است !",
+        icon: "error",
+        dangerMode: true,
+        buttons: "تلاش مجدد",
+      })
     }
   }
 
@@ -174,7 +180,7 @@ export default function Register() {
             <div className="login-form__password">
               <Input
                 id="registerPassword"
-                type="password"
+                type={isShowPass ? "text" : "password"}
                 placeholder="رمز عبور"
                 className="login-form__password-input"
                 element="input"
@@ -185,13 +191,22 @@ export default function Register() {
                   maxValidator(18),
                 ]}
               />
-              <i className="login-form__password-icon fa fa-lock-open"></i>
-              <FaEye className="login-form__password-icon" />
+              {isShowPass ? (
+                <MdVisibilityOff
+                  className="login-form__password-icon"
+                  onClick={() => setIsShowPass(false)}
+                />
+              ) : (
+                <MdVisibility
+                  className="login-form__password-icon"
+                  onClick={() => setIsShowPass(true)}
+                />
+              )}
             </div>
             <div className="login-form__password">
               <Input
                 id="registerConfirmPassword"
-                type="password"
+                type={isShowConfirmPass ? "text" : "password"}
                 placeholder="تکرار رمز عبور"
                 className="login-form__password-input"
                 element="input"
@@ -202,8 +217,17 @@ export default function Register() {
                   maxValidator(18),
                 ]}
               />
-              <i className="login-form__password-icon fa fa-lock-open"></i>
-              <FaEye className="login-form__password-icon" />
+              {isShowConfirmPass ? (
+                <MdVisibilityOff
+                  className="login-form__password-icon"
+                  onClick={() => setIsShowConfirmPass(false)}
+                />
+              ) : (
+                <MdVisibility
+                  className="login-form__password-icon"
+                  onClick={() => setIsShowConfirmPass(true)}
+                />
+              )}
             </div>
             <Button
               className={`login-form__btn ${

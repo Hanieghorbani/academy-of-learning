@@ -5,14 +5,11 @@ import { Link } from "react-router-dom"
 import { FaChalkboardTeacher, FaUsers, FaArrowLeft } from "react-icons/fa"
 export default function CourseBox(props) {
   const [isImgShow, setIsImgShow] = useState(false)
-
   const onImageLoaded = () => setIsImgShow(true)
   let scroeArr = Array(props.courseAverageScore).fill(1)
 
-
-  console.log(props);
   return (
-    <div className={`col-4 ${(props.isInSwiper && "col-12")}`}>
+    <div className={`col-4 ${props.isInSwiper && "col-12"}`}>
       <div className="course-box">
         <Link to={`/course-info/${props.shortName}`}>
           <img
