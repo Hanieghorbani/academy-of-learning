@@ -12,15 +12,60 @@ import { useParams } from "react-router-dom"
 export default function Category() {
   const { categoryName } = useParams()
   const [courses, setCourses] = useState([])
+  const [coursesOrdered, setCoursesOrdered] = useState([])
   const [shownCourses, setShownCourses] = useState([])
-
+  const [lists, setLists] = useState([
+    { 1: "مرتب سازی پیش فرض", key: "default" },
+    { 2: "مرتب سازی دوره های رایگان", key: "free" },
+    { 3: "مرتب سازی دوره های پولی", key: "money" },
+    { 4: "مرتب سازی بر اساس ارزان ترین", key: "cheap" },
+    { 5: "مرتب سازی بر اساس گران ترین", key: "expensive" },
+    { 6: "مربت سازی بر اساس آخرین", key: "last" },
+    { 7: "مربت سازی بر اساس اولین", key: "fist" },
+  ])
+  const [status, setStatus] = useState("default")
+  const [statusTitle, setStatusTitle] = useState("مرتب سازی پیش فرض")
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
       .then((res) => res.json())
       .then((result) => {
         setCourses(result)
+        setCoursesOrdered(result)
       })
   }, [categoryName])
+
+  useEffect(() => {
+    switch (status) {
+      case "free": {
+        setCoursesOrdered(courses.filter((course) => !course.price))
+        break
+      }
+      case "money": {
+        setCoursesOrdered(courses.filter((course) => course.price))
+        break
+      }
+      case "last": {
+        setCoursesOrdered([...courses].reverse())
+        break
+      }
+      case "first": {
+        setCoursesOrdered(courses)
+        break
+      }
+      case "cheap": {
+        setCoursesOrdered([...courses].sort((a, b) => a.price - b.price))
+
+        break
+      }
+      case "expensive": {
+        setCoursesOrdered([...courses].sort((a, b) => b.price - a.price))
+        break
+      }
+      default: {
+        setCoursesOrdered(courses)
+      }
+    }
+  }, [status])
   return (
     <div>
       <Header />
@@ -37,38 +82,30 @@ export default function Category() {
                           <AiOutlineAppstore className=" courses-top-bar__icon" />
                         </div>
                         <div className="courses-top-bar__column-btn">
-                          <i className="fas fa-align-left courses-top-bar__icon"></i>
                           <HiMenuAlt2 className="courses-top-bar__icon" />
                         </div>
 
                         <div className="courses-top-bar__selection">
                           <span className="courses-top-bar__selection-title">
-                            مرتب سازی پیش فرض
+                            {statusTitle}
                             <BsChevronDown className="courses-top-bar__selection-icon" />
                           </span>
                           <ul className="courses-top-bar__selection-list">
-                            <li className="courses-top-bar__selection-item courses-top-bar__selection-item--active">
-                              مرتب سازی پیش فرض
-                            </li>
-                            <li className="courses-top-bar__selection-item">
-                              مربت سازی بر اساس محبوبیت
-                            </li>
-                            <li className="courses-top-bar__selection-item">
-                              مربت سازی بر اساس امتیاز
-                            </li>
-                            <li className="courses-top-bar__selection-item">
-                              مربت سازی بر اساس آخرین
-                            </li>
-                            <li className="courses-top-bar__selection-item">
-                              مربت سازی بر اساس ارزان ترین
-                            </li>
-                            <li className="courses-top-bar__selection-item">
-                              مربت سازی بر اساس گران ترین
-                            </li>
+                            {lists.map((list, index) => (
+                              <li
+                                className="courses-top-bar__selection-item"
+                                onClick={(e) => {
+                                  setStatusTitle(e.target.textContent)
+                                  setStatus(list.key)
+                                }}
+                              >
+                                {list[index + 1]}
+                              </li>
+                            ))}
                           </ul>
                         </div>
                       </div>
-
+                      {/* courses-top-bar__selection-item--active */}
                       <div className="courses-top-bar__left">
                         <form action="#" className="courses-top-bar__form">
                           <input
@@ -84,7 +121,7 @@ export default function Category() {
                       <CourseBox {...course} />
                     ))}
                     <Pagination
-                      items={courses}
+                      items={coursesOrdered}
                       itemsCount={3}
                       pathname={`/category-info/${categoryName}`}
                       setShownCourses={setShownCourses}

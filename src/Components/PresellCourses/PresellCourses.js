@@ -4,7 +4,6 @@ import SectionHeader from "./../SectionHeader/SectionHeader"
 import CourseBox from "../CourseBox/CourseBox"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper/modules"
-
 import "swiper/css"
 import "swiper/css/pagination"
 // import "./styles.css"
@@ -35,6 +34,7 @@ export default function PresellCourses() {
                   clickable: true,
                 }}
                 modules={[Pagination]}
+                loop={true}
                 className="mySwiper"
               >
                 {presellCourses.map((course) => (
