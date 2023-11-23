@@ -25,6 +25,7 @@ export default function Category() {
   ])
   const [status, setStatus] = useState("default")
   const [statusTitle, setStatusTitle] = useState("مرتب سازی پیش فرض")
+  const [searchValue, setSearchValue] = useState("")
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
       .then((res) => res.json())
@@ -93,11 +94,14 @@ export default function Category() {
                           <ul className="courses-top-bar__selection-list">
                             {lists.map((list, index) => (
                               <li
-                                className="courses-top-bar__selection-item"
                                 onClick={(e) => {
                                   setStatusTitle(e.target.textContent)
                                   setStatus(list.key)
                                 }}
+                                className={`courses-top-bar__selection-item ${
+                                  list.key == status &&
+                                  "courses-top-bar__selection-item--active "
+                                }`}
                               >
                                 {list[index + 1]}
                               </li>
@@ -105,21 +109,37 @@ export default function Category() {
                           </ul>
                         </div>
                       </div>
-                      {/* courses-top-bar__selection-item--active */}
                       <div className="courses-top-bar__left">
                         <form action="#" className="courses-top-bar__form">
                           <input
                             type="text"
                             className="courses-top-bar__input"
                             placeholder="جستجوی دوره ..."
+                            value={searchValue}
+                            onChange={(e) => {
+                              setSearchValue(e.target.value)
+                              const filteredCours = courses.filter((course) =>
+                                course.name.includes(e.target.value)
+                              )
+                              setCoursesOrdered(filteredCours)
+                            }}
                           />
                           <AiOutlineSearch className="courses-top-bar__search-icon" />
                         </form>
                       </div>
                     </div>
-                    {shownCourses.map((course) => (
-                      <CourseBox {...course} />
-                    ))}
+                    {shownCourses.length ? (
+                      <>
+                        {shownCourses.map((course) => (
+                          <CourseBox {...course} />
+                        ))}
+                      </>
+                    ) : (
+                      <div className="alert alert-warning">
+                        هیچ نتیجه ای برای {statusTitle} وجود ندارد
+                      </div>
+                    )}
+
                     <Pagination
                       items={coursesOrdered}
                       itemsCount={3}
