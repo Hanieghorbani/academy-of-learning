@@ -9,6 +9,8 @@ export default function CourseBox(props) {
   const onImageLoaded = () => setIsImgShow(true)
   let scroeArr = Array(props.courseAverageScore).fill(1)
 
+
+  console.log(props);
   return (
     <div className={`col-4 ${(props.isInSwiper && "col-12")}`}>
       <div className="course-box">

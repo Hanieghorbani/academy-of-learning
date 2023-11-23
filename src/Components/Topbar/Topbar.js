@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { memo, useEffect, useState } from "react"
 import "./Topbar.css"
 import { BsTelephone, BsEnvelope } from "react-icons/bs"
 import { Link } from "react-router-dom"
-export default function Topbar() {
+export default memo(function Topbar() {
   const [allTopbarLinks, setAllTopbarLinks] = useState([])
   useEffect(() => {
     fetch(`http://localhost:4000/v1/menus/topbar`)
@@ -23,7 +23,6 @@ export default function Topbar() {
         <div className="top-bar__content">
           <div className="top-bar__right">
             <ul className="top-bar__menu">
-            
               {getRandomItem(allTopbarLinks, 5).map((link) => (
                 <li className="top-bar__item">
                   <Link to={link.href} className="top-bar__link">
@@ -53,4 +52,4 @@ export default function Topbar() {
       </div>
     </div>
   )
-}
+})

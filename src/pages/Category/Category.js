@@ -6,6 +6,7 @@ import Pagination from "../../Components/Pagination/Pagination"
 import { AiOutlineSearch, AiOutlineAppstore } from "react-icons/ai"
 import { HiMenuAlt2 } from "react-icons/hi"
 import { BsChevronDown } from "react-icons/bs"
+import { FaChalkboardTeacher, FaUsers, FaArrowLeft } from "react-icons/fa"
 
 import "./Category.css"
 import { useParams } from "react-router-dom"
@@ -26,6 +27,7 @@ export default function Category() {
   const [status, setStatus] = useState("default")
   const [statusTitle, setStatusTitle] = useState("مرتب سازی پیش فرض")
   const [searchValue, setSearchValue] = useState("")
+  const [showCourses, setShowCourses] = useState("grid")
   useEffect(() => {
     fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
       .then((res) => res.json())
@@ -79,10 +81,23 @@ export default function Category() {
                   <>
                     <div className="courses-top-bar">
                       <div className="courses-top-bar__right">
-                        <div className="courses-top-bar__row-btn courses-top-bar__icon--active">
+                        <div
+                          className={`courses-top-bar__row-btn ${
+                            showCourses == "grid" &&
+                            "courses-top-bar__icon--active"
+                          }`}
+                          onClick={() => setShowCourses("grid")}
+                        >
                           <AiOutlineAppstore className=" courses-top-bar__icon" />
                         </div>
-                        <div className="courses-top-bar__column-btn">
+
+                        <div
+                          className={`courses-top-bar__row-btn ${
+                            showCourses == "list" &&
+                            "courses-top-bar__icon--active"
+                          }`}
+                          onClick={() => setShowCourses("list")}
+                        >
                           <HiMenuAlt2 className="courses-top-bar__icon" />
                         </div>
 
@@ -97,6 +112,7 @@ export default function Category() {
                                 onClick={(e) => {
                                   setStatusTitle(e.target.textContent)
                                   setStatus(list.key)
+                                  setSearchValue("")
                                 }}
                                 className={`courses-top-bar__selection-item ${
                                   list.key == status &&
@@ -118,6 +134,8 @@ export default function Category() {
                             value={searchValue}
                             onChange={(e) => {
                               setSearchValue(e.target.value)
+                              setStatus("default")
+                              setStatusTitle("مرتب سازی پیش فرض")
                               const filteredCours = courses.filter((course) =>
                                 course.name.includes(e.target.value)
                               )
@@ -130,13 +148,92 @@ export default function Category() {
                     </div>
                     {shownCourses.length ? (
                       <>
-                        {shownCourses.map((course) => (
-                          <CourseBox {...course} />
-                        ))}
+                        {showCourses == "grid" ? (
+                          <>
+                            {shownCourses.map((course) => (
+                              <CourseBox {...course} />
+                            ))}
+                          </>
+                        ) : (
+                          <>
+                            {shownCourses.map((course) => (
+                              <div class="col-12">
+                                <div class="course-box">
+                                  <div class="course__box-header">
+                                    <div class="course__box-right">
+                                      <a
+                                        class="course__box-right-link"
+                                        href="#"
+                                      >
+                                        <img
+                                          src={`/images/courses/${course.cover}`}
+                                          class="course__box-right-img"
+                                        />
+                                      </a>
+                                    </div>
+                                    <div class="course__box-left">
+                                      <div class="course__box-left-top">
+                                        <a
+                                          href="#"
+                                          class="course__box-left-link"
+                                        >
+                                          {course.name}
+                                        </a>
+                                      </div>
+                                      <div class="course__box-left-center">
+                                        <div class="course__box-left-teacher">
+                                          <FaChalkboardTeacher className="course__box-left-icon ms-2"/> 
+                                          <span class="course__box-left-name">
+                                           {course.creator}
+                                          </span>
+                                        </div>
+                                        <div class="course__box-left-stars">
+                                          <span class="course__box-left-star">
+                                            <img src="/images/svgs/star_fill.svg" />
+                                          </span>
+                                          <span class="course__box-left-star">
+                                            <img src="/images/svgs/star_fill.svg" />
+                                          </span>
+                                          <span class="course__box-left-star">
+                                            <img src="/images/svgs/star_fill.svg" />
+                                          </span>
+                                          <span class="course__box-left-star">
+                                            <img src="/images/svgs/star_fill.svg" />
+                                          </span>
+                                          <span class="course__box-left-star">
+                                            <img src="/images/svgs/star_fill.svg" />
+                                          </span>
+                                        </div>
+                                      </div>
+                                      <div class="course__box-left-bottom">
+                                        <div class="course__box-left-des">
+                                          <p>{course.description}</p>
+                                        </div>
+                                      </div>
+                                      <div class="course__box-footer">
+                                        <div class="course__box-footer-right">
+                                          <FaUsers className="course__box-footer-icon ms-2"/>
+                                          <span class="course__box-footer-count">
+                                            202
+                                          </span>
+                                        </div>
+                                        <span class="course__box-footer-left">
+                                          {course.price === 0
+                                            ? "رایگان"
+                                            : course.price.toLocaleString()}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </>
+                        )}
                       </>
                     ) : (
                       <div className="alert alert-warning">
-                        هیچ نتیجه ای برای {statusTitle} وجود ندارد
+                        هیچ دوره ای یافت نشد !
                       </div>
                     )}
 
