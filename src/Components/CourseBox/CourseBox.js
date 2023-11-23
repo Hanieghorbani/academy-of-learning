@@ -10,7 +10,7 @@ export default function CourseBox(props) {
   let scroeArr = Array(props.courseAverageScore).fill(1)
 
   return (
-    <div className="col-4">
+    <div className={`col-4 ${(props.isInSwiper && "col-12")}`}>
       <div className="course-box">
         <Link to={`/course-info/${props.shortName}`}>
           <img
