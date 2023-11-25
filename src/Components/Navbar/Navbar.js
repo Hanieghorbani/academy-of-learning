@@ -10,10 +10,12 @@ export default function Navbar() {
   const [allNavbarLinks, setAllNavbarLinks] = useState([])
 
   useEffect(() => {
+  
     fetch("http://localhost:4000/v1/menus")
       .then((res) => res.json())
       .then((datas) => {
         setAllNavbarLinks(datas)
+        
       })
   }, [])
   return (

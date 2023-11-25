@@ -11,11 +11,15 @@ export default function LastArticles() {
     fetch("http://localhost:4000/v1/articles", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${localStorageToken.token}`,
+        Authorization: `Bearer ${
+          !localStorageToken ? "null" : localStorageToken.token
+        }`,
       },
-    }).then((res) => res.json()).then(result=>{
-      setArticles(result)
     })
+      .then((res) => res.json())
+      .then((result) => {
+        setArticles(result)
+      })
   }, [])
   return (
     <section className="articles">
@@ -29,11 +33,10 @@ export default function LastArticles() {
 
         <div className="articles__content">
           <div className="row">
-          {articles && articles.splice(0,3).map(article=>(
-            <ArticleBox
-              {...article}
-            />
-          ))}
+            {articles &&
+              articles
+                .splice(0, 3)
+                .map((article) => <ArticleBox {...article} />)}
           </div>
         </div>
       </div>

@@ -29,7 +29,9 @@ export default function ArticleInfo() {
     fetch(`http://localhost:4000/v1/articles/${articleName}`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${localStorageToken.token}`,
+        Authorization: `Bearer ${
+          !localStorageToken ? "null" : localStorageToken.token
+        }`,
       },
     })
       .then((res) => {

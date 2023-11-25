@@ -20,8 +20,9 @@ export default function App() {
   const logout = useCallback(() => {
     setToken(null)
     setUserInfos({})
+    setIsLoggedIn(false)
     localStorage.removeItem("user")
-  }, [])
+  })
 
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
