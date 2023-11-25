@@ -16,7 +16,12 @@ import {
   phoneValidator,
 } from "../../validators/rules"
 import { MdVisibility, MdVisibilityOff } from "react-icons/md"
-import { FaEnvelope, FaUserPlus, FaRegUserCircle,FaPhoneAlt  } from "react-icons/fa"
+import {
+  FaEnvelope,
+  FaUserPlus,
+  FaRegUserCircle,
+  FaPhoneAlt,
+} from "react-icons/fa"
 import { BiSolidUser } from "react-icons/bi"
 import AuthContext from "../../userContext/authContext"
 
@@ -38,9 +43,9 @@ export default function Register() {
         value: "",
         isValid: false,
       },
-      registerPhone:{
-         value:'',
-         isValid:false
+      registerPhone: {
+        value: "",
+        isValid: false,
       },
       registerPassword: {
         value: "",
@@ -65,7 +70,7 @@ export default function Register() {
         name: formState.inputs.registerName.value,
         username: formState.inputs.registerUsername.value,
         email: formState.inputs.registerEmail.value,
-        phone:formState.inputs.registerPhone.value ,
+        phone: formState.inputs.registerPhone.value,
         password: formState.inputs.registerPassword.value,
         confirmPassword: formState.inputs.registerConfirmPassword.value,
       }
@@ -97,14 +102,30 @@ export default function Register() {
           })
         })
         .catch((err) => {
-          swal({
-            text: "این کاربر قبلا ثبت نام کرده",
-            icon: "error",
-            dangerMode: true,
-            buttons: "ورود",
-          }).then((value) => {
-            navigate("/login")
-          })
+          console.log(err)
+          if (err == 'Error: {"message":"this phone number banned!"}') {
+            swal({
+              text: "متاسفیم!شما از طرف مدیران سایت مسدود شدین..",
+              icon: "error",
+              dangerMode: true,
+              buttons: "ارتباط با ما",
+            }).then(() => {
+              navigate("/contact")
+            })
+          } else if (
+            err == 'Error: {"message":"username or email is duplicate."}'
+          ) {
+            swal({
+              text: "ایمیل یا نام کاربری تکراری است.",
+              icon: "error",
+              dangerMode: true,
+              buttons: "تلاش مجدد",
+            }).then(() => {
+              navigate("/register")
+            })
+          }
+          {
+          }
         })
     } else {
       swal({
@@ -191,11 +212,9 @@ export default function Register() {
                 className="login-form__username-input"
                 element="input"
                 onInputHandler={onInputHandler}
-                validations={[
-                  phoneValidator()
-                ]}
+                validations={[phoneValidator()]}
               />
-              <FaPhoneAlt  className="login-form__password-icon " />
+              <FaPhoneAlt className="login-form__password-icon " />
             </div>
             <div className="login-form__password">
               <Input
