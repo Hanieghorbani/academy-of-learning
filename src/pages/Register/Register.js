@@ -13,9 +13,10 @@ import {
   minValidator,
   maxValidator,
   emailValidator,
+  phoneValidator,
 } from "../../validators/rules"
 import { MdVisibility, MdVisibilityOff } from "react-icons/md"
-import { FaEnvelope, FaUserPlus, FaRegUserCircle } from "react-icons/fa"
+import { FaEnvelope, FaUserPlus, FaRegUserCircle,FaPhoneAlt  } from "react-icons/fa"
 import { BiSolidUser } from "react-icons/bi"
 import AuthContext from "../../userContext/authContext"
 
@@ -36,6 +37,10 @@ export default function Register() {
       registerUsername: {
         value: "",
         isValid: false,
+      },
+      registerPhone:{
+         value:'',
+         isValid:false
       },
       registerPassword: {
         value: "",
@@ -60,6 +65,7 @@ export default function Register() {
         name: formState.inputs.registerName.value,
         username: formState.inputs.registerUsername.value,
         email: formState.inputs.registerEmail.value,
+        phone:formState.inputs.registerPhone.value ,
         password: formState.inputs.registerPassword.value,
         confirmPassword: formState.inputs.registerConfirmPassword.value,
       }
@@ -176,6 +182,20 @@ export default function Register() {
                 ]}
               />
               <FaEnvelope className="login-form__password-icon " />
+            </div>
+            <div className="login-form__password">
+              <Input
+                id="registerPhone"
+                type="number"
+                placeholder="شماره همراه"
+                className="login-form__username-input"
+                element="input"
+                onInputHandler={onInputHandler}
+                validations={[
+                  phoneValidator()
+                ]}
+              />
+              <FaPhoneAlt  className="login-form__password-icon " />
             </div>
             <div className="login-form__password">
               <Input
