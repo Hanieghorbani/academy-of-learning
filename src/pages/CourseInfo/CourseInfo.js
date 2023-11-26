@@ -30,7 +30,7 @@ export default function CourseInfo() {
   const [creator, setCreator] = useState([])
   const [updatedAt, setUpdatedAt] = useState("")
   const [createdAt, setCreatedAt] = useState("")
-  const {courseName} = useParams()
+  const { courseName } = useParams()
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
@@ -142,7 +142,7 @@ export default function CourseInfo() {
             <div className="col-6">
               <video
                 src=""
-                poster={`/images/courses/${courseInfos.cover}`}
+                poster={`http://localhost:4000/courses/covers/${courseInfos.cover}`}
                 className="course-info__video"
                 controls
               ></video>
