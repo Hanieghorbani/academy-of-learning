@@ -4,8 +4,8 @@ import Input from "../../../Components/Form/Input"
 import { minValidator, maxValidator } from "./../../../validators/rules"
 import { useForm } from "./../../../hooks/useForm"
 import swal from "sweetalert"
-
 import "./Category.css"
+import Swal from "sweetalert2"
 
 export default function Category() {
   const localStorageData = JSON.parse(localStorage.getItem("user"))
@@ -34,7 +34,6 @@ export default function Category() {
     fetch(`http://localhost:4000/v1/category`)
       .then((res) => res.json())
       .then((allCategories) => {
-        console.log(allCategories)
         setCategories(allCategories)
       })
   }
@@ -69,7 +68,6 @@ export default function Category() {
   }
 
   function removeCategoryHandler(id) {
-    console.log(id)
     swal({
       text: "آیا از حذف این دسته بندی اطمینان دارید؟",
       icon: "warning",
@@ -93,6 +91,41 @@ export default function Category() {
             })
           }
         })
+      }
+    })
+  }
+
+  function updateCategory(id) {
+    Swal.fire({
+      title: "اطلاعات جدید را وارد کنید",
+      html:
+        '<input type="text" id="newTitle" class="swal2-input" placeholder="عنوان جدید">' +
+        '<input type="text" id="newShortName" class="swal2-input" placeholder="نام کوتاه جدید">',
+      showCancelButton: true,
+      confirmButtonText: "ثبت",
+      cancelButtonText: "لغو",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newTitle = document.getElementById("newTitle").value
+        const newShortName = document.getElementById("newShortName").value
+        // انجام عملیات مربوط به ورودی‌ها
+        if (newTitle.trim().length && newShortName.trim().length) {
+          fetch(`http://localhost:4000/v1/category/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorageData.token}`,
+            },
+            body: JSON.stringify({ 
+              title:newTitle,
+              name:newShortName,
+             }),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              getAllCategories()
+            })
+        }
       }
     })
   }
@@ -159,11 +192,15 @@ export default function Category() {
           </thead>
           <tbody>
             {categories.map((category, index) => (
-              <tr>
+              <tr key={category._id}>
                 <td>{index + 1}</td>
                 <td>{category.title}</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button
+                    type="button"
+                    class="btn btn-primary edit-btn"
+                    onClick={() => updateCategory(category._id)}
+                  >
                     ویرایش
                   </button>
                 </td>
