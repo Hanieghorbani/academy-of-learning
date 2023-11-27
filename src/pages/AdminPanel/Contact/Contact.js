@@ -7,52 +7,91 @@ export default function Contact() {
   const localStorageData = JSON.parse(localStorage.getItem("user"))
 
   useEffect(() => {
+    getAllContacts()
+  }, [])
+
+  function getAllContacts() {
     fetch("http://localhost:4000/v1/contact")
       .then((res) => res.json())
       .then((allContacts) => {
         setContacts(allContacts)
       })
-  }, [])
-function showContactBody(name,body){
-  swal({
-    text:`${name}: ${body}`,
-    buttons: "تایید",
-  })
-}
+  }
+  function showContactBody(name, body) {
+    swal({
+      text: `${name}: ${body}`,
+      buttons: "تایید",
+    })
+  }
 
-function answerContactHandler(email){
-  swal({
-    text:"متن پاسخ را وارد کنید:",
-    content:'input',
-    buttons: "ارسال",
-  }).then(value=>{
-    if (value.trim()) {
-      console.log(value);
-      fetch('http://localhost:4000/v1/contact/answer',{
-        method:'POST',
-        headers:{
-          Authorization: `Bearer ${localStorageData.token}`,
-          'Content-Type' : 'application/json'
-        },
-        body:JSON.stringify({
-          email,
-          answer:value
+  function answerContactHandler(email) {
+    swal({
+      text: "متن پاسخ را وارد کنید:",
+      content: "input",
+      buttons: "ارسال",
+    }).then((value) => {
+      if (value.trim()) {
+        console.log(value)
+        fetch("http://localhost:4000/v1/contact/answer", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorageData.token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            answer: value,
+          }),
+        }).then((res) => {
+          if (res.ok) {
+            swal({
+              text: "پیغام شما ارسال شد",
+              icon: "success",
+              dangerMode: false,
+              buttons: "تایید",
+            })
+          } else {
+            console.log(res.text())
+          }
         })
-      }).then(res=>{
-        if (res.ok) {
-          swal({
-            text: 'پیغام شما ارسال شد',
-            icon: "success",
-            dangerMode: false,
-            buttons: "تایید",
-          })
-        }else{
-             console.log(res.text()); 
-        }
-      })
-    }
-  })
-}
+      }
+    })
+  }
+
+  function removeContact(id) {
+    swal({
+      text: "آیا از حذف این پیغام اطمینان دارید؟",
+      icon: "warning",
+      buttons: ["لغو", "حذف"],
+    }).then((res) => {
+      if (res) {
+        fetch(`http://localhost:4000/v1/contact/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorageData.token}`,
+          },
+        }).then((res) => {
+          if (res.ok) {
+            swal({
+              text: "پیغام با موفقیت حذف شد",
+              icon: "success",
+              dangerMode: false,
+              buttons: "تایید",
+            }).then(() => {
+              getAllContacts()
+            })
+          } else {
+            swal({
+              text: "حذف پیغام با مشکل مواجه شد!",
+              icon: "error",
+              dangerMode: true,
+              buttons: "تایید",
+            })
+          }
+        })
+      }
+    })
+  }
   return (
     <>
       <DataTable title="پیغام‌ها">
@@ -79,18 +118,26 @@ function answerContactHandler(email){
                   <button
                     type="button"
                     class="btn btn-primary edit-btn"
-                    onClick={() => showContactBody(contact.name,contact.body)}
+                    onClick={() => showContactBody(contact.name, contact.body)}
                   >
                     مشاهده پیغام
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn" onClick={()=>answerContactHandler(contact.email)}>
+                  <button
+                    type="button"
+                    class="btn btn-primary edit-btn"
+                    onClick={() => answerContactHandler(contact.email)}
+                  >
                     پاسخ
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger delete-btn">
+                  <button
+                    type="button"
+                    class="btn btn-danger delete-btn"
+                    onClick={() => removeContact(contact._id)}
+                  >
                     حذف
                   </button>
                 </td>

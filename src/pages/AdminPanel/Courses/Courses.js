@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react"
 import "./Courses.css"
 import DataTable from "../../../Components/AdminPanel/DataTable/DataTable"
 import swal from "sweetalert"
-import { useForm } from "./../../../hooks/useForm";
-import Input from "./../../../Components/Form/Input";
+import { useForm } from "./../../../hooks/useForm"
+import Input from "./../../../Components/Form/Input"
 import {
   requiredValidator,
   minValidator,
   maxValidator,
-} from "./../../../validators/rules";
+} from "./../../../validators/rules"
 
 export default function Courses() {
   const [courses, setCourses] = useState([])
   const localStorageData = JSON.parse(localStorage.getItem("user"))
-  const [courseCategory, setCourseCategory] = useState("")
+  const [courseCategory, setCourseCategory] = useState("-1")
   const [categories, setCategories] = useState([])
-  const [courseStatus, setCourseStatus] = useState('start')
+  const [courseStatus, setCourseStatus] = useState("start")
   const [courseCover, setCourseCover] = useState({})
 
   const [formState, onInputHandler] = useForm(
@@ -42,7 +42,7 @@ export default function Courses() {
       },
     },
     false
-  );
+  )
   useEffect(() => {
     getAllCourses()
 
@@ -50,7 +50,6 @@ export default function Courses() {
       .then((res) => res.json())
       .then((allCategories) => {
         setCategories(allCategories)
-        console.log(categories)
       })
   }, [])
 
@@ -101,42 +100,68 @@ export default function Courses() {
     })
   }
 
-  function addNewCourse(e){
+  function addNewCourse(e) {
     e.preventDefault()
     let formData = new FormData()
-    formData.append('name', formState.inputs.name.value)
-    formData.append('description', formState.inputs.description.value)
-    formData.append('shortName', formState.inputs.shortName.value)
-    formData.append('categoryID', courseCategory)
-    formData.append('price', formState.inputs.price.value)
-    formData.append('support', formState.inputs.support.value)
-    formData.append('status', courseStatus)
-    formData.append('cover', courseCover)
+    formData.append("name", formState.inputs.name.value)
+    formData.append("description", formState.inputs.description.value)
+    formData.append("shortName", formState.inputs.shortName.value)
+    formData.append("categoryID", courseCategory)
+    formData.append("price", formState.inputs.price.value)
+    formData.append("support", formState.inputs.support.value)
+    formData.append("status", courseStatus)
+    formData.append("cover", courseCover)
 
-    fetch(`http://localhost:4000/v1/courses`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorageData.token}`
-      },
-      body: formData
-    }).then(res => {
-      if(res.ok) {
-        swal({
-          title: 'دوره جدید با موفقیت اضافه شد',
-          icon: 'success',
-          buttons: 'تایید'
-        }).then(() => {
-          getAllCourses()
-        })
-      }else{
-        console.log(res.text());
-      }
-    })
+    if (courseCategory != "-1") {
+      fetch(`http://localhost:4000/v1/courses`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorageData.token}`,
+        },
+        body: formData,
+      }).then((res) => {
+        if (res.ok) {
+          swal({
+            title: "دوره جدید با موفقیت اضافه شد",
+            icon: "success",
+            buttons: "تایید",
+          }).then(() => {
+            getAllCourses()
+          })
+        } else {
+          res.json().then((data) => {
+            for (const err of data.message) {
+              if (err.message.includes("تصویر الزامی می باشد")) {
+                swal({
+                  title: "لطفا تصویر دوره را انتخاب کنید",
+                  icon: "error",
+                  buttons: "تایید",
+                })
+              } else if (
+                err.message.includes("price must be a `number` type")
+              ) {
+                swal({
+                  title: "لطفا قیمت را به عدد وارد کنید",
+                  icon: "error",
+                  buttons: "تایید",
+                })
+              }
+            }
+          })
+        }
+      })
+    } else {
+      swal({
+        title: "لطفا دسته بندی را انتخاب کنید",
+        icon: "error",
+        buttons: "تایید",
+      })
+    }
   }
 
   return (
     <>
-       <div class="container-fluid" id="home-content">
+      <div class="container-fluid" id="home-content">
         <div class="container">
           <div class="home-title">
             <span>افزودن دوره جدید</span>
@@ -218,7 +243,8 @@ export default function Courses() {
             <div class="col-6">
               <div class="number input">
                 <label class="input-title">دسته‌بندی دوره</label>
-                <select onChange={(e)=>setCourseCategory(e.target.value)}>
+                <select onChange={(e) => setCourseCategory(e.target.value)}>
+                  <option value="">انتخاب کنید</option>
                   {categories.map((category) => (
                     <option value={category._id}>{category.title}</option>
                   ))}
@@ -229,10 +255,14 @@ export default function Courses() {
             <div class="col-6">
               <div class="file">
                 <label class="input-title">عکس دوره</label>
-                <input type="file" id="file" onChange={event => {
-                  console.log(event.target.files[0]);
-                  setCourseCover(event.target.files[0])
-                }} />
+                <input
+                  type="file"
+                  id="file"
+                  onChange={(event) => {
+                    console.log(event.target.files[0])
+                    setCourseCover(event.target.files[0])
+                  }}
+                />
               </div>
             </div>
             <div class="col-12">
@@ -247,8 +277,8 @@ export default function Courses() {
                           type="radio"
                           value="start"
                           name="condition"
-                          checked
-                          onInput={e => setCourseStatus(e.target.value)}
+                          defaultChecked
+                          onClick={(e) => setCourseStatus(e.target.value)}
                         />
                       </label>
                     </div>
@@ -259,14 +289,19 @@ export default function Courses() {
                           type="radio"
                           value="presell"
                           name="condition"
-                          onInput={e => setCourseStatus(e.target.value)}
+                          onClick={(e) => setCourseStatus(e.target.value)}
                         />
                       </label>
                     </div>
                   </div>
                 </div>
                 <div class="submit-btn">
-                  <input type="submit" value="افزودن" onClick={addNewCourse} />
+                  <input
+                    type="submit"
+                    value="افزودن"
+                    onClick={addNewCourse}
+                    disabled={!formState.isFormValid}
+                  />
                 </div>
               </div>
             </div>
