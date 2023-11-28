@@ -12,8 +12,8 @@ export default function ArticleBox({ title, description, cover, shortName }) {
             className="article-card__link-img"
           >
             <img
-              src={`/images/blog/${cover}`}
-              className="article-card__img"
+              src={`http://localhost:4000/courses/covers/${cover}`}
+              className="article-card__img w-100"
               alt="Article Cover"
             />
           </Link>

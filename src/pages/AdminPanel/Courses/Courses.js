@@ -112,6 +112,8 @@ export default function Courses() {
     formData.append("status", courseStatus)
     formData.append("cover", courseCover)
 
+
+    console.log(formData);
     if (courseCategory != "-1") {
       fetch(`http://localhost:4000/v1/courses`, {
         method: "POST",

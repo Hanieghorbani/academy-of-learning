@@ -35,6 +35,7 @@
 
 .article__banner {
   margin-top: 4rem;
+  border-radius: 4rem;
 }
 
 .article__score {
@@ -87,19 +88,22 @@
   margin: 5rem 0;
 }
 
-.article-section__title {
+.article-section h2 {
   font-size: 2.4rem;
   color: #008c25;
   font-weight: bold;
   line-height: 1.2;
 }
 
-.article-section__text {
+.article-section p  {
   margin: 2rem 0;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  color: #7d7e7f;
 }
 
-.article-section__img {
-  display: block;
+.article-section img{
+    display: block;
   margin: 0 auto;
 }
 
@@ -289,10 +293,5 @@
 
 /* Start Helper Classes */
 
-.paragraph {
-  font-size: 1.5rem;
-  line-height: 3rem;
-  color: #7d7e7f;
-}
 
 /* Finish Helper Classes */
