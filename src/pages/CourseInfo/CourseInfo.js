@@ -58,6 +58,7 @@ export default function CourseInfo() {
         setUpdatedAt(result.updatedAt)
         setCreatedAt(result.categoryID.createdAt)
         setCreator(result.creator)
+        console.log(result)
       })
       .catch((err) => {
         swal({
@@ -322,7 +323,8 @@ export default function CourseInfo() {
                                     </div>
                                     <div className="introduction__accordion-left">
                                       <span className="introduction__accordion-time">
-                                        18:34
+                                        {session.time.substring(0, 2)}:
+                                        {session.time.substring(2, 4)}
                                       </span>
                                     </div>
                                   </div>
