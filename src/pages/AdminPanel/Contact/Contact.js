@@ -15,6 +15,7 @@ export default function Contact() {
       .then((res) => res.json())
       .then((allContacts) => {
         setContacts(allContacts)
+        console.log(allContacts);
       })
   }
   function showContactBody(name, body) {
@@ -110,7 +111,7 @@ export default function Contact() {
           <tbody>
             {contacts.map((contact, index) => (
               <tr>
-                <td>{index + 1}</td>
+                <td className={contact.answer ? 'bg-success text-white' : 'bg-danger text-white'}>{index + 1}</td>
                 <td>{contact.name}</td>
                 <td>{contact.email}</td>
                 <td>{contact.phone}</td>

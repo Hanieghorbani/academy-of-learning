@@ -16,10 +16,11 @@ import {
   FaLink,
   FaYoutube,
   FaChalkboardTeacher,
+  FaLock,
 } from "react-icons/fa"
 import { AiFillWechat } from "react-icons/ai"
 import { PiStudentBold } from "react-icons/pi"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
 
 export default function CourseInfo() {
   const navigate = useNavigate()
@@ -34,7 +35,6 @@ export default function CourseInfo() {
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
     fetch(`http://localhost:4000/v1/courses/${courseName}`, {
-      method: "GET",
       headers: {
         Authorization: `Bearer ${
           localStorageToken ? localStorageToken.token : "null"
@@ -58,7 +58,6 @@ export default function CourseInfo() {
         setUpdatedAt(result.updatedAt)
         setCreatedAt(result.categoryID.createdAt)
         setCreator(result.creator)
-        console.log(result)
       })
       .catch((err) => {
         swal({
@@ -314,18 +313,31 @@ export default function CourseInfo() {
                                         {index + 1}
                                       </span>
                                       <FaYoutube className="introduction__accordion-icon" />
-                                      <a
-                                        href="#"
-                                        className="introduction__accordion-link"
-                                      >
-                                        {session.title}
-                                      </a>
+                                      {session.free ||
+                                      courseInfos.isUserRegisteredToThisCourse ? (
+                                        <Link
+                                          to={`/${courseName}/${session._id}`}
+                                          className="introduction__accordion-link"
+                                        >
+                                          {session.title}
+                                        </Link>
+                                      ) : (
+                                        <span className="introduction__accordion-link">
+                                          {session.title}
+                                        </span>
+                                      )}
                                     </div>
                                     <div className="introduction__accordion-left">
                                       <span className="introduction__accordion-time">
                                         {session.time.substring(0, 2)}:
                                         {session.time.substring(2, 4)}
                                       </span>
+                                      {!session.free &&
+                                      !courseInfos.isUserRegisteredToThisCourse ? (
+                                        <FaLock className="me-3" />
+                                      ) : (
+                                        ""
+                                      )}
                                     </div>
                                   </div>
                                 </div>
