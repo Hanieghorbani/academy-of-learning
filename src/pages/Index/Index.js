@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AboutUs from "../../Components/AboutUs/AboutUs";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
@@ -10,8 +10,7 @@ import Landing from "../../Components/Landing/Landing";
 
 import "./Index.css";
 
-export default function Index(props) {
-
+export default function Index() {
   return (
     <>
       <Header />

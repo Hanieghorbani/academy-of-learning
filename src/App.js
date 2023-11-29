@@ -10,6 +10,14 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userInfos, setUserInfos] = useState({})
 
+  const [indexInfos, setIndexInfos] = useState([])
+  useEffect(() => {
+    fetch("http://localhost:4000/v1/infos/index")
+      .then((res) => res.json())
+      .then((data) => {
+        setIndexInfos(data)
+      })
+  }, [])
   const login = useCallback((userInfos, token) => {
     setToken(token)
     setIsLoggedIn(true)
@@ -48,6 +56,7 @@ export default function App() {
         userInfos,
         login,
         logout,
+        indexInfos
       }}
     >
       {router}

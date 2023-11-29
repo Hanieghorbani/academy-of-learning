@@ -1,8 +1,12 @@
-import React, { memo, useEffect, useState } from "react"
+import React, { memo, useEffect, useState, useContext } from "react"
 import "./Topbar.css"
 import { BsTelephone, BsEnvelope } from "react-icons/bs"
 import { Link } from "react-router-dom"
+import AuthContext from "../../userContext/authContext"
+
 export default memo(function Topbar() {
+  const contextData = useContext(AuthContext)
+
   const [allTopbarLinks, setAllTopbarLinks] = useState([])
   useEffect(() => {
     fetch(`http://localhost:4000/v1/menus/topbar`)
@@ -35,7 +39,7 @@ export default memo(function Topbar() {
           <div className="top-bar__left">
             <div className="top-bar__email">
               <a href="#" className="top-bar__email-text top-bar__link">
-                hnie.ghorbani@gmail.com
+                {contextData.indexInfos.email}
               </a>
               <i className="fas fa-envelope top-bar__email-icon"></i>
 
@@ -43,7 +47,7 @@ export default memo(function Topbar() {
             </div>
             <div className="top-bar__phone">
               <a href="#" className="top-bar__phone-text top-bar__link">
-                09121234567
+                {contextData.indexInfos.phone}
               </a>
               <BsTelephone className="top-bar__phone-icon" />
             </div>
