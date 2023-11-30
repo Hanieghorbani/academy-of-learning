@@ -50,6 +50,8 @@ export default function Contact() {
               icon: "success",
               dangerMode: false,
               buttons: "تایید",
+            }).then(()=>{
+              getAllContacts()
             })
           } else {
             console.log(res.text())
