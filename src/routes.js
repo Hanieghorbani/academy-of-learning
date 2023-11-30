@@ -18,6 +18,7 @@ import AdminCategory from './pages/AdminPanel/Category/Category'
 import AdminContacts from './pages/AdminPanel/Contact/Contact'
 import Sessions from './pages/AdminPanel/Sessions/Sessions'
 import Comments from './pages/AdminPanel/Comments/Comments'
+import Offs from "./pages/AdminPanel/Offs/Offs"
 const routes = [
     { path: '/', element: <Index /> },
     { path: '/course-info/:courseName', element: <CourseInfo /> },
@@ -39,6 +40,7 @@ const routes = [
         { path: 'contacts', element: <AdminContacts/> }, 
         { path: 'sessions', element: <Sessions/> }, 
         { path: 'comments', element: <Comments/> }, 
+        { path: 'offs', element: <Offs/> }, 
     ]},
 
 ]

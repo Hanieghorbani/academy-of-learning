@@ -77,7 +77,7 @@ export default function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to={"/p-admin"}>
+            <Link to={"offs"}>
               <span>کدهای تخفیف</span>
             </Link>
           </li>
