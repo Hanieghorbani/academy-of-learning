@@ -242,7 +242,7 @@ export default function Articles() {
                 >
                   <option value="-1">دسته بندی مقاله را انتخاب کنید،</option>
                   {categories.map((category) => (
-                    <option value={category._id}>{category.title}</option>
+                    <option key={category._id} value={category._id}>{category.title}</option>
                   ))}
                 </select>
                 <span class="error-message text-danger"></span>
@@ -288,7 +288,7 @@ export default function Articles() {
           </thead>
           <tbody>
             {articles.map((article, index) => (
-              <tr>
+              <tr key={article._id}>
                 <td>{index + 1}</td>
                 <td>{article.title}</td>
                 <td>{article.shortName}</td>

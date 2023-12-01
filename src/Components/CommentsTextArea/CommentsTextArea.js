@@ -9,7 +9,7 @@ export default function CommentsTextArea({ comments, submitComment }) {
   const contextData = useContext(AuthContext)
   const [contentComment, setContentComment] = useState("")
   const [shownComments, setShownComments] = useState([])
-  const [score, setScore] = useState("امتیاز خود را انتخاب کنید")
+  const [score, setScore] = useState("-1")
   // answerContent
   function clearCommentTextArea() {
     setContentComment("")
@@ -60,7 +60,10 @@ export default function CommentsTextArea({ comments, submitComment }) {
                     </p>
                   </div>
                   {comment.answerContent && (
-                    <div key={comment.answerContent._id} className="comments__item my-5">
+                    <div
+                      key={comment.answerContent._id}
+                      className="comments__item my-5"
+                    >
                       <div className="comments__question">
                         <div className="comments__question-header">
                           <div className="comments__question-header-right">
@@ -134,16 +137,25 @@ export default function CommentsTextArea({ comments, submitComment }) {
               <select
                 className="comments__score-input w-100"
                 onChange={(e) => setScore(e.target.value)}
-                value={score}
               >
-                <option className="comments__score-input-text">
+                <option value={'-1'} className="comments__score-input-text">
                   امتیاز خود را انتخاب کنید
                 </option>
-                <option className="comments__score-input-text">1</option>
-                <option className="comments__score-input-text">2</option>
-                <option className="comments__score-input-text">3</option>
-                <option className="comments__score-input-text">4</option>
-                <option className="comments__score-input-text">5</option>
+                <option value={5} className="comments__score-input-text">
+                  عالی
+                </option>
+                <option value={4} className="comments__score-input-text">
+                  خیلی خوب
+                </option>
+                <option value={3} className="comments__score-input-text">
+                  خوب
+                </option>
+                <option value={2} className="comments__score-input-text">
+                  متوسط
+                </option>
+                <option value={1} className="comments__score-input-text">
+                  افتضاح
+                </option>
               </select>
               {/* <FaChevronDown className="comments__input-icon" /> */}
             </div>

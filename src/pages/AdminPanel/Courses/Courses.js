@@ -248,7 +248,7 @@ export default function Courses() {
                 <select onChange={(e) => setCourseCategory(e.target.value)}>
                   <option value="">انتخاب کنید</option>
                   {categories.map((category) => (
-                    <option value={category._id}>{category.title}</option>
+                    <option key={category._id} value={category._id}>{category.title}</option>
                   ))}
                 </select>
                 <span class="error-message text-danger"></span>

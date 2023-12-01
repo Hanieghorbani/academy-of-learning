@@ -38,7 +38,7 @@ export default function PresellCourses() {
                 className="mySwiper"
               >
                 {presellCourses.map((course) => (
-                  <SwiperSlide>
+                  <SwiperSlide key={course._id}>
                     <CourseBox {...course} isInSwiper={true} />
                   </SwiperSlide>
                 ))}

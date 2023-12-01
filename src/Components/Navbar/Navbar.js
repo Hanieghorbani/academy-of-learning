@@ -36,7 +36,7 @@ export default function Navbar() {
                 </Link>
               </li>
               {allNavbarLinks.map((link) => (
-                <li className="main-header__item">
+                <li key={link._id} className="main-header__item">
                   <Link to={`${link.href}/1`} className="main-header__link">
                     {link.title}
                     {link.submenus.length !== 0 && (
@@ -44,7 +44,7 @@ export default function Navbar() {
                         <IoIosArrowDown className="main-header__link-icon" />
                         <ul className="main-header__dropdown">
                           {link.submenus.map((sub) => (
-                            <li className="main-header__dropdown-item">
+                            <li key={sub._id} className="main-header__dropdown-item">
                               <Link
                                 to={sub.href}
                                 className="main-header__dropdown-link"

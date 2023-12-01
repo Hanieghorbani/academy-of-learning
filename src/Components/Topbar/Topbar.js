@@ -28,7 +28,7 @@ export default memo(function Topbar() {
           <div className="top-bar__right">
             <ul className="top-bar__menu">
               {getRandomItem(allTopbarLinks, 5).map((link) => (
-                <li className="top-bar__item">
+                <li key={link._id} className="top-bar__item">
                   <Link to={link.href} className="top-bar__link">
                     {link.title}
                   </Link>

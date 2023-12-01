@@ -109,6 +109,7 @@ export default function Category() {
                           <ul className="courses-top-bar__selection-list">
                             {lists.map((list, index) => (
                               <li
+                              key={list._id} 
                                 onClick={(e) => {
                                   setStatusTitle(e.target.textContent)
                                   setStatus(list.key)
@@ -151,13 +152,13 @@ export default function Category() {
                         {showCourses == "grid" ? (
                           <>
                             {shownCourses.map((course) => (
-                              <CourseBox {...course} />
+                              <CourseBox key={course._id}  {...course} />
                             ))}
                           </>
                         ) : (
                           <>
                             {shownCourses.map((course) => (
-                              <div class="col-12">
+                              <div key={course._id}  class="col-12">
                                 <div class="course-box">
                                   <div class="course__box-header">
                                     <div class="course__box-right">

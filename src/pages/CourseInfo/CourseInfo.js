@@ -78,29 +78,31 @@ export default function CourseInfo() {
 
   const submitComment = (score, contentComment, clearCommentTextArea) => {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
-    fetch(`http://localhost:4000/v1/comments`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorageToken.token}`,
-      },
-      body: JSON.stringify({
-        body: contentComment,
-        courseShortName: courseName,
-        score: score,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        swal({
-          title: "نظر شما پس از بررسی و تایید مدیر ثبت خواهد شد",
-          icon: "success",
-          dangerMode: false,
-          buttons: "تایید",
-        }).then((res) => {
-          clearCommentTextArea()
-        })
+    if (score != "-1") {
+      fetch(`http://localhost:4000/v1/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorageToken.token}`,
+        },
+        body: JSON.stringify({
+          body: contentComment,
+          courseShortName: courseName,
+          score: score,
+        }),
       })
+        .then((res) => res.json())
+        .then((result) => {
+          swal({
+            title: "نظر شما پس از بررسی و تایید مدیر ثبت خواهد شد",
+            icon: "success",
+            dangerMode: false,
+            buttons: "تایید",
+          }).then((res) => {
+            clearCommentTextArea()
+          })
+        })
+    }
   }
 
   function registerInCourse(course) {
@@ -201,38 +203,42 @@ export default function CourseInfo() {
                   }
                 })
                 .then((result) => {
-                  fetch(
-                    `http://localhost:4000/v1/courses/${course._id}/register`,
-                    {
-                      method: "POST",
-                      headers: {
-                        Authorization: `Bearer ${localStorageToken.token}`,
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify({
-                        price: (course.price * result.percent) / 100,
-                      }),
-                    }
-                  ).then((res) => {
-                    if (res.ok) {
-                      swal({
-                        title: `مبلغ قابل پرداخت با تخفیف: ${
-                          (course.price * result.percent) / 100
-                        }`,
-                        text: "تواین مرحله باید به درگاه پرداخت منتقل شده وپرداخت با موفقیت انجام بشه.الکی مثلا ما پرداخت رو انجام دادیم:)",
-                        icon: "warning",
-                        buttons: "تایید",
-                      }).then(() => {
-                        swal({
-                          title: "تبریک! شما با موفقیت در دوره ثبت نام کردید",
-                          icon: "success",
-                          buttons: "تایید",
-                        }).then(() => {
-                          getAllInfosCourse()
-                        })
+                  swal({
+                    title: `مبلغ قابل پرداخت با تخفیف: ${
+                      course.price - (course.price * result.percent) / 100
+                    }`,
+                    text: "تواین مرحله باید به درگاه پرداخت منتقل شده وپرداخت با موفقیت انجام بشه.الکی مثلا ما پرداخت رو انجام دادیم:)",
+                    icon: "warning",
+                    buttons: "پرداخت",
+                  }).then((res) => {
+                    if (res) {
+                      fetch(
+                        `http://localhost:4000/v1/courses/${course._id}/register`,
+                        {
+                          method: "POST",
+                          headers: {
+                            Authorization: `Bearer ${localStorageToken.token}`,
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify({
+                            price:
+                              course.price -
+                              (course.price * result.percent) / 100,
+                          }),
+                        }
+                      ).then((res) => {
+                        if (res.ok) {
+                          swal({
+                            title: "تبریک! شما با موفقیت در دوره ثبت نام کردید",
+                            icon: "success",
+                            buttons: "تایید",
+                          }).then(() => {
+                            getAllInfosCourse()
+                          })
+                        } else {
+                          console.log(res.text())
+                        }
                       })
-                    } else {
-                      console.log(res.text())
                     }
                   })
                 })
@@ -444,7 +450,7 @@ export default function CourseInfo() {
                         {sessions.length != 0 ? (
                           <>
                             {sessions.map((session, index) => (
-                              <Accordion.Body key={session.id}>
+                              <Accordion.Body key={session._id}>
                                 <div
                                   id="collapseOne"
                                   className="accordion-collapse collapse show"

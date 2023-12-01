@@ -37,7 +37,7 @@ export default function LastArticles() {
               articles
                 .filter(article=>article.publish)
                 .splice(0, 3)
-                .map((article) => <ArticleBox {...article} />)}
+                .map((article) => <ArticleBox key={article._id} {...article} />)}
           </div>
         </div>
       </div>

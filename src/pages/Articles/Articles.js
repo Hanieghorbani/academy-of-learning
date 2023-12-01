@@ -37,7 +37,7 @@ export default function Articles() {
             <div className="container">
               <div className="row">
                 {shownArticles.filter(article=>article.publish).map((article) => (
-                  <ArticleBox key={article.id} {...article} />
+                  <ArticleBox key={article._id} {...article} />
                 ))}
               </div>
             </div>

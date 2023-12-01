@@ -142,11 +142,11 @@ export default function Menus() {
               >
                 <option value="-1">منوی اصلی را انتخاب کنید</option>
                 {menus.map((menu) => (
-                  <>
+                  <div key={menu._id}>
                     {!Boolean(menu.parent) && (
                       <option value={menu._id}>{menu.title}</option>
                     )}
-                  </>
+                  </div>
                 ))}
               </select>
               <span class="error-message text-danger"></span>
@@ -176,7 +176,7 @@ export default function Menus() {
           </thead>
           <tbody>
             {menus.map((menu, index) => (
-              <tr>
+              <tr key={menu._id}>
                 <td>{index + 1}</td>
                 <td>{menu.title}</td>
                 <td>{menu.href}</td>

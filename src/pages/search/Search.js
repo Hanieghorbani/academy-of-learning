@@ -32,7 +32,7 @@ export default function Search() {
                 {allResultCourses.length == true ? (
                   <>
                     {allResultCourses.map((course) => (
-                      <CourseBox key={course.id} {...course} />
+                      <CourseBox key={course._id} {...course} />
                     ))}
                   </>
                 ) : (
@@ -54,7 +54,7 @@ export default function Search() {
                 {allResultArticles.length == true ? (
                   <>
                     {allResultArticles.map((article) => (
-                      <ArticleBox key={article.id} {...article} />
+                      <ArticleBox key={article._id} {...article} />
                     ))}
                   </>
                 ) : (

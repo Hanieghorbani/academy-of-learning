@@ -37,7 +37,7 @@ export default function PopularCourses() {
                 className="mySwiper"
               >
                 {popularCourses.map((course) => (
-                  <SwiperSlide key={course.id}>
+                  <SwiperSlide key={course._id}>
                     <CourseBox {...course} isInSwiper={true} />
                   </SwiperSlide>
                 ))}

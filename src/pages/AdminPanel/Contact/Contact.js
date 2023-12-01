@@ -112,7 +112,7 @@ export default function Contact() {
           </thead>
           <tbody>
             {contacts.map((contact, index) => (
-              <tr>
+              <tr key={contact._id}>
                 <td className={contact.answer ? 'bg-success text-white' : 'bg-danger text-white'}>{index + 1}</td>
                 <td>{contact.name}</td>
                 <td>{contact.email}</td>
