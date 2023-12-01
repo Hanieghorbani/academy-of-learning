@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer } from "react"
 import validator from "../../validators/validator"
 
-
 const inputReducer = (state, action) => {
   switch (action.type) {
     case "CHANGE": {
@@ -19,12 +18,13 @@ const inputReducer = (state, action) => {
 
 export default function Input(props) {
   const [mainInput, dispatch] = useReducer(inputReducer, {
-    value: "",
-    isValid: false,
+    value: props.defaultValue ? props.defaultValue : "",
+    isValid: props.defaultValue ? true : false,
   })
 
   const { value, isValid } = mainInput
-  const { id, onInputHandler,validations,type,placeholder,className, } = props
+  const { id, onInputHandler, validations, type, placeholder, className } =
+    props
 
   useEffect(() => {
     onInputHandler(id, value, isValid)
@@ -49,12 +49,13 @@ export default function Input(props) {
         }`}
         value={value}
         onChange={onChangeHandler}
+        defaultValue={props.defaultValue}
       />
     ) : (
       <textarea
         placeholder={placeholder}
         className={`${className} ${
-         isValid ? "border-success" : "border-danger"
+          isValid ? "border-success" : "border-danger"
         }`}
         onChange={onChangeHandler}
         value={value}

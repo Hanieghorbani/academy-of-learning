@@ -14,6 +14,7 @@ import Users from "./pages/AdminPanel/Users/Users"
 import AdminCourses from './pages/AdminPanel/Courses/Courses'
 import Menus from "./pages/AdminPanel/Menus/Menus"
 import AdminArticles from './pages/AdminPanel/Articles/Articles'
+import Draft from "./pages/AdminPanel/Draft/Draft"
 import AdminCategory from './pages/AdminPanel/Category/Category'
 import AdminContacts from './pages/AdminPanel/Contact/Contact'
 import Sessions from './pages/AdminPanel/Sessions/Sessions'
@@ -36,6 +37,7 @@ const routes = [
         { path: 'courses', element: <AdminCourses/> }, 
         { path: 'menus', element: <Menus/> }, 
         { path: 'articles', element: <AdminArticles/> }, 
+        { path: 'articles/draft/:articleName', element: <Draft/> }, 
         { path: 'category', element: <AdminCategory/> }, 
         { path: 'contacts', element: <AdminContacts/> }, 
         { path: 'sessions', element: <Sessions/> }, 

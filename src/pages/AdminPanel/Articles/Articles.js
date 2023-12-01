@@ -5,6 +5,7 @@ import { useForm } from "./../../../hooks/useForm"
 import Input from "./../../../Components/Form/Input"
 import { minValidator } from "./../../../validators/rules"
 import Editor from "../../../Components/Form/Editor"
+import { Link } from "react-router-dom"
 export default function Articles() {
   const localStorageData = JSON.parse(localStorage.getItem("user"))
   const [articles, setArticles] = useState([])
@@ -12,7 +13,6 @@ export default function Articles() {
   const [articleCategory, setArticleCategory] = useState("-1")
   const [articleCover, setArticleCover] = useState({})
   const [articleBody, setArticleBody] = useState("")
-
   const [formState, onInputHandler] = useForm(
     {
       title: {
@@ -85,7 +85,9 @@ export default function Articles() {
 
   function createArticle(e) {
     e.preventDefault()
-    let formData = new FormData()
+
+    if (articleCover) {
+       let formData = new FormData()
     formData.append("title", formState.inputs.title.value)
     formData.append("description", formState.inputs.description.value)
     formData.append("body", articleBody)
@@ -108,8 +110,46 @@ export default function Articles() {
         }).then(() => {
           getAllArticles()
         })
-      }else{
-        console.log(res.text());
+      } else {
+        console.log(res.text())
+      }
+    })
+    }else{
+      swal({
+        title: 'تصویر مقاله را انتخاب کنید',
+        icon: "error",
+        buttons: "تایید",
+      })
+    }
+   
+  }
+  function createArticleDraft(e) {
+    e.preventDefault()
+    let formData = new FormData()
+    formData.append("title", formState.inputs.title.value)
+    formData.append("description", formState.inputs.description.value)
+    formData.append("body", articleBody)
+    formData.append("shortName", formState.inputs.shortName.value)
+    formData.append("categoryID", articleCategory)
+    formData.append("cover", articleCover)
+
+    fetch("http://localhost:4000/v1/articles/draft", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorageData.token}`,
+      },
+      body: formData,
+    }).then((res) => {
+      if (res.ok) {
+        swal({
+          title: "مقاله جدید با موفقیت پیش نویس شد",
+          icon: "success",
+          buttons: "تایید",
+        }).then(() => {
+          getAllArticles()
+        })
+      } else {
+        console.log(res.text())
       }
     })
   }
@@ -219,6 +259,14 @@ export default function Articles() {
                   >
                     افزودن
                   </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-lg me-3"
+                    onClick={createArticleDraft}
+                    disabled={!formState.isFormValid}
+                  >
+                    پیش نویس
+                  </button>
                 </div>
               </div>
             </div>
@@ -233,6 +281,7 @@ export default function Articles() {
               <th>عنوان</th>
               <th>لینک</th>
               <th>نویسنده</th>
+              <th>وضعیت</th>
               <th>ویرایش</th>
               <th>حذف</th>
             </tr>
@@ -244,6 +293,18 @@ export default function Articles() {
                 <td>{article.title}</td>
                 <td>{article.shortName}</td>
                 <td>{article.creator.name}</td>
+                <td>
+                  {article.publish ? (
+                    "منتشر شده"
+                  ) : (
+                    <Link
+                      to={`draft/${article.shortName}`}
+                      class="btn btn-primary edit-btn"
+                    >
+                      ادامه
+                    </Link>
+                  )}
+                </td>
                 <td>
                   <button type="button" class="btn btn-primary edit-btn">
                     ویرایش

@@ -35,6 +35,7 @@ export default function LastArticles() {
           <div className="row">
             {articles &&
               articles
+                .filter(article=>article.publish)
                 .splice(0, 3)
                 .map((article) => <ArticleBox {...article} />)}
           </div>
