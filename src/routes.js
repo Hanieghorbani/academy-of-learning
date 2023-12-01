@@ -10,6 +10,7 @@ import Contact from "./pages/Contact/Contact"
 import Search from "./pages/search/Search"
 import Session from './pages/Session/Session'
 import AdminPanel from './pages/AdminPanel/index'
+import Main from "./pages/AdminPanel/Main/Main"
 import Users from "./pages/AdminPanel/Users/Users"
 import AdminCourses from './pages/AdminPanel/Courses/Courses'
 import Menus from "./pages/AdminPanel/Menus/Menus"
@@ -33,6 +34,7 @@ const routes = [
     { path: '/search/:searchValue', element: <Search /> },
     { path: '/:courseName/:sessionID', element: <Session /> },
     { path: '/p-admin/*', element: <AdminPanel /> ,children:[
+        { path: '', element: <Main /> }, 
         { path: 'users', element: <Users /> }, 
         { path: 'courses', element: <AdminCourses/> }, 
         { path: 'menus', element: <Menus/> }, 
