@@ -31,10 +31,15 @@ export default function CourseInfo() {
   const [creator, setCreator] = useState([])
   const [updatedAt, setUpdatedAt] = useState("")
   const [createdAt, setCreatedAt] = useState("")
+  const [relatedCourses,setRelatedCourses] = useState([])
   const { courseName } = useParams()
   const localStorageToken = JSON.parse(localStorage.getItem("user"))
   useEffect(() => {
     getAllInfosCourse()
+    fetch(`http://localhost:4000/v1/courses/related/${courseName}`).then(res=>res.json()).then(datas=>{
+setRelatedCourses(datas)
+console.log(datas);
+    })
   }, [courseName])
 
   function getAllInfosCourse() {
@@ -646,54 +651,21 @@ export default function CourseInfo() {
                     دوره های مرتبط
                   </span>
                   <ul className="course-info__courses-list">
-                    <li className="course-info__courses-list-item">
-                      <a href="#" className="course-info__courses-link">
+                  {relatedCourses.map(course=>(
+                    <li key={course._id} className="course-info__courses-list-item">
+                      <Link to={`/course-info/${course.shortName}`} className="course-info__courses-link">
                         <img
-                          src="/images/courses/js_project.png"
+                          src={`http://localhost:4000/courses/covers/${course.cover}`}
                           alt="Course Cover"
                           className="course-info__courses-img"
                         />
                         <span className="course-info__courses-text">
-                          پروژه های تخصصی با جاوا اسکریپت
+                          {course.name}
                         </span>
-                      </a>
+                      </Link>
                     </li>
-                    <li className="course-info__courses-list-item">
-                      <a href="#" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/fareelancer.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          تعیین قیمت پروژه های فریلنسری
-                        </span>
-                      </a>
-                    </li>
-                    <li className="course-info__courses-list-item">
-                      <a href="#" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/nodejs.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          دوره Api نویسی
-                        </span>
-                      </a>
-                    </li>
-                    <li className="course-info__courses-list-item">
-                      <a href="#" className="course-info__courses-link">
-                        <img
-                          src="/images/courses/jango.png"
-                          alt="Course Cover"
-                          className="course-info__courses-img"
-                        />
-                        <span className="course-info__courses-text">
-                          متخصص جنگو
-                        </span>
-                      </a>
-                    </li>
+                  ))}
+                  
                   </ul>
                 </div>
               </div>
