@@ -71,7 +71,7 @@ export default function Navbar() {
             </a>
 
             {contextData.isLoggedIn? (
-              <Link to={"/login"} className="main-header__profile">
+              <Link to={"/my-account"} className="main-header__profile">
                 <span className="main-header__profile-text">
                   {contextData.userInfos.name}
                 </span>

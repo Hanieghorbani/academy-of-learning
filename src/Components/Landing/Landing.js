@@ -8,7 +8,6 @@ import AuthContext from "../../userContext/authContext"
 
 export default function Landing() {
   const contextData = useContext(AuthContext)
-  console.log(contextData.indexInfos);
 
   const [searchValue, setSearchValue] = useState("")
   const navigate = useNavigate()
