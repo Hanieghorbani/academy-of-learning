@@ -20,15 +20,15 @@ export default function Search() {
   return (
     <div>
       <Header />
-      <div className="course">
-        <div className="container">
+      <div class="course">
+        <div class="container">
           <SectionHeader
             title={"نتیجه جستجو برای دوره ها"}
             desc={"پیش به سوی موفقیت"}
           />
-          <div className="courses-content">
-            <div className="container">
-              <div className="row">
+          <div class="courses-content">
+            <div class="container">
+              <div class="row">
                 {allResultCourses.length == true ? (
                   <>
                     {allResultCourses.map((course) => (
@@ -36,7 +36,7 @@ export default function Search() {
                     ))}
                   </>
                 ) : (
-                  <div className="alert alert-warning">
+                  <div class="alert alert-warning">
                     دوره ای برای جستجوی شما پیدا نشد !
                   </div>
                 )}
@@ -48,9 +48,9 @@ export default function Search() {
             title={"نتیجه جستجو برای مقالات "}
             desc={"پیش به سوی ارتقای دانش"}
           />
-          <div className="courses-content">
-            <div className="container">
-              <div className="row">
+          <div class="courses-content">
+            <div class="container">
+              <div class="row">
                 {allResultArticles.length == true ? (
                   <>
                     {allResultArticles.map((article) => (
@@ -58,7 +58,7 @@ export default function Search() {
                     ))}
                   </>
                 ) : (
-                  <div className="alert alert-warning">
+                  <div class="alert alert-warning">
                     مقاله ای برای جستجوی شما پیدا نشد !
                   </div>
                 )}

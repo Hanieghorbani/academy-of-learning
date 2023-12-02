@@ -203,7 +203,7 @@ export default function Articles() {
                   id="description"
                   onInputHandler={onInputHandler}
                   validations={[minValidator(5)]}
-                  className="article-textarea"
+                  class="article-textarea"
                 />
                 <span class="error-message text-danger"></span>
               </div>
@@ -253,7 +253,7 @@ export default function Articles() {
                 <div class="submit-btn">
                   <button
                     type="submit"
-                    className="btn btn-primary btn-lg"
+                    class="btn btn-primary btn-lg"
                     onClick={createArticle}
                     disabled={!formState.isFormValid}
                   >
@@ -261,7 +261,7 @@ export default function Articles() {
                   </button>
                   <button
                     type="submit"
-                    className="btn btn-primary btn-lg me-3"
+                    class="btn btn-primary btn-lg me-3"
                     onClick={createArticleDraft}
                     disabled={!formState.isFormValid}
                   >

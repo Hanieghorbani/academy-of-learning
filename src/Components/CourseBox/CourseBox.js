@@ -15,40 +15,40 @@ export default function CourseBox(props) {
   // }, [])
   return (
     <>
-      <div className={`col-4 ${props.isInSwiper && "col-12"}`}>
-        <div className="course-box">
+      <div class={`col-4 ${props.isInSwiper && "col-12"}`}>
+        <div class="course-box">
           <Link to={`/course-info/${props.shortName}`}>
             <img
               src={`http://localhost:4000/courses/covers/${props.cover}`}
               alt="Course img"
-              className="course-box__img"
+              class="course-box__img"
               onLoad={onImageLoaded}
             />
             {!isImgShow && <CircleSpinner />}
           </Link>
-          <div className="course-box__main">
+          <div class="course-box__main">
             <Link
               to={`/course-info/${props.shortName}`}
-              className="course-box__title"
+              class="course-box__title"
             >
               {props.name}
             </Link>
 
-            <div className="course-box__rating-teacher">
-              <div className="course-box__teacher">
-                <FaChalkboardTeacher className="course-box__teacher-icon" />
-                <a href="#" className="course-box__teacher-link">
+            <div class="course-box__rating-teacher">
+              <div class="course-box__teacher">
+                <FaChalkboardTeacher class="course-box__teacher-icon" />
+                <a href="#" class="course-box__teacher-link">
                   {props.creator}
                 </a>
               </div>
-              <div className="course-box__rating">
+              <div class="course-box__rating">
                 {Array(5 - props.courseAverageScore)
                   .fill("0")
                   .map(() => (
                     <img
                       src="/images/svgs/star.svg"
                       alt="rating"
-                      className="course-box__star"
+                      class="course-box__star"
                     />
                   ))}
                 {Array(props.courseAverageScore)
@@ -57,32 +57,32 @@ export default function CourseBox(props) {
                     <img
                       src="/images/svgs/star_fill.svg"
                       alt="rating"
-                      className="course-box__star"
+                      class="course-box__star"
                     />
                   ))}
               </div>
             </div>
 
-            <div className="course-box__status">
-              <div className="course-box__users">
-                <FaUsers className="course-box__users-icon" />
-                <span className="course-box__users-text">
+            <div class="course-box__status">
+              <div class="course-box__users">
+                <FaUsers class="course-box__users-icon" />
+                <span class="course-box__users-text">
                   {props.registers}
                 </span>
               </div>
-              <span className="course-box__price">
+              <span class="course-box__price">
                 {props.price ? props.price.toLocaleString() : "رایگان"}
               </span>
             </div>
           </div>
 
-          <div className="course-box__footer">
+          <div class="course-box__footer">
             <Link
               to={`/course-info/${props.shortName}`}
-              className="course-box__footer-link"
+              class="course-box__footer-link"
             >
               مشاهده اطلاعات
-              <FaArrowLeft className="course-box__footer-icon" />
+              <FaArrowLeft class="course-box__footer-icon" />
             </Link>
           </div>
         </div>

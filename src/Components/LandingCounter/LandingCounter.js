@@ -15,5 +15,5 @@ export default function LandingCounter({ limit }) {
     return () => clearInterval(interval);
   }, [courseCounter]);
 
-  return <span className="landing-status__count">{courseCounter}</span>;
+  return <span class="landing-status__count">{courseCounter}</span>;
 }

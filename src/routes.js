@@ -27,6 +27,7 @@ import Offs from "./pages/AdminPanel/Offs/Offs"
 //user panel
 import UserPanel from './pages/UserPanel/Index'
 import MainUserPanel from './pages/UserPanel/Main/Main'
+import Orders from "./pages/UserPanel/Orders/Orders"
 const routes = [
     { path: '/', element: <Index /> },
     { path: '/course-info/:courseName', element: <CourseInfo /> },
@@ -54,7 +55,7 @@ const routes = [
     ]},
     { path: '/my-account/*', element: <UserPanel /> ,children:[
         { path: '', element: <MainUserPanel /> }, 
-        // { path: 'users', element: <Users /> }, 
+        { path: 'orders', element: <Orders /> }, 
         // { path: 'courses', element: <AdminCourses/> }, 
         // { path: 'menus', element: <Menus/> }, 
         // { path: 'articles', element: <AdminArticles/> }, 

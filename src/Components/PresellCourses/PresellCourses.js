@@ -18,15 +18,15 @@ export default function PresellCourses() {
       })
   }, [])
   return (
-    <div className="popular">
-      <div className="container">
+    <div class="popular">
+      <div class="container">
         <SectionHeader
           title="دوره های در حال پیش فروش"
           desc="متن تستی برای توضیحات دوره های پیش فروش"
         />
-        <div className="courses-content">
-          <div className="container">
-            <div className="row">
+        <div class="courses-content">
+          <div class="container">
+            <div class="row">
               <Swiper
                 slidesPerView={3}
                 spaceBetween={30}
@@ -35,7 +35,7 @@ export default function PresellCourses() {
                 }}
                 modules={[Pagination]}
                 loop={true}
-                className="mySwiper"
+                class="mySwiper"
               >
                 {presellCourses.map((course) => (
                   <SwiperSlide key={course._id}>

@@ -19,35 +19,35 @@ export default function Navbar() {
       })
   }, [])
   return (
-    <div className="main-header">
-      <div className="container-fluid">
-        <div className="main-header__content">
-          <div className="main-header__right">
+    <div class="main-header">
+      <div class="container-fluid">
+        <div class="main-header__content">
+          <div class="main-header__right">
             <img
               src="/images/logo/Logo.png"
-              className="main-header__logo"
+              class="main-header__logo"
               alt="لوگوی سبزلرن"
             />
 
-            <ul className="main-header__menu">
-              <li className="main-header__item">
-                <Link to={"/"} className="main-header__link">
+            <ul class="main-header__menu">
+              <li class="main-header__item">
+                <Link to={"/"} class="main-header__link">
                   صفحه اصلی
                 </Link>
               </li>
               {allNavbarLinks.map((link) => (
-                <li key={link._id} className="main-header__item">
-                  <Link to={`${link.href}/1`} className="main-header__link">
+                <li key={link._id} class="main-header__item">
+                  <Link to={`${link.href}/1`} class="main-header__link">
                     {link.title}
                     {link.submenus.length !== 0 && (
                       <>
-                        <IoIosArrowDown className="main-header__link-icon" />
-                        <ul className="main-header__dropdown">
+                        <IoIosArrowDown class="main-header__link-icon" />
+                        <ul class="main-header__dropdown">
                           {link.submenus.map((sub) => (
-                            <li key={sub._id} className="main-header__dropdown-item">
+                            <li key={sub._id} class="main-header__dropdown-item">
                               <Link
                                 to={sub.href}
-                                className="main-header__dropdown-link"
+                                class="main-header__dropdown-link"
                               >
                                 {sub.title}
                               </Link>
@@ -62,23 +62,23 @@ export default function Navbar() {
             </ul>
           </div>
 
-          <div className="main-header__left">
-            <a href="#" className="main-header__search-btn">
-              <AiOutlineSearch className="main-header__search-icon" />
+          <div class="main-header__left">
+            <a href="#" class="main-header__search-btn">
+              <AiOutlineSearch class="main-header__search-icon" />
             </a>
-            <a href="#" className="main-header__cart-btn">
-              <HiOutlineShoppingCart className="main-header__cart-icon" />
+            <a href="#" class="main-header__cart-btn">
+              <HiOutlineShoppingCart class="main-header__cart-icon" />
             </a>
 
             {contextData.isLoggedIn? (
-              <Link to={"/my-account"} className="main-header__profile">
-                <span className="main-header__profile-text">
+              <Link to={"/my-account"} class="main-header__profile">
+                <span class="main-header__profile-text">
                   {contextData.userInfos.name}
                 </span>
               </Link>
             ) : (
-              <Link to={"/login"} className="main-header__profile">
-                <span className="main-header__profile-text">
+              <Link to={"/login"} class="main-header__profile">
+                <span class="main-header__profile-text">
                   ورود / ثبت نام
                 </span>
               </Link>

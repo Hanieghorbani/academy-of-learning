@@ -72,41 +72,41 @@ export default function Category() {
   return (
     <div>
       <Header />
-      <section className="courses">
-        <div className="container">
-          <div className="courses-content">
-            <div className="container">
-              <div className="row">
+      <section class="courses">
+        <div class="container">
+          <div class="courses-content">
+            <div class="container">
+              <div class="row">
                 {courses.length ? (
                   <>
-                    <div className="courses-top-bar">
-                      <div className="courses-top-bar__right">
+                    <div class="courses-top-bar">
+                      <div class="courses-top-bar__right">
                         <div
-                          className={`courses-top-bar__row-btn ${
+                          class={`courses-top-bar__row-btn ${
                             showCourses == "grid" &&
                             "courses-top-bar__icon--active"
                           }`}
                           onClick={() => setShowCourses("grid")}
                         >
-                          <AiOutlineAppstore className=" courses-top-bar__icon" />
+                          <AiOutlineAppstore class=" courses-top-bar__icon" />
                         </div>
 
                         <div
-                          className={`courses-top-bar__row-btn ${
+                          class={`courses-top-bar__row-btn ${
                             showCourses == "list" &&
                             "courses-top-bar__icon--active"
                           }`}
                           onClick={() => setShowCourses("list")}
                         >
-                          <HiMenuAlt2 className="courses-top-bar__icon" />
+                          <HiMenuAlt2 class="courses-top-bar__icon" />
                         </div>
 
-                        <div className="courses-top-bar__selection">
-                          <span className="courses-top-bar__selection-title">
+                        <div class="courses-top-bar__selection">
+                          <span class="courses-top-bar__selection-title">
                             {statusTitle}
-                            <BsChevronDown className="courses-top-bar__selection-icon" />
+                            <BsChevronDown class="courses-top-bar__selection-icon" />
                           </span>
-                          <ul className="courses-top-bar__selection-list">
+                          <ul class="courses-top-bar__selection-list">
                             {lists.map((list, index) => (
                               <li
                               key={list._id} 
@@ -115,7 +115,7 @@ export default function Category() {
                                   setStatus(list.key)
                                   setSearchValue("")
                                 }}
-                                className={`courses-top-bar__selection-item ${
+                                class={`courses-top-bar__selection-item ${
                                   list.key == status &&
                                   "courses-top-bar__selection-item--active "
                                 }`}
@@ -126,11 +126,11 @@ export default function Category() {
                           </ul>
                         </div>
                       </div>
-                      <div className="courses-top-bar__left">
-                        <form action="#" className="courses-top-bar__form">
+                      <div class="courses-top-bar__left">
+                        <form action="#" class="courses-top-bar__form">
                           <input
                             type="text"
-                            className="courses-top-bar__input"
+                            class="courses-top-bar__input"
                             placeholder="جستجوی دوره ..."
                             value={searchValue}
                             onChange={(e) => {
@@ -143,7 +143,7 @@ export default function Category() {
                               setCoursesOrdered(filteredCours)
                             }}
                           />
-                          <AiOutlineSearch className="courses-top-bar__search-icon" />
+                          <AiOutlineSearch class="courses-top-bar__search-icon" />
                         </form>
                       </div>
                     </div>
@@ -183,7 +183,7 @@ export default function Category() {
                                       </div>
                                       <div class="course__box-left-center">
                                         <div class="course__box-left-teacher">
-                                          <FaChalkboardTeacher className="course__box-left-icon ms-2"/> 
+                                          <FaChalkboardTeacher class="course__box-left-icon ms-2"/> 
                                           <span class="course__box-left-name">
                                            {course.creator}
                                           </span>
@@ -213,7 +213,7 @@ export default function Category() {
                                       </div>
                                       <div class="course__box-footer">
                                         <div class="course__box-footer-right">
-                                          <FaUsers className="course__box-footer-icon ms-2"/>
+                                          <FaUsers class="course__box-footer-icon ms-2"/>
                                           <span class="course__box-footer-count">
                                             202
                                           </span>
@@ -233,7 +233,7 @@ export default function Category() {
                         )}
                       </>
                     ) : (
-                      <div className="alert alert-warning">
+                      <div class="alert alert-warning">
                         هیچ دوره ای یافت نشد !
                       </div>
                     )}
@@ -246,7 +246,7 @@ export default function Category() {
                     />
                   </>
                 ) : (
-                  <div className="alert alert-warning">
+                  <div class="alert alert-warning">
                     هنوز هیچ دوره ای برای این دسته بندی ضبط نشده !
                   </div>
                 )}

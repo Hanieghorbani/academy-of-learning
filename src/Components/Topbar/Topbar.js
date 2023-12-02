@@ -22,34 +22,34 @@ export default memo(function Topbar() {
   }
 
   return (
-    <div className="top-bar">
-      <div className="container-fluid">
-        <div className="top-bar__content">
-          <div className="top-bar__right">
-            <ul className="top-bar__menu">
+    <div class="top-bar">
+      <div class="container-fluid">
+        <div class="top-bar__content">
+          <div class="top-bar__right">
+            <ul class="top-bar__menu">
               {getRandomItem(allTopbarLinks, 5).map((link) => (
-                <li key={link._id} className="top-bar__item">
-                  <Link to={link.href} className="top-bar__link">
+                <li key={link._id} class="top-bar__item">
+                  <Link to={link.href} class="top-bar__link">
                     {link.title}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="top-bar__left">
-            <div className="top-bar__email">
-              <a href="#" className="top-bar__email-text top-bar__link">
+          <div class="top-bar__left">
+            <div class="top-bar__email">
+              <a href="#" class="top-bar__email-text top-bar__link">
                 {contextData.indexInfos.email}
               </a>
-              <i className="fas fa-envelope top-bar__email-icon"></i>
+              <i class="fas fa-envelope top-bar__email-icon"></i>
 
-              <BsEnvelope className="top-bar__email-icon" />
+              <BsEnvelope class="top-bar__email-icon" />
             </div>
-            <div className="top-bar__phone">
-              <a href="#" className="top-bar__phone-text top-bar__link">
+            <div class="top-bar__phone">
+              <a href="#" class="top-bar__phone-text top-bar__link">
                 {contextData.indexInfos.phone}
               </a>
-              <BsTelephone className="top-bar__phone-icon" />
+              <BsTelephone class="top-bar__phone-icon" />
             </div>
           </div>
         </div>

@@ -21,8 +21,8 @@ export default function LastCourses() {
   }, [])
   return (
     <>
-      <div className="courses">
-        <div className="container">
+      <div class="courses">
+        <div class="container">
           <SectionHeader
             title="جدیدترین دوره ها"
             desc="سکوی پرتاپ شما به سمت موفقیت"
@@ -30,9 +30,9 @@ export default function LastCourses() {
             btnHref="/courses/1"
           />
 
-          <div className="courses-content">
-            <div className="container">
-              <div className="row">
+          <div class="courses-content">
+            <div class="container">
+              <div class="row">
                 {courses &&
                   courses
                     .splice(0, 6)

@@ -31,11 +31,11 @@ export default function Articles() {
           },
         ]}
       />
-      <section className="courses">
-        <div className="container">
-          <div className="courses-content">
-            <div className="container">
-              <div className="row">
+      <section class="courses">
+        <div class="container">
+          <div class="courses-content">
+            <div class="container">
+              <div class="row">
                 {shownArticles.filter(article=>article.publish).map((article) => (
                   <ArticleBox key={article._id} {...article} />
                 ))}

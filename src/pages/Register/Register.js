@@ -141,27 +141,27 @@ export default function Register() {
     <>
       <Header />
 
-      <section className="login-register">
-        <div className="login register-form">
-          <span className="login__title">ساخت حساب کاربری</span>
-          <span className="login__subtitle">
+      <section class="login-register">
+        <div class="login register-form">
+          <span class="login__title">ساخت حساب کاربری</span>
+          <span class="login__subtitle">
             خوشحالیم قراره به جمع ما بپیوندی
           </span>
-          <div className="login__new-member">
-            <span className="login__new-member-text">
+          <div class="login__new-member">
+            <span class="login__new-member-text">
               قبلا ثبت‌نام کرده‌اید؟
             </span>
-            <Link className="login__new-member-link" to="/login">
+            <Link class="login__new-member-link" to="/login">
               وارد شوید
             </Link>
           </div>
-          <form action="#" className="login-form">
-            <div className="login-form__username">
+          <form action="#" class="login-form">
+            <div class="login-form__username">
               <Input
                 id="registerName"
                 type="text"
                 placeholder="نام و نام خانوادگی"
-                className="login-form__username-input"
+                class="login-form__username-input"
                 element="input"
                 onInputHandler={onInputHandler}
                 validations={[
@@ -170,14 +170,14 @@ export default function Register() {
                   maxValidator(20),
                 ]}
               />
-              <FaRegUserCircle className="login-form__username-icon" />
+              <FaRegUserCircle class="login-form__username-icon" />
             </div>
-            <div className="login-form__username">
+            <div class="login-form__username">
               <Input
                 id="registerUsername"
                 type="text"
                 placeholder="نام کاربری"
-                className="login-form__username-input"
+                class="login-form__username-input"
                 element="input"
                 onInputHandler={onInputHandler}
                 validations={[
@@ -186,14 +186,14 @@ export default function Register() {
                   maxValidator(20),
                 ]}
               />
-              <BiSolidUser className="login-form__username-icon" />
+              <BiSolidUser class="login-form__username-icon" />
             </div>
-            <div className="login-form__password">
+            <div class="login-form__password">
               <Input
                 id="registerEmail"
                 type="email"
                 placeholder="آدرس ایمیل"
-                className="login-form__username-input"
+                class="login-form__username-input"
                 element="input"
                 onInputHandler={onInputHandler}
                 validations={[
@@ -202,26 +202,26 @@ export default function Register() {
                   emailValidator(),
                 ]}
               />
-              <FaEnvelope className="login-form__password-icon " />
+              <FaEnvelope class="login-form__password-icon " />
             </div>
-            <div className="login-form__password">
+            <div class="login-form__password">
               <Input
                 id="registerPhone"
                 type="number"
                 placeholder="شماره همراه"
-                className="login-form__username-input"
+                class="login-form__username-input"
                 element="input"
                 onInputHandler={onInputHandler}
                 validations={[phoneValidator()]}
               />
-              <FaPhoneAlt className="login-form__password-icon " />
+              <FaPhoneAlt class="login-form__password-icon " />
             </div>
-            <div className="login-form__password">
+            <div class="login-form__password">
               <Input
                 id="registerPassword"
                 type={isShowPass ? "text" : "password"}
                 placeholder="رمز عبور"
-                className="login-form__password-input"
+                class="login-form__password-input"
                 element="input"
                 onInputHandler={onInputHandler}
                 validations={[
@@ -232,22 +232,22 @@ export default function Register() {
               />
               {isShowPass ? (
                 <MdVisibilityOff
-                  className="login-form__password-icon"
+                  class="login-form__password-icon"
                   onClick={() => setIsShowPass(false)}
                 />
               ) : (
                 <MdVisibility
-                  className="login-form__password-icon"
+                  class="login-form__password-icon"
                   onClick={() => setIsShowPass(true)}
                 />
               )}
             </div>
-            <div className="login-form__password">
+            <div class="login-form__password">
               <Input
                 id="registerConfirmPassword"
                 type={isShowConfirmPass ? "text" : "password"}
                 placeholder="تکرار رمز عبور"
-                className="login-form__password-input"
+                class="login-form__password-input"
                 element="input"
                 onInputHandler={onInputHandler}
                 validations={[
@@ -258,39 +258,39 @@ export default function Register() {
               />
               {isShowConfirmPass ? (
                 <MdVisibilityOff
-                  className="login-form__password-icon"
+                  class="login-form__password-icon"
                   onClick={() => setIsShowConfirmPass(false)}
                 />
               ) : (
                 <MdVisibility
-                  className="login-form__password-icon"
+                  class="login-form__password-icon"
                   onClick={() => setIsShowConfirmPass(true)}
                 />
               )}
             </div>
             <Button
-              className={`login-form__btn ${
+              class={`login-form__btn ${
                 formState.isFormValid ? "bg-success" : "bg-danger"
               }`}
               type="submit"
               onClick={registerNewUser}
               disabled={!formState.isFormValid}
             >
-              <FaUserPlus className="login-form__btn-icon" />
-              <span className="login-form__btn-text">عضویت</span>
+              <FaUserPlus class="login-form__btn-icon" />
+              <span class="login-form__btn-text">عضویت</span>
             </Button>
           </form>
-          <div className="login__des">
-            <span className="login__des-title">سلام کاربر محترم:</span>
-            <ul className="login__des-list">
-              <li className="login__des-item">
+          <div class="login__des">
+            <span class="login__des-title">سلام کاربر محترم:</span>
+            <ul class="login__des-list">
+              <li class="login__des-item">
                 لطفا از مرورگر های مطمئن و بروز مانند گوگل کروم و فایرفاکس
                 استفاده کنید.
               </li>
-              <li className="login__des-item">
+              <li class="login__des-item">
                 ما هرگز اطلاعات محرمانه شمارا از طریق ایمیل درخواست نمیکنیم.
               </li>
-              <li className="login__des-item">
+              <li class="login__des-item">
                 لطفا کلمه عبور خود را در فواصل زمانی کوتاه تغییر دهید.
               </li>
             </ul>

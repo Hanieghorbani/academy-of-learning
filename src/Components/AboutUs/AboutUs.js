@@ -6,15 +6,15 @@ import "./AboutUs.css"
 
 export default function AboutUs() {
   return (
-    <div className="about-us">
-      <div className="container">
+    <div class="about-us">
+      <div class="container">
         <SectionHeader
           title="ما چه کمکی بهتون میکنیم؟"
           desc="از اونجایی که آکادمی آموزشی سبزلرن یک آکادمی خصوصی هست"
         />
 
-        <div className="container">
-          <div className="row">
+        <div class="container">
+          <div class="row">
             <AboutUsBox
               title={"دوره های اختصاصی"}
               desc={"با پشتیبانی و کیفیت بالا ارائه میده !"}

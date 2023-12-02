@@ -61,7 +61,7 @@ export default function Topbar() {
                       </a>
                     </label>
                   </li>
-                ))}</>) : (<li className="home-notification-modal-item">هیچ پیغامی وجود ندارد !</li>)}
+                ))}</>) : (<li class="home-notification-modal-item">هیچ پیغامی وجود ندارد !</li>)}
                 
               </ul>
             </div>

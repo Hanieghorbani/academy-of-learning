@@ -70,19 +70,19 @@ export default function Contact() {
     <>
       <Header />
 
-      <section className="login-register">
-        <div className="login register-form">
-          <span className="login__title">ارتباط با ما</span>
-          <span className="login__subtitle">
+      <section class="login-register">
+        <div class="login register-form">
+          <span class="login__title">ارتباط با ما</span>
+          <span class="login__subtitle">
             نظر یا انتقادتو بنویس برامون :)
           </span>
-          <form action="#" className="login-form">
-            <div className="login-form__username login-form__parent">
+          <form action="#" class="login-form">
+            <div class="login-form__username login-form__parent">
               <Input
                 onInputHandler={onInputHandler}
                 element="input"
                 id="name"
-                className="login-form__username-input"
+                class="login-form__username-input"
                 type="text"
                 placeholder="نام و نام خانوادگی"
                 validations={[
@@ -91,14 +91,14 @@ export default function Contact() {
                   maxValidator(20),
                 ]}
               />
-              <FaUser className="login-form__username-icon" />
+              <FaUser class="login-form__username-icon" />
             </div>
-            <div className="login-form__password login-form__parent">
+            <div class="login-form__password login-form__parent">
               <Input
                 onInputHandler={onInputHandler}
                 element="input"
                 id="email"
-                className="login-form__password-input"
+                class="login-form__password-input"
                 type="text"
                 placeholder="آدرس ایمیل"
                 validations={[
@@ -108,14 +108,14 @@ export default function Contact() {
                   emailValidator(),
                 ]}
               />
-              <FaEnvelope className="login-form__password-icon" />
+              <FaEnvelope class="login-form__password-icon" />
             </div>
-            <div className="login-form__phone-number login-form__parent">
+            <div class="login-form__phone-number login-form__parent">
               <Input
                 onInputHandler={onInputHandler}
                 element="input"
                 id="phone"
-                className="login-form__password-input"
+                class="login-form__password-input"
                 type="text"
                 placeholder="شماره تماس"
                 validations={[
@@ -124,27 +124,27 @@ export default function Contact() {
                   maxValidator(11),
                 ]}
               />
-              <FaPhoneAlt className="login-form__password-icon" />
+              <FaPhoneAlt class="login-form__password-icon" />
             </div>
-            <div className="login-form__text login-form__parent">
+            <div class="login-form__text login-form__parent">
               <Input
                 onInputHandler={onInputHandler}
                 element="textarea"
                 id="body"
-                className="login-form__text-input"
+                class="login-form__text-input"
                 placeholder="متن خود را وارد کنید"
                 validations={[requiredValidator(), minValidator(10)]}
               />
             </div>
             <Button
-              className={`login-form__btn ${
+              class={`login-form__btn ${
                 formState.isFormValid ? "bg-success" : "bg-danger"
               }`}
               type="submit"
               onClick={addNewContact}
               disabled={!formState.isFormValid}
             >
-              <span className="login-form__btn-text">ارسال</span>
+              <span class="login-form__btn-text">ارسال</span>
             </Button>
           </form>
         </div>

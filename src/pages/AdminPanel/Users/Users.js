@@ -42,7 +42,7 @@ export default function Users() {
     },
     false
   )
-  let localStorageToken = JSON.parse(localStorage.getItem("user"))
+  const localStorageToken = JSON.parse(localStorage.getItem("user"))
   useEffect(() => {
     getAllUsers()
   }, [])
@@ -199,7 +199,7 @@ export default function Users() {
               <label class="input-title">نام و نام خانوادگی</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="name"
                 element="input"
                 validations={[
@@ -218,7 +218,7 @@ export default function Users() {
               <label class="input-title">نام کاربری</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="username"
                 element="input"
                 validations={[
@@ -237,7 +237,7 @@ export default function Users() {
               <label class="input-title">ایمیل</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="email"
                 element="input"
                 validations={[
@@ -257,7 +257,7 @@ export default function Users() {
               <label class="input-title">رمز عبور</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="password"
                 element="input"
                 validations={[
@@ -276,7 +276,7 @@ export default function Users() {
               <label class="input-title">نکرار رمز عبور</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="confirmPassword"
                 element="input"
                 validations={[
@@ -295,7 +295,7 @@ export default function Users() {
               <label class="input-title">شماره تلفن</label>
               <Input
                 type="text"
-                className=""
+                class=""
                 id="phone"
                 element="input"
                 validations={[phoneValidator()]}
@@ -365,7 +365,7 @@ export default function Users() {
                 ))}
               </>
             ) : (
-              <div className="alert alert-warning">هیچ کاربری یافت نشد !</div>
+              <div class="alert alert-warning">هیچ کاربری یافت نشد !</div>
             )}
           </tbody>
         </table>
