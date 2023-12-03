@@ -104,9 +104,9 @@ export default function SendTicket() {
                 icon: "error",
                 buttons: "تایید",
               })
-            }else if (err.message.includes("متن الزامی است")) {
+            } else if (err.message.includes("متن الزامی است")) {
               swal({
-                title: 'متن الزامی است',
+                title: "متن الزامی است",
                 icon: "error",
                 buttons: "تایید",
               })

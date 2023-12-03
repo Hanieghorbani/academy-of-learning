@@ -30,7 +30,8 @@ import MainUserPanel from "./pages/UserPanel/Main/Main"
 import Orders from "./pages/UserPanel/Orders/Orders"
 import ViewOrder from "./pages/UserPanel/ViewOrder/ViewOrder"
 import UserCourses from "./pages/UserPanel/Courses/Courses"
-import  SendTicket from './pages/UserPanel/Tickets/SendTicket'
+import Tickets from "./pages/UserPanel/Tickets/Tickets"
+import SendTicket from "./pages/UserPanel/Tickets/SendTicket"
 const routes = [
   { path: "/", element: <Index /> },
   { path: "/course-info/:courseName", element: <CourseInfo /> },
@@ -68,7 +69,8 @@ const routes = [
       { path: "orders", element: <Orders /> },
       { path: "view-order/:orderID", element: <ViewOrder /> },
       { path: "courses", element: <UserCourses /> },
-      { path: 'send-ticket', element: <SendTicket/> },
+      { path: "tickets", element: <Tickets /> },
+      { path: "send-ticket", element: <SendTicket /> },
       // { path: 'articles/draft/:articleName', element: <Draft/> },
       // { path: 'category', element: <AdminCategory/> },
       // { path: 'contacts', element: <AdminContacts/> },

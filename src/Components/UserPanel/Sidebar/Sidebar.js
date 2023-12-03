@@ -56,9 +56,9 @@ export default function Sidebar() {
           </a>
         </li>
         <li class="sidebar__item">
-          <a class="sidebar__link" href="#">
+          <Link class="sidebar__link" to={'tickets'}>
             تیکت های پشتیبانی
-          </a>
+          </Link>
         </li>
         <li class="sidebar__item">
           <a class="sidebar__link"  onClick={logoutHandler}>
