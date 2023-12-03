@@ -29,10 +29,10 @@ export default function PopularCourses() {
               <Swiper
                 slidesPerView={3}
                 spaceBetween={30}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Pagination]}
+                // pagination={{
+                //   clickable: true,
+                // }}
+                // modules={[Pagination]}
                 loop={true}
                 class="mySwiper"
               >

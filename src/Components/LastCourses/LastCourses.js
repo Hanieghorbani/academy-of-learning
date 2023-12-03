@@ -21,7 +21,7 @@ export default function LastCourses() {
   }, [])
   return (
     <>
-      <div class="courses">
+      <div class="courses border-0">
         <div class="container">
           <SectionHeader
             title="جدیدترین دوره ها"

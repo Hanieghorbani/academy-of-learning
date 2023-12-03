@@ -7,12 +7,7 @@ import { FaRegStar } from "react-icons/fa6"
 export default function CourseBox(props) {
   const [isImgShow, setIsImgShow] = useState(false)
   const onImageLoaded = () => setIsImgShow(true)
-  // const [scoreArr, setScoreArr] = useState([])
-  // const [isLoadin, setIsLoading] = useState(false)
-  // useEffect(() => {
-  //   setScoreArr(Array(props.courseAverageScore).fill("start"))
-  //   setIsLoading(true)
-  // }, [])
+
   return (
     <>
       <div class={`col-4 ${props.isInSwiper && "col-12"}`}>
@@ -44,8 +39,9 @@ export default function CourseBox(props) {
               <div class="course-box__rating">
                 {Array(5 - props.courseAverageScore)
                   .fill("0")
-                  .map(() => (
+                  .map((item, index) => (
                     <img
+                      key={index}
                       src="/images/svgs/star.svg"
                       alt="rating"
                       class="course-box__star"
@@ -53,8 +49,9 @@ export default function CourseBox(props) {
                   ))}
                 {Array(props.courseAverageScore)
                   .fill(1)
-                  .map(() => (
+                  .map((item, index) => (
                     <img
+                      key={index}
                       src="/images/svgs/star_fill.svg"
                       alt="rating"
                       class="course-box__star"
@@ -66,9 +63,7 @@ export default function CourseBox(props) {
             <div class="course-box__status">
               <div class="course-box__users">
                 <FaUsers class="course-box__users-icon" />
-                <span class="course-box__users-text">
-                  {props.registers}
-                </span>
+                <span class="course-box__users-text">{props.registers}</span>
               </div>
               <span class="course-box__price">
                 {props.price ? props.price.toLocaleString() : "رایگان"}
