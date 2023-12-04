@@ -55,6 +55,8 @@ export default function SendTicket() {
       course: courseId ? courseId : undefined,
     }
 
+    console.log(newTicket);
+
     fetch(`http://localhost:4000/v1/tickets`, {
       method: "POST",
       headers: {

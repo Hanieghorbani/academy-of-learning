@@ -65,9 +65,29 @@ export default function CourseBox(props) {
                 <FaUsers class="course-box__users-icon" />
                 <span class="course-box__users-text">{props.registers}</span>
               </div>
-              <span class="course-box__price">
-                {props.price ? props.price.toLocaleString() : "رایگان"}
-              </span>
+
+              <div>
+                <span
+                  class={`course-box__price ${
+                    props.price !== 0 &&
+                    props.discount &&
+                    "text-decoration-line-through"
+                  } `}
+                >
+                  {props.price !== 0 ? props.price.toLocaleString() : "رایگان"}
+                </span>
+
+                {props.price !== 0 && props.discount && (
+                  <>
+                    <span className="course-box__price ms-3">
+                      {(
+                        props.price -
+                        (props.price * props.discount) / 100
+                      ).toLocaleString()}
+                    </span>
+                  </>
+                )}
+              </div>
             </div>
           </div>
 
@@ -80,6 +100,10 @@ export default function CourseBox(props) {
               <FaArrowLeft class="course-box__footer-icon" />
             </Link>
           </div>
+
+          {props.price !== 0 && props.discount && (
+            <span class="courses-box__discount">%{props.discount}</span>
+          )}
         </div>
       </div>
     </>

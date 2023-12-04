@@ -24,6 +24,8 @@ import AdminContacts from "./pages/AdminPanel/Contact/Contact"
 import Sessions from "./pages/AdminPanel/Sessions/Sessions"
 import Comments from "./pages/AdminPanel/Comments/Comments"
 import Offs from "./pages/AdminPanel/Offs/Offs"
+import Discounts from "./pages/AdminPanel/Discounts/Discounts"
+import AdminTickets from "./pages/AdminPanel/Tickets/Tickets"
 
 //user panel
 import UserPanel from "./pages/UserPanel/Index"
@@ -31,7 +33,7 @@ import MainUserPanel from "./pages/UserPanel/Main/Main"
 import Orders from "./pages/UserPanel/Orders/Orders"
 import ViewOrder from "./pages/UserPanel/ViewOrder/ViewOrder"
 import UserCourses from "./pages/UserPanel/Courses/Courses"
-import Tickets from "./pages/UserPanel/Tickets/Tickets"
+import UserTickets from "./pages/UserPanel/Tickets/Tickets"
 import SendTicket from "./pages/UserPanel/Tickets/SendTicket"
 import TicketAnswer from "./pages/UserPanel/Tickets/TicketAnswer"
 import EditAccount from "./pages/UserPanel/EditAccount/EditAccount"
@@ -66,6 +68,8 @@ const routes = [
       { path: "sessions", element: <Sessions /> },
       { path: "comments", element: <Comments /> },
       { path: "offs", element: <Offs /> },
+      { path: "discounts", element: <Discounts /> },
+      { path: "tickets", element: <AdminTickets /> },
     ],
   },
   {
@@ -76,7 +80,7 @@ const routes = [
       { path: "orders", element: <Orders /> },
       { path: "view-order/:orderID", element: <ViewOrder /> },
       { path: "courses", element: <UserCourses /> },
-      { path: "tickets", element: <Tickets /> },
+      { path: "tickets", element: <UserTickets /> },
       { path: "send-ticket", element: <SendTicket /> },
       { path: "tickets/answer/:id", element: <TicketAnswer /> },
       { path: "edit-account", element: <EditAccount /> },
