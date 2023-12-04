@@ -92,22 +92,22 @@ export default function Login() {
     <>
       <Header />
 
-      <section class="login-register">
-        <div class="login">
-          <span class="login__title">ورود به حساب کاربری</span>
-          <span class="login__subtitle">
+      <section className="login-register">
+        <div className="login">
+          <span className="login__title">ورود به حساب کاربری</span>
+          <span className="login__subtitle">
             خوشحالیم دوباره میبینیمت دوست عزیز :)
           </span>
-          <div class="login__new-member">
-            <span class="login__new-member-text">کاربر جدید هستید؟</span>
-            <Link class="login__new-member-link" to="/register">
+          <div className="login__new-member">
+            <span className="login__new-member-text">کاربر جدید هستید؟</span>
+            <Link className="login__new-member-link" to="/register">
               ثبت نام
             </Link>
           </div>
-          <form action="#" class="login-form">
-            <div class="login-form__username">
+          <form action="#" className="login-form">
+            <div className="login-form__username">
               <Input
-                class="login-form__username-input"
+                className="login-form__username-input"
                 id="loginUsername"
                 type="text"
                 placeholder="نام کاربری"
@@ -119,14 +119,14 @@ export default function Login() {
                 ]}
                 onInputHandler={onInputHandler}
               />
-              <BiSolidUser class="login-form__username-icon" />
+              <BiSolidUser className="login-form__username-icon" />
             </div>
-            <div class="login-form__password">
+            <div className="login-form__password">
               <Input
                 element="input"
                 id="loginPassword"
                 type={isShowPass ? "text" : "password"}
-                class="login-form__password-input"
+                className="login-form__password-input"
                 placeholder="رمز عبور"
                 validations={[
                   requiredValidator(),
@@ -138,12 +138,12 @@ export default function Login() {
 
               {isShowPass ? (
                 <MdVisibilityOff
-                  class="login-form__password-icon"
+                  className="login-form__password-icon"
                   onClick={() => setIsShowPass(false)}
                 />
               ) : (
                 <MdVisibility
-                  class="login-form__password-icon"
+                  className="login-form__password-icon"
                   onClick={() => setIsShowPass(true)}
                 />
               )}
@@ -154,7 +154,7 @@ export default function Login() {
               onChange={() => setIsVarifyRecaptcha(true)}
             />
             <Button
-              class={`login-form__btn ${
+              className={`login-form__btn ${
                 formState.isFormValid && isVarifyRecaptcha
                   ? "bg-success"
                   : "bg-danger"
@@ -163,37 +163,37 @@ export default function Login() {
               onClick={userLogin}
               disabled={!formState.isFormValid || !isVarifyRecaptcha}
             >
-              <MdInput class="login-form__btn-icon" />
-              <span class="login-form__btn-text">ورود</span>
+              <MdInput className="login-form__btn-icon" />
+              <span className="login-form__btn-text">ورود</span>
             </Button>
-            <div class="login-form__password-setting">
-              <label class="login-form__password-remember">
+            <div className="login-form__password-setting">
+              <label className="login-form__password-remember">
                 <input
-                  class="login-form__password-checkbox"
+                  className="login-form__password-checkbox"
                   type="checkbox"
                 />
-                <span class="login-form__password-text">
+                <span className="login-form__password-text">
                   مرا به خاطر داشته باش
                 </span>
               </label>
-              <label class="login-form__password-forget">
-                <a class="login-form__password-forget-link" href="#">
+              <label className="login-form__password-forget">
+                <a className="login-form__password-forget-link" href="#">
                   رمز عبور را فراموش کرده اید؟
                 </a>
               </label>
             </div>
           </form>
-          <div class="login__des">
-            <span class="login__des-title">سلام کاربر محترم:</span>
-            <ul class="login__des-list">
-              <li class="login__des-item">
+          <div className="login__des">
+            <span className="login__des-title">سلام کاربر محترم:</span>
+            <ul className="login__des-list">
+              <li className="login__des-item">
                 لطفا از مرورگر های مطمئن و بروز مانند گوگل کروم و فایرفاکس
                 استفاده کنید.
               </li>
-              <li class="login__des-item">
+              <li className="login__des-item">
                 ما هرگز اطلاعات محرمانه شمارا از طریق ایمیل درخواست نمیکنیم.
               </li>
-              <li class="login__des-item">
+              <li className="login__des-item">
                 لطفا کلمه عبور خود را در فواصل زمانی کوتاه تغییر دهید.
               </li>
             </ul>

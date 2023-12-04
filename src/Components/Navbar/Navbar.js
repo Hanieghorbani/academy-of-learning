@@ -10,12 +10,10 @@ export default function Navbar() {
   const [allNavbarLinks, setAllNavbarLinks] = useState([])
 
   useEffect(() => {
-  
     fetch("http://localhost:4000/v1/menus")
       .then((res) => res.json())
       .then((datas) => {
         setAllNavbarLinks(datas)
-        
       })
   }, [])
   return (
@@ -44,7 +42,10 @@ export default function Navbar() {
                         <IoIosArrowDown class="main-header__link-icon" />
                         <ul class="main-header__dropdown">
                           {link.submenus.map((sub) => (
-                            <li key={sub._id} class="main-header__dropdown-item">
+                            <li
+                              key={sub._id}
+                              class="main-header__dropdown-item"
+                            >
                               <Link
                                 to={sub.href}
                                 class="main-header__dropdown-link"
@@ -70,7 +71,7 @@ export default function Navbar() {
               <HiOutlineShoppingCart class="main-header__cart-icon" />
             </a>
 
-            {contextData.isLoggedIn? (
+            {contextData.isLoggedIn ? (
               <Link to={"/my-account"} class="main-header__profile">
                 <span class="main-header__profile-text">
                   {contextData.userInfos.name}
@@ -78,9 +79,7 @@ export default function Navbar() {
               </Link>
             ) : (
               <Link to={"/login"} class="main-header__profile">
-                <span class="main-header__profile-text">
-                  ورود / ثبت نام
-                </span>
+                <span class="main-header__profile-text">ورود / ثبت نام</span>
               </Link>
             )}
           </div>

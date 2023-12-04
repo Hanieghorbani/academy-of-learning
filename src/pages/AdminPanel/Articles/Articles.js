@@ -156,15 +156,15 @@ export default function Articles() {
 
   return (
     <>
-      <div class="container-fluid" id="home-content">
-        <div class="container">
-          <div class="home-title">
+      <div className="container-fluid" id="home-content">
+        <div className="container">
+          <div className="home-title">
             <span>افزودن مقاله جدید</span>
           </div>
-          <form class="form">
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+          <form className="form">
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   عنوان
                 </label>
                 <Input
@@ -174,12 +174,12 @@ export default function Articles() {
                   onInputHandler={onInputHandler}
                   validations={[minValidator(8)]}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   لینک
                 </label>
                 <Input
@@ -189,12 +189,12 @@ export default function Articles() {
                   onInputHandler={onInputHandler}
                   validations={[minValidator(5)]}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-12">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+            <div className="col-12">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   چکیده
                 </label>
                 <Input
@@ -203,24 +203,24 @@ export default function Articles() {
                   id="description"
                   onInputHandler={onInputHandler}
                   validations={[minValidator(5)]}
-                  class="article-textarea"
+                  className="article-textarea"
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-12">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+            <div className="col-12">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   محتوا
                 </label>
                 <Editor value={articleBody} setValue={setArticleBody} />
 
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   کاور
                 </label>
                 <input
@@ -229,12 +229,12 @@ export default function Articles() {
                     setArticleCover(event.target.files[0])
                   }}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title" style={{ display: "block" }}>
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title" style={{ display: "block" }}>
                   دسته بندی
                 </label>
                 <select
@@ -245,15 +245,15 @@ export default function Articles() {
                     <option key={category._id} value={category._id}>{category.title}</option>
                   ))}
                 </select>
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-12">
-              <div class="bottom-form">
-                <div class="submit-btn">
+            <div className="col-12">
+              <div className="bottom-form">
+                <div className="submit-btn">
                   <button
                     type="submit"
-                    class="btn btn-primary btn-lg"
+                    className="btn btn-primary btn-lg"
                     onClick={createArticle}
                     disabled={!formState.isFormValid}
                   >
@@ -261,7 +261,7 @@ export default function Articles() {
                   </button>
                   <button
                     type="submit"
-                    class="btn btn-primary btn-lg me-3"
+                    className="btn btn-primary btn-lg me-3"
                     onClick={createArticleDraft}
                     disabled={!formState.isFormValid}
                   >
@@ -274,7 +274,7 @@ export default function Articles() {
         </div>
       </div>
       <DataTable title="مقاله‌ها">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -299,21 +299,21 @@ export default function Articles() {
                   ) : (
                     <Link
                       to={`draft/${article.shortName}`}
-                      class="btn btn-primary edit-btn"
+                      className="btn btn-primary edit-btn"
                     >
                       ادامه
                     </Link>
                   )}
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button type="button" className="btn btn-primary edit-btn">
                     ویرایش
                   </button>
                 </td>
                 <td>
                   <button
                     type="button"
-                    class="btn btn-danger delete-btn"
+                    className="btn btn-danger delete-btn"
                     onClick={() => removeArticle(article._id)}
                   >
                     حذف

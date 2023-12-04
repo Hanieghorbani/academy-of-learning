@@ -25,8 +25,8 @@ export default function Index() {
             <MainBox title="سفارشات" href="orders" />
             <MainBox title="دوره های خریداری شده" href="courses" />
             <MainBox title="کیف پول من" href="wallet" />
-            <MainBox title="جزئیات حساب کاربری" href="infos" />
-            <MainBox title="تیکت های پشتیبانی" href="ticket" />
+            <MainBox title="جزئیات حساب کاربری" href="edit-account" />
+            <MainBox title="تیکت های پشتیبانی" href="tickets" />
           </div>
         </div>
       </div>

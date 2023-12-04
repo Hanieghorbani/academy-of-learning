@@ -10,6 +10,7 @@ import Contact from "./pages/Contact/Contact"
 import Search from "./pages/search/Search"
 import Session from "./pages/Session/Session"
 
+import PAdminPrivate from "./Components/Privates/PAdminPrivate"
 //admin panel
 import AdminPanel from "./pages/AdminPanel/index"
 import MainAdminPanel from "./pages/AdminPanel/Main/Main"
@@ -32,6 +33,8 @@ import ViewOrder from "./pages/UserPanel/ViewOrder/ViewOrder"
 import UserCourses from "./pages/UserPanel/Courses/Courses"
 import Tickets from "./pages/UserPanel/Tickets/Tickets"
 import SendTicket from "./pages/UserPanel/Tickets/SendTicket"
+import TicketAnswer from "./pages/UserPanel/Tickets/TicketAnswer"
+import EditAccount from "./pages/UserPanel/EditAccount/EditAccount"
 const routes = [
   { path: "/", element: <Index /> },
   { path: "/course-info/:courseName", element: <CourseInfo /> },
@@ -46,7 +49,11 @@ const routes = [
   { path: "/:courseName/:sessionID", element: <Session /> },
   {
     path: "/p-admin/*",
-    element: <AdminPanel />,
+    element: (
+      <PAdminPrivate>
+        <AdminPanel />
+      </PAdminPrivate>
+    ),
     children: [
       { path: "", element: <MainAdminPanel /> },
       { path: "users", element: <Users /> },
@@ -71,8 +78,8 @@ const routes = [
       { path: "courses", element: <UserCourses /> },
       { path: "tickets", element: <Tickets /> },
       { path: "send-ticket", element: <SendTicket /> },
-      // { path: 'articles/draft/:articleName', element: <Draft/> },
-      // { path: 'category', element: <AdminCategory/> },
+      { path: "tickets/answer/:id", element: <TicketAnswer /> },
+      { path: "edit-account", element: <EditAccount /> },
       // { path: 'contacts', element: <AdminContacts/> },
       // { path: 'sessions', element: <Sessions/> },
       // { path: 'comments', element: <Comments/> },

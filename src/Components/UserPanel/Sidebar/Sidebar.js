@@ -46,14 +46,14 @@ export default function Sidebar() {
           </a>
         </li>
         <li class="sidebar__item">
-          <a class="sidebar__link" href="#">
+          <Link class="sidebar__link" to={'edit-account'}>
             جزئیات حساب کاربری
-          </a>
+          </Link>
         </li>
         <li class="sidebar__item">
-          <a class="sidebar__link" href="#">
+          <Link class="sidebar__link" to={'courses'}>
             دوره های خریداری شده
-          </a>
+          </Link>
         </li>
         <li class="sidebar__item">
           <Link class="sidebar__link" to={'tickets'}>

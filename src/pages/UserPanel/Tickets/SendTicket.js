@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { IoIosSend } from "react-icons/io"
 import "./SendTicket.css"
 import swal from "sweetalert"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function SendTicket() {
   const [departments, setDepartments] = useState([])
@@ -13,7 +14,8 @@ export default function SendTicket() {
   const [departmentId, setDepartmentId] = useState("")
   const [courseId, setCourseId] = useState("")
   const [priority, setPriority] = useState("")
-
+  
+  const navigate = useNavigate()
   useEffect(() => {
     fetch(`http://localhost:4000/v1/tickets/departments`)
       .then((res) => res.json())
@@ -69,6 +71,8 @@ export default function SendTicket() {
           icon: "success",
           dangerMode: false,
           buttons: "تایید",
+        }).then(()=>{
+          navigate('/my-account/tickets')
         })
       } else if (res.status == 500) {
         swal({
@@ -122,9 +126,9 @@ export default function SendTicket() {
       <div class="ticket">
         <div class="ticket-header">
           <span class="ticket-header__title">ارسال تیکت جدید</span>
-          <a class="ticket-header__link" href="#">
+          <Link class="ticket-header__link" to={'/my-account/tickets'}>
             همه تیکت ها
-          </a>
+          </Link>
         </div>
         <form class="ticket-form" action="#">
           <div class="row">
