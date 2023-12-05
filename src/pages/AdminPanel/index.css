@@ -767,3 +767,10 @@ ul {
   color: white;
   background-color: red !important;
 }
+
+.roleChangeInputs{
+  display: flex;
+  justify-content: space-evenly;
+  
+  font-size: 1.5rem;
+}

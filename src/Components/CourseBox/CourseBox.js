@@ -70,14 +70,14 @@ export default function CourseBox(props) {
                 <span
                   class={`course-box__price ${
                     props.price !== 0 &&
-                    props.discount &&
+                    props.discount !== 0 &&
                     "text-decoration-line-through"
                   } `}
                 >
                   {props.price !== 0 ? props.price.toLocaleString() : "رایگان"}
                 </span>
 
-                {props.price !== 0 && props.discount && (
+                {props.price !== 0 && props.discount !== 0 && (
                   <>
                     <span className="course-box__price ms-3">
                       {(
@@ -101,7 +101,7 @@ export default function CourseBox(props) {
             </Link>
           </div>
 
-          {props.price !== 0 && props.discount && (
+          {props.price !== 0 && props.discount !== 0 && (
             <span class="courses-box__discount">%{props.discount}</span>
           )}
         </div>

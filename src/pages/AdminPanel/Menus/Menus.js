@@ -182,7 +182,7 @@ export default function Menus() {
                 <td>{menu.href}</td>
                 <td>{menu.parent ? menu.parent.title : <FaCheck />}</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button type="button" className="btn btn-primary edit-btn">
                     ویرایش
                   </button>
                 </td>

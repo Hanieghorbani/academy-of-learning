@@ -10,8 +10,11 @@ import {
   emailValidator,
   phoneValidator,
 } from "./../../../validators/rules"
+import Swal from "sweetalert2"
+import { click } from "@testing-library/user-event/dist/click"
 
 export default function Users() {
+  const [role, setRole] = useState("")
   const [users, setUsers] = useState([])
   const [formState, onInputHandler] = useForm(
     {
@@ -152,7 +155,7 @@ export default function Users() {
             icon: "success",
             dangerMode: false,
             buttons: "تایید",
-          }).then(()=>{
+          }).then(() => {
             getAllUsers()
           })
         })
@@ -178,7 +181,7 @@ export default function Users() {
           {
           }
         })
-    }else {
+    } else {
       swal({
         text: "تکرار رمز عبور اشتباه است !",
         icon: "error",
@@ -187,6 +190,41 @@ export default function Users() {
       })
     }
   }
+
+  function roleChange(id) {
+    swal({
+      text: "نقش کاربر را وارد کنید: (ADMIN or USER)",
+      content: "input",
+      buttons: "ارسال",
+    }).then((role) => {
+      if (role.trim()) {
+        fetch(`http://localhost:4000/v1/users/role`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${localStorageToken.token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ role, id }),
+        }).then((res) => {
+          if (res.ok) {
+            swal({
+              text: `نقش کاربر به ${
+                role == "ADMIN" ? "مدیر" : "کاربر عادی"
+              } تغیر یافت`,
+              icon: "success",
+              dangerMode: false,
+              buttons: "تایید",
+            }).then(() => {
+              getAllUsers()
+            })
+          } else {
+            console.log(res.text())
+          }
+        })
+      }
+    })
+  }
+
   return (
     <>
       <div class="home-content-edit">
@@ -323,6 +361,7 @@ export default function Users() {
               <th>شماره</th>
               <th>ایمیل</th>
               <th>نقش</th>
+              <th>تغییر نقش</th>
               <th>ویرایش</th>
               <th>حذف</th>
               <th>بن</th>
@@ -332,12 +371,21 @@ export default function Users() {
             {users.length ? (
               <>
                 {users.map((user, index) => (
-                  <tr key={user._id} >
+                  <tr key={user._id}>
                     <td>{index + 1}</td>
                     <td>{user.name}</td>
                     <td>{user.phone}</td>
                     <td>{user.email}</td>
-                    <td>{user.role}</td>
+                    <td>{user.role == "ADMIN" ? "مدیر" : "کاربر عادی"}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn btn-primary edit-btn"
+                        onClick={() => roleChange(user._id)}
+                      >
+                        تغییر نقش
+                      </button>
+                    </td>
                     <td>
                       <button type="button" class="btn btn-primary edit-btn">
                         ویرایش
