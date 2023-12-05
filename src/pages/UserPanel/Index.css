@@ -207,10 +207,10 @@
     cursor: grab;
     overflow: hidden;
   }
-  .swiper-pagination {
+  /* .swiper-pagination {
     position: absolute;
     bottom: -4rem !important;
-  }
+  } */
   .swiper-pagination-bullet {
     width: 13px;
     height: 13px;

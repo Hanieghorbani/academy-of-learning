@@ -112,8 +112,6 @@ export default function Courses() {
     formData.append("status", courseStatus)
     formData.append("cover", courseCover)
 
-
-    console.log(formData);
     if (courseCategory != "-1") {
       fetch(`http://localhost:4000/v1/courses`, {
         method: "POST",
@@ -163,15 +161,15 @@ export default function Courses() {
 
   return (
     <>
-      <div class="container-fluid" id="home-content">
-        <div class="container">
-          <div class="home-title">
+      <div className="container-fluid" id="home-content">
+        <div className="container">
+          <div className="home-title">
             <span>افزودن دوره جدید</span>
           </div>
-          <form class="form">
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title">نام دوره</label>
+          <form className="form">
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title">نام دوره</label>
                 <Input
                   id="name"
                   element="input"
@@ -180,12 +178,12 @@ export default function Courses() {
                   type="text"
                   placeholder="لطفا نام دوره را وارد کنید..."
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="price input">
-                <label class="input-title">توضیحات دوره</label>
+            <div className="col-6">
+              <div className="price input">
+                <label className="input-title">توضیحات دوره</label>
                 <Input
                   id="description"
                   element="input"
@@ -194,12 +192,12 @@ export default function Courses() {
                   type="text"
                   placeholder="لطفا توضیحات دوره را وارد کنید..."
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="number input">
-                <label class="input-title">Url دوره</label>
+            <div className="col-6">
+              <div className="number input">
+                <label className="input-title">Url دوره</label>
                 <Input
                   id="shortName"
                   element="input"
@@ -209,12 +207,12 @@ export default function Courses() {
                   isValid="false"
                   placeholder="لطفا Url دوره را وارد کنید..."
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="price input">
-                <label class="input-title">قیمت دوره</label>
+            <div className="col-6">
+              <div className="price input">
+                <label className="input-title">قیمت دوره</label>
                 <Input
                   id="price"
                   element="input"
@@ -224,12 +222,12 @@ export default function Courses() {
                   isValid="false"
                   placeholder="لطفا قیمت دوره را وارد کنید..."
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="price input">
-                <label class="input-title">نحوه پشتیبانی دوره</label>
+            <div className="col-6">
+              <div className="price input">
+                <label className="input-title">نحوه پشتیبانی دوره</label>
                 <Input
                   id="support"
                   element="input"
@@ -239,40 +237,39 @@ export default function Courses() {
                   isValid="false"
                   placeholder="لطفا نحوه پشتیبانی دوره را وارد کنید..."
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="number input">
-                <label class="input-title">دسته‌بندی دوره</label>
+            <div className="col-6">
+              <div className="number input">
+                <label className="input-title">دسته‌بندی دوره</label>
                 <select onChange={(e) => setCourseCategory(e.target.value)}>
                   <option value="">انتخاب کنید</option>
                   {categories.map((category) => (
                     <option key={category._id} value={category._id}>{category.title}</option>
                   ))}
                 </select>
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="file">
-                <label class="input-title">عکس دوره</label>
+            <div className="col-6">
+              <div className="file">
+                <label className="input-title">عکس دوره</label>
                 <input
                   type="file"
                   id="file"
                   onChange={(event) => {
-                    console.log(event.target.files[0])
                     setCourseCover(event.target.files[0])
                   }}
                 />
               </div>
             </div>
-            <div class="col-12">
-              <div class="bottom-form">
-                <div class="condition">
-                  <label class="input-title">وضعیت دوره</label>
-                  <div class="radios">
-                    <div class="available">
+            <div className="col-12">
+              <div className="bottom-form">
+                <div className="condition">
+                  <label className="input-title">وضعیت دوره</label>
+                  <div className="radios">
+                    <div className="available">
                       <label>
                         <span>در حال برگزاری</span>
                         <input
@@ -284,7 +281,7 @@ export default function Courses() {
                         />
                       </label>
                     </div>
-                    <div class="unavailable">
+                    <div className="unavailable">
                       <label>
                         <span>پیش فروش</span>
                         <input
@@ -297,7 +294,7 @@ export default function Courses() {
                     </div>
                   </div>
                 </div>
-                <div class="submit-btn">
+                <div className="submit-btn">
                   <input
                     type="submit"
                     value="افزودن"
@@ -311,7 +308,7 @@ export default function Courses() {
         </div>
       </div>
       <DataTable title="دوره‌ها">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -342,14 +339,14 @@ export default function Courses() {
                 <td>{course.creator}</td>
                 <td>{course.categoryID.title}</td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button type="button" className="btn btn-primary edit-btn">
                     ویرایش
                   </button>
                 </td>
                 <td>
                   <button
                     type="button"
-                    class="btn btn-danger delete-btn"
+                    className="btn btn-danger delete-btn"
                     onClick={() => removeCourseHandler(course._id)}
                   >
                     حذف

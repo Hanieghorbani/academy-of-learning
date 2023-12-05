@@ -9,16 +9,16 @@ export default function Index() {
     <div>
       <Header />
 
-      <section class="content">
-        <div class="content-header">
-          <div class="container">
-            <span class="content-header__title">حساب کاربری من</span>
-            <span class="content-header__subtitle">پیشخوان</span>
+      <section className="content">
+        <div className="content-header">
+          <div className="container">
+            <span className="content-header__title">حساب کاربری من</span>
+            <span className="content-header__subtitle">پیشخوان</span>
           </div>
         </div>
-        <div class="content-main">
-          <div class="container">
-            <div class="row">
+        <div className="content-main">
+          <div className="container">
+            <div className="row">
               <Sidebar />
 
               <Outlet />

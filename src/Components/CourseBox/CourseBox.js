@@ -7,36 +7,35 @@ import { FaRegStar } from "react-icons/fa6"
 export default function CourseBox(props) {
   const [isImgShow, setIsImgShow] = useState(false)
   const onImageLoaded = () => setIsImgShow(true)
-
   return (
     <>
-      <div class={`col-4 ${props.isInSwiper && "col-12"}`}>
-        <div class="course-box">
+      <div className={`col-4 ${props.isInSwiper && "col-12"}`}>
+        <div className="course-box">
           <Link to={`/course-info/${props.shortName}`}>
             <img
               src={`http://localhost:4000/courses/covers/${props.cover}`}
               alt="Course img"
-              class="course-box__img"
+              className="course-box__img"
               onLoad={onImageLoaded}
             />
             {!isImgShow && <CircleSpinner />}
           </Link>
-          <div class="course-box__main">
+          <div className="course-box__main">
             <Link
               to={`/course-info/${props.shortName}`}
-              class="course-box__title"
+              className="course-box__title"
             >
               {props.name}
             </Link>
 
-            <div class="course-box__rating-teacher">
-              <div class="course-box__teacher">
-                <FaChalkboardTeacher class="course-box__teacher-icon" />
-                <a href="#" class="course-box__teacher-link">
+            <div className="course-box__rating-teacher">
+              <div className="course-box__teacher">
+                <FaChalkboardTeacher className="course-box__teacher-icon" />
+                <a href="#" className="course-box__teacher-link">
                   {props.creator}
                 </a>
               </div>
-              <div class="course-box__rating">
+              <div className="course-box__rating">
                 {Array(5 - props.courseAverageScore)
                   .fill("0")
                   .map((item, index) => (
@@ -44,7 +43,7 @@ export default function CourseBox(props) {
                       key={index}
                       src="/images/svgs/star.svg"
                       alt="rating"
-                      class="course-box__star"
+                      className="course-box__star"
                     />
                   ))}
                 {Array(props.courseAverageScore)
@@ -54,21 +53,21 @@ export default function CourseBox(props) {
                       key={index}
                       src="/images/svgs/star_fill.svg"
                       alt="rating"
-                      class="course-box__star"
+                      className="course-box__star"
                     />
                   ))}
               </div>
             </div>
 
-            <div class="course-box__status">
-              <div class="course-box__users">
-                <FaUsers class="course-box__users-icon" />
-                <span class="course-box__users-text">{props.registers}</span>
+            <div className="course-box__status">
+              <div className="course-box__users">
+                <FaUsers className="course-box__users-icon" />
+                <span className="course-box__users-text">{props.registers}</span>
               </div>
 
               <div>
                 <span
-                  class={`course-box__price ${
+                  className={`course-box__price ${
                     props.price !== 0 &&
                     props.discount !== 0 &&
                     "text-decoration-line-through"
@@ -79,7 +78,7 @@ export default function CourseBox(props) {
 
                 {props.price !== 0 && props.discount !== 0 && (
                   <>
-                    <span className="course-box__price ms-3">
+                    <span classNameName="course-box__price ms-3">
                       {(
                         props.price -
                         (props.price * props.discount) / 100
@@ -91,18 +90,18 @@ export default function CourseBox(props) {
             </div>
           </div>
 
-          <div class="course-box__footer">
+          <div className="course-box__footer">
             <Link
               to={`/course-info/${props.shortName}`}
-              class="course-box__footer-link"
+              className="course-box__footer-link"
             >
               مشاهده اطلاعات
-              <FaArrowLeft class="course-box__footer-icon" />
+              <FaArrowLeft className="course-box__footer-icon" />
             </Link>
           </div>
 
           {props.price !== 0 && props.discount !== 0 && (
-            <span class="courses-box__discount">%{props.discount}</span>
+            <span className="courses-box__discount">%{props.discount}</span>
           )}
         </div>
       </div>

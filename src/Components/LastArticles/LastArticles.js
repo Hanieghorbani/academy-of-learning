@@ -22,8 +22,8 @@ export default function LastArticles() {
       })
   }, [])
   return (
-    <section class="articles">
-      <div class="container">
+    <section className="articles">
+      <div className="container">
         <SectionHeader
           title="جدیدترین مقاله ها"
           desc="پیش به سوی ارتقای دانش"
@@ -31,8 +31,8 @@ export default function LastArticles() {
           btnHref={"/articles/1"}
         />
 
-        <div class="articles__content">
-          <div class="row">
+        <div className="articles__content">
+          <div className="row">
             {articles &&
               articles
                 .filter(article=>article.publish)

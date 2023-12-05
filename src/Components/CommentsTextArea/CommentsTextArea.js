@@ -16,80 +16,80 @@ export default function CommentsTextArea({ comments, submitComment }) {
     setScore("امتیاز خود را انتخاب کنید")
   }
   return (
-    <div class="comments">
-      <div class="comments__header">
-        <div class="comments__header-icon-content">
-          <FaRegComment class="comments__header-icon" />
+    <div className="comments">
+      <div className="comments__header">
+        <div className="comments__header-icon-content">
+          <FaRegComment className="comments__header-icon" />
         </div>
-        <span class="comments__header-title">نظرات</span>
+        <span className="comments__header-title">نظرات</span>
       </div>
-      <div class="comments__content">
+      <div className="comments__content">
         {comments.length === 0 ? (
-          <div class="alert alert-warning">
+          <div className="alert alert-warning">
             هنوز کامنتی برای این دوره ثبت نشده!
           </div>
         ) : (
           <>
             {comments.map((comment) => (
-              <div key={comment._id} class="comments__item">
-                <div class="comments__question">
-                  <div class="comments__question-header">
-                    <div class="comments__question-header-right">
-                      <span class="comments__question-name comment-name">
+              <div key={comment._id} className="comments__item">
+                <div className="comments__question">
+                  <div className="comments__question-header">
+                    <div className="comments__question-header-right">
+                      <span className="comments__question-name comment-name">
                         {comment.creator.name}
                       </span>
-                      <span class="comments__question-status comment-status">
+                      <span className="comments__question-status comment-status">
                         {comment.creator.role === "ADMIN" ? "مدیر" : "کاربر"}
                       </span>
-                      <span class="comments__question-date comment-date">
+                      <span className="comments__question-date comment-date">
                         {comment.createdAt.slice(0, 10)}
                       </span>
                     </div>
-                    <div class="comments__question-header-left">
+                    <div className="comments__question-header-left">
                       <a
-                        class="comments__question-header-link comment-link"
+                        className="comments__question-header-link comment-link"
                         href="#"
                       >
                         پاسخ
                       </a>
                     </div>
                   </div>
-                  <div class="comments__question-text">
-                    <p class="comments__question-paragraph comment-paragraph">
+                  <div className="comments__question-text">
+                    <p className="comments__question-paragraph comment-paragraph">
                       {comment.body}
                     </p>
                   </div>
                   {comment.answerContent && (
                     <div
                       key={comment.answerContent._id}
-                      class="comments__item my-5"
+                      className="comments__item my-5"
                     >
-                      <div class="comments__question">
-                        <div class="comments__question-header">
-                          <div class="comments__question-header-right">
-                            <span class="comments__question-name comment-name">
+                      <div className="comments__question">
+                        <div className="comments__question-header">
+                          <div className="comments__question-header-right">
+                            <span className="comments__question-name comment-name">
                               {comment.answerContent.creator.name}
                             </span>
-                            <span class="comments__question-status comment-status">
+                            <span className="comments__question-status comment-status">
                               {comment.answerContent.creator.role === "ADMIN"
                                 ? "مدیر"
                                 : "کاربر"}
                             </span>
-                            <span class="comments__question-date comment-date">
+                            <span className="comments__question-date comment-date">
                               {comment.answerContent.createdAt.slice(0, 10)}
                             </span>
                           </div>
-                          <div class="comments__question-header-left">
+                          <div className="comments__question-header-left">
                             <a
-                              class="comments__question-header-link comment-link"
+                              className="comments__question-header-link comment-link"
                               href="#"
                             >
                               پاسخ
                             </a>
                           </div>
                         </div>
-                        <div class="comments__question-text">
-                          <p class="comments__question-paragraph comment-paragraph">
+                        <div className="comments__question-text">
+                          <p className="comments__question-paragraph comment-paragraph">
                             {comment.answerContent.body}
                           </p>
                         </div>
@@ -111,65 +111,65 @@ export default function CommentsTextArea({ comments, submitComment }) {
 
       {contextData.isLoggedIn ? (
         <>
-          <div class="comments__rules">
-            <span class="comments__rules-title">قوانین ثبت دیدگاه</span>
-            <span class="comments__rules-item">
-              <FaCheck class="comments__rules-icon" />
+          <div className="comments__rules">
+            <span className="comments__rules-title">قوانین ثبت دیدگاه</span>
+            <span className="comments__rules-item">
+              <FaCheck className="comments__rules-icon" />
               اگر نیاز به پشتیبانی دوره دارید از قسمت پرسش سوال در قسمت نمایش
               انلاین استفاده نمایید و سوالات مربوط به رفع اشکال تایید نخواهند شد
             </span>
-            <span class="comments__rules-item">
-              <FaCheck class="comments__rules-icon" />
+            <span className="comments__rules-item">
+              <FaCheck className="comments__rules-icon" />
               دیدگاه های نامرتبط به دوره تایید نخواهد شد.
             </span>
-            <span class="comments__rules-item">
-              <FaCheck class="comments__rules-icon" />
+            <span className="comments__rules-item">
+              <FaCheck className="comments__rules-icon" />
               سوالات مرتبط با رفع اشکال در این بخش تایید نخواهد شد.
             </span>
-            <span class="comments__rules-item">
-              <FaCheck class="comments__rules-icon" />
+            <span className="comments__rules-item">
+              <FaCheck className="comments__rules-icon" />
               از درج دیدگاه های تکراری پرهیز نمایید.
             </span>
           </div>
-          <div class="comments__respond">
-            <div class="comments__score">
-              <span class="comments__score-title">امتیاز شما</span>
+          <div className="comments__respond">
+            <div className="comments__score">
+              <span className="comments__score-title">امتیاز شما</span>
               <select
-                class="comments__score-input w-100"
+                className="comments__score-input w-100"
                 onChange={(e) => setScore(e.target.value)}
               >
-                <option value={'-1'} class="comments__score-input-text">
+                <option value={'-1'} className="comments__score-input-text">
                   امتیاز خود را انتخاب کنید
                 </option>
-                <option value={5} class="comments__score-input-text">
+                <option value={5} className="comments__score-input-text">
                   عالی
                 </option>
-                <option value={4} class="comments__score-input-text">
+                <option value={4} className="comments__score-input-text">
                   خیلی خوب
                 </option>
-                <option value={3} class="comments__score-input-text">
+                <option value={3} className="comments__score-input-text">
                   خوب
                 </option>
-                <option value={2} class="comments__score-input-text">
+                <option value={2} className="comments__score-input-text">
                   متوسط
                 </option>
-                <option value={1} class="comments__score-input-text">
+                <option value={1} className="comments__score-input-text">
                   افتضاح
                 </option>
               </select>
-              {/* <FaChevronDown class="comments__input-icon" /> */}
+              {/* <FaChevronDown className="comments__input-icon" /> */}
             </div>
-            <div class="comments__respond-content">
-              <div class="comments__respond-title">دیدگاه شما *</div>
+            <div className="comments__respond-content">
+              <div className="comments__respond-title">دیدگاه شما *</div>
               <textarea
-                class="comments__score-input-respond"
+                className="comments__score-input-respond"
                 value={contentComment}
                 onChange={(e) => setContentComment(e.target.value)}
               ></textarea>
             </div>
             <button
               type="submit"
-              class="comments__respond-btn"
+              className="comments__respond-btn"
               onClick={() =>
                 submitComment(score, contentComment, clearCommentTextArea)
               }
@@ -179,7 +179,7 @@ export default function CommentsTextArea({ comments, submitComment }) {
           </div>
         </>
       ) : (
-        <div class="alert alert-danger">
+        <div className="alert alert-danger">
           برای ثبت دیدگاه باید وارد <Link to={"/login"}>حساب کاربری</Link> خود
           شوید !
         </div>

@@ -72,7 +72,6 @@ export default function Menus() {
       parent: menuParent != "-1" ? menuParent : undefined,
     }
 
-    console.log(menuInfos);
     fetch("http://localhost:4000/v1/menus", {
       method: "POST",
       headers: {
@@ -91,21 +90,24 @@ export default function Menus() {
           getAllMenus()
         })
       } else {
-        console.log(res.text())
+        swal({
+          icon: "error",
+          buttons: "تایید",
+        })
       }
     })
   }
 
   return (
     <>
-      <div class="container">
-        <div class="home-title">
+      <div className="container">
+        <div className="home-title">
           <span>افزودن کاربر جدید</span>
         </div>
-        <form class="form">
-          <div class="col-6">
-            <div class="name input">
-              <label class="input-title">عنوان</label>
+        <form className="form">
+          <div className="col-6">
+            <div className="name input">
+              <label className="input-title">عنوان</label>
               <Input
                 element="input"
                 onInputHandler={onInputHandler}
@@ -115,12 +117,12 @@ export default function Menus() {
                 placeholder="لطفا عنوان را وارد کنید..."
                 validations={[minValidator(5)]}
               />
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
-          <div class="col-6">
-            <div class="name input">
-              <label class="input-title">لینک</label>
+          <div className="col-6">
+            <div className="name input">
+              <label className="input-title">لینک</label>
               <Input
                 element="input"
                 onInputHandler={onInputHandler}
@@ -130,14 +132,14 @@ export default function Menus() {
                 validations={[minValidator(5)]}
                 placeholder="لطفا عنوان را وارد کنید..."
               />
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
-          <div class="col-6">
-            <div class="name input">
-              <label class="input-title">منو</label>
+          <div className="col-6">
+            <div className="name input">
+              <label className="input-title">منو</label>
               <select
-                class="select"
+                className="select"
                 onChange={(event) => setMenuParent(event.target.value)}
               >
                 <option value="-1">منوی اصلی را انتخاب کنید</option>
@@ -149,12 +151,12 @@ export default function Menus() {
                   </div>
                 ))}
               </select>
-              <span class="error-message text-danger"></span>
+              <span className="error-message text-danger"></span>
             </div>
           </div>
-          <div class="col-12">
-            <div class="bottom-form">
-              <div class="submit-btn">
+          <div className="col-12">
+            <div className="bottom-form">
+              <div className="submit-btn">
                 <input type="submit" value="افزودن" onClick={createMenu} />
               </div>
             </div>
@@ -163,7 +165,7 @@ export default function Menus() {
       </div>
 
       <DataTable title="منوها">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -182,14 +184,14 @@ export default function Menus() {
                 <td>{menu.href}</td>
                 <td>{menu.parent ? menu.parent.title : <FaCheck />}</td>
                 <td>
-                  <button type="button" className="btn btn-primary edit-btn">
+                  <button type="button" classNameName="btn btn-primary edit-btn">
                     ویرایش
                   </button>
                 </td>
                 <td>
                   <button
                     type="button"
-                    class="btn btn-danger delete-btn"
+                    className="btn btn-danger delete-btn"
                     onClick={() => removeMenu(menu._id)}
                   >
                     حذف

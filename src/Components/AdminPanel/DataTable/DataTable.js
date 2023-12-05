@@ -2,14 +2,14 @@ import React from "react";
 
 export default function DataTable({ children, title }) {
   return (
-    <div class="container">
-      <div class="home-content-latset-users">
-        <div class="home-content-users-title">
+    <div className="container">
+      <div className="home-content-latset-users">
+        <div className="home-content-users-title">
           <span>
-            لیست <span class="signup">{title}</span>
+            لیست <span className="signup">{title}</span>
           </span>
         </div>
-        <div class="home-content-users-table">
+        <div className="home-content-users-table">
           {
               children
           }

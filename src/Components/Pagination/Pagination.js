@@ -19,20 +19,20 @@ export default function Pagination({
   }, [page, items])
 
   return (
-    <div class="courses-pagination">
-      <ul class="courses__pagination-list">
-        {/* <li class="courses__pagination-item">
-          <Link to={`${pathname}/${Number(page) - 1}`} class="courses__pagination-link">
-            <FaArrowRight class="courses__pagination-icon" />
+    <div className="courses-pagination">
+      <ul className="courses__pagination-list">
+        {/* <li className="courses__pagination-item">
+          <Link to={`${pathname}/${Number(page) - 1}`} className="courses__pagination-link">
+            <FaArrowRight className="courses__pagination-icon" />
           </Link>
         </li> */}
         {Array(pageCount)
           .fill("H")
           .map((numPage, index) => (
-            <li key={index} class="courses__pagination-item">
+            <li key={index} className="courses__pagination-item">
               <Link
                 to={`${pathname}/${index + 1}`}
-                class={`courses__pagination-link ${
+                className={`courses__pagination-link ${
                   index + 1 == Number(page) &&
                   "courses__pagination-link--active"
                 }`}
@@ -41,12 +41,12 @@ export default function Pagination({
               </Link>
             </li>
           ))}
-        {/* <li class="courses__pagination-item">
+        {/* <li className="courses__pagination-item">
           <Link
             to={`${pathname}/${Number(page) + 1}`}
-            class="courses__pagination-link"
+            className="courses__pagination-link"
           >
-            <FaArrowLeft class="courses__pagination-icon" />
+            <FaArrowLeft className="courses__pagination-icon" />
           </Link>
         </li> */}
       </ul>

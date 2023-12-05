@@ -14,7 +14,6 @@ export default function ViewOrder() {
     })
       .then((res) => res.json())
       .then((datas) => {
-        console.log(datas)
         setOrderInfos(datas[0])
         setIsLoading(true)
       })

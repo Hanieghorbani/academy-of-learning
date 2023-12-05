@@ -33,11 +33,11 @@ export default function Courses() {
       />
 
       {/* <!--------------------------------  Courses-Section  --------------------------------> */}
-      <section class="courses">
-        <div class="container">
-          <div class="courses-content">
-            <div class="container">
-              <div class="row">
+      <section className="courses">
+        <div className="container">
+          <div className="courses-content">
+            <div className="container">
+              <div className="row">
                 {shownCourses.map((course) => (
                   <CourseBox key={course._id}  {...course} />
                 ))}

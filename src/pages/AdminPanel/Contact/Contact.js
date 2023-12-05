@@ -15,7 +15,6 @@ export default function Contact() {
       .then((res) => res.json())
       .then((allContacts) => {
         setContacts(allContacts)
-        console.log(allContacts);
       })
   }
   function showContactBody(name, body) {
@@ -32,7 +31,6 @@ export default function Contact() {
       buttons: "ارسال",
     }).then((value) => {
       if (value.trim()) {
-        console.log(value)
         fetch("http://localhost:4000/v1/contact/answer", {
           method: "POST",
           headers: {
@@ -54,7 +52,10 @@ export default function Contact() {
               getAllContacts()
             })
           } else {
-            console.log(res.text())
+            swal({
+              icon: "error",
+              buttons: "تایید",
+            })
           }
         })
       }
@@ -98,7 +99,7 @@ export default function Contact() {
   return (
     <>
       <DataTable title="پیغام‌ها">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -113,14 +114,14 @@ export default function Contact() {
           <tbody>
             {contacts.map((contact, index) => (
               <tr key={contact._id}>
-                <td class={contact.answer ? 'bg-success text-white' : 'bg-danger text-white'}>{index + 1}</td>
+                <td className={contact.answer ? 'bg-success text-white' : 'bg-danger text-white'}>{index + 1}</td>
                 <td>{contact.name}</td>
                 <td>{contact.email}</td>
                 <td>{contact.phone}</td>
                 <td>
                   <button
                     type="button"
-                    class="btn btn-primary edit-btn"
+                    className="btn btn-primary edit-btn"
                     onClick={() => showContactBody(contact.name, contact.body)}
                   >
                     مشاهده پیغام
@@ -129,7 +130,7 @@ export default function Contact() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-primary edit-btn"
+                    className="btn btn-primary edit-btn"
                     onClick={() => answerContactHandler(contact.email)}
                   >
                     پاسخ
@@ -138,7 +139,7 @@ export default function Contact() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-danger delete-btn"
+                    className="btn btn-danger delete-btn"
                     onClick={() => removeContact(contact._id)}
                   >
                     حذف

@@ -15,7 +15,6 @@ export default function Main() {
     })
       .then((res) => res.json())
       .then((datas) => {
-        console.log(datas)
         setMainInfos(datas)
         setIsLoading(true)
       })
@@ -24,23 +23,23 @@ export default function Main() {
   return (
     <>
       {isLoading && (
-        <div class="container-fluid" id="home-content">
-          <div class="container">
-            <div class="home-content-title">
-              <span class="welcome">
-                خوش آمدید,<span class="name">{MainInfos.adminName}</span>
+        <div className="container-fluid" id="home-content">
+          <div className="container">
+            <div className="home-content-title">
+              <span className="welcome">
+                خوش آمدید,<span className="name">{MainInfos.adminName}</span>
               </span>
             </div>
-            <div class="home-content-boxes">
-              <div class="row">
+            <div className="home-content-boxes">
+              <div className="row">
                 {MainInfos.infos.map((info) => (
-                  <MainInfoBox key={info._id} {...info}/>
+                  <MainInfoBox key={info._id} {...info} />
                 ))}
               </div>
             </div>
 
             <DataTable title="کاربران اخیر اضافه شده">
-              <table class="table">
+              <table className="table">
                 <thead>
                   <tr>
                     <th>شناسه</th>
@@ -64,9 +63,9 @@ export default function Main() {
                       ))}
                     </>
                   ) : (
-                    <div class="alert alert-warning">
-                      هیچ کاربری یافت نشد !
-                    </div>
+                    <tr className="alert alert-warning">
+                      <td>هیچ کاربری یافت نشد !</td>
+                    </tr>
                   )}
                 </tbody>
               </table>

@@ -56,7 +56,6 @@ export default function Category() {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result)
         swal({
           title: "دسته بندی مورد نظر با موفقیت اضافه شد",
           icon: "success",
@@ -132,15 +131,15 @@ export default function Category() {
 
   return (
     <>
-      <div class="container-fluid" id="home-content">
-        <div class="container">
-          <div class="home-title">
+      <div className="container-fluid" id="home-content">
+        <div className="container">
+          <div className="home-title">
             <span>افزودن دسته‌بندی جدید</span>
           </div>
-          <form class="form">
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title">عنوان</label>
+          <form className="form">
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title">عنوان</label>
                 <Input
                   element="input"
                   onInputHandler={onInputHandler}
@@ -149,12 +148,12 @@ export default function Category() {
                   placeholder="لطفا عنوان را وارد کنید..."
                   validations={[minValidator(5), maxValidator(20)]}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-6">
-              <div class="name input">
-                <label class="input-title">اسم کوتاه</label>
+            <div className="col-6">
+              <div className="name input">
+                <label className="input-title">اسم کوتاه</label>
                 <Input
                   element="input"
                   onInputHandler={onInputHandler}
@@ -163,12 +162,12 @@ export default function Category() {
                   placeholder="لطفا اسم کوتاه را وارد کنید..."
                   validations={[minValidator(5), maxValidator(20)]}
                 />
-                <span class="error-message text-danger"></span>
+                <span className="error-message text-danger"></span>
               </div>
             </div>
-            <div class="col-12">
-              <div class="bottom-form">
-                <div class="submit-btn">
+            <div className="col-12">
+              <div className="bottom-form">
+                <div className="submit-btn">
                   <input
                     type="submit"
                     value="افزودن"
@@ -181,7 +180,7 @@ export default function Category() {
         </div>
       </div>
       <DataTable title="دسته‌بندی‌ها">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -198,7 +197,7 @@ export default function Category() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-primary edit-btn"
+                    className="btn btn-primary edit-btn"
                     onClick={() => updateCategory(category._id)}
                   >
                     ویرایش
@@ -207,7 +206,7 @@ export default function Category() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-danger delete-btn"
+                    className="btn btn-danger delete-btn"
                     onClick={() => removeCategoryHandler(category._id)}
                   >
                     حذف

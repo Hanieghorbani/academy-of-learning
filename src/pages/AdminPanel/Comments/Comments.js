@@ -104,7 +104,11 @@ export default function Comments() {
               getAllComments()
             })
           } else {
-            console.log(res.text())
+            swal({
+              title: "پیغام شما ارسال نشد!!",
+              icon: "error",
+              buttons: "تایید",
+            })
           }
         })
       }
@@ -134,7 +138,10 @@ export default function Comments() {
               getAllComments()
             })
           }else{
-            console.log(res.text());
+            swal({
+              icon: "error",
+              buttons: "تایید",
+            })
           }
         })
       }
@@ -171,7 +178,7 @@ export default function Comments() {
   return (
     <>
       <DataTable title="کامنت‌ها">
-        <table class="table">
+        <table className="table">
           <thead>
             <tr>
               <th>شناسه</th>
@@ -190,7 +197,7 @@ export default function Comments() {
             {comments.map((comment, index) => (
               <tr key={comment._id}>
                 <td
-                  class={
+                  className={
                     comment.answer
                       ? "bg-success text-white"
                       : "bg-danger text-white"
@@ -204,7 +211,7 @@ export default function Comments() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-primary edit-btn"
+                    className="btn btn-primary edit-btn"
                     onClick={() =>
                       showCommentBody(comment.creator.name, comment.body)
                     }
@@ -215,14 +222,14 @@ export default function Comments() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-primary edit-btn"
+                    className="btn btn-primary edit-btn"
                     onClick={() => answerComment(comment._id)}
                   >
                     پاسخ
                   </button>
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary edit-btn">
+                  <button type="button" className="btn btn-primary edit-btn">
                     ویرایش
                   </button>
                 </td>
@@ -230,7 +237,7 @@ export default function Comments() {
                   <td>
                     <button
                       type="button"
-                      class="btn btn-danger edit-btn"
+                      className="btn btn-danger edit-btn"
                       onClick={() => rejectComment(comment._id)}
                     >
                       رد
@@ -240,7 +247,7 @@ export default function Comments() {
                   <td>
                     <button
                       type="button"
-                      class="btn btn-primary edit-btn "
+                      className="btn btn-primary edit-btn "
                       onClick={() => acceptComment(comment._id)}
                     >
                       تایید
@@ -251,7 +258,7 @@ export default function Comments() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-danger delete-btn"
+                    className="btn btn-danger delete-btn"
                     onClick={() => remvoeComment(comment._id)}
                   >
                     حذف
@@ -260,7 +267,7 @@ export default function Comments() {
                 <td>
                   <button
                     type="button"
-                    class="btn btn-danger delete-btn"
+                    className="btn btn-danger delete-btn"
                     onClick={() => banUser(comment.creator._id)}
                   >
                     بن

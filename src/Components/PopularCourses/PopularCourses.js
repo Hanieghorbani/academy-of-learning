@@ -17,24 +17,24 @@ export default function PopularCourses() {
       })
   }, [])
   return (
-    <div class="popular">
-      <div class="container">
+    <div className="popular">
+      <div className="container">
         <SectionHeader
           title="محبوب ترین دوره ها"
           desc="دوره های محبوب بر اساس امتیاز دانشجوها"
         />
-        <div class="courses-content">
-          <div class="container">
-            <div class="row">
+        <div className="courses-content">
+          <div className="container">
+            <div className="row">
               <Swiper
                 slidesPerView={3}
                 spaceBetween={30}
-                // pagination={{
-                //   clickable: true,
-                // }}
-                // modules={[Pagination]}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[Pagination]}
                 loop={true}
-                class="mySwiper"
+                className="mySwiper"
               >
                 {popularCourses.map((course) => (
                   <SwiperSlide key={course._id}>

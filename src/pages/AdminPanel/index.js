@@ -9,10 +9,10 @@ export default function index() {
       <div id="content">
         <Sidebar />
 
-        <div id="home" class="col-10">
+        <div id="home" className="col-10">
           <Topbar />
 
-          <div class="container-fluid" id="home-content">
+          <div className="container-fluid" id="home-content">
             <Outlet />
           </div>
         </div>

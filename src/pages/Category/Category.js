@@ -72,41 +72,41 @@ export default function Category() {
   return (
     <div>
       <Header />
-      <section class="courses">
-        <div class="container">
-          <div class="courses-content">
-            <div class="container">
-              <div class="row">
+      <section className="courses">
+        <div className="container">
+          <div className="courses-content">
+            <div className="container">
+              <div className="row">
                 {courses.length ? (
                   <>
-                    <div class="courses-top-bar">
-                      <div class="courses-top-bar__right">
+                    <div className="courses-top-bar">
+                      <div className="courses-top-bar__right">
                         <div
-                          class={`courses-top-bar__row-btn ${
+                          className={`courses-top-bar__row-btn ${
                             showCourses == "grid" &&
                             "courses-top-bar__icon--active"
                           }`}
                           onClick={() => setShowCourses("grid")}
                         >
-                          <AiOutlineAppstore class=" courses-top-bar__icon" />
+                          <AiOutlineAppstore className=" courses-top-bar__icon" />
                         </div>
 
                         <div
-                          class={`courses-top-bar__row-btn ${
+                          className={`courses-top-bar__row-btn ${
                             showCourses == "list" &&
                             "courses-top-bar__icon--active"
                           }`}
                           onClick={() => setShowCourses("list")}
                         >
-                          <HiMenuAlt2 class="courses-top-bar__icon" />
+                          <HiMenuAlt2 className="courses-top-bar__icon" />
                         </div>
 
-                        <div class="courses-top-bar__selection">
-                          <span class="courses-top-bar__selection-title">
+                        <div className="courses-top-bar__selection">
+                          <span className="courses-top-bar__selection-title">
                             {statusTitle}
-                            <BsChevronDown class="courses-top-bar__selection-icon" />
+                            <BsChevronDown className="courses-top-bar__selection-icon" />
                           </span>
-                          <ul class="courses-top-bar__selection-list">
+                          <ul className="courses-top-bar__selection-list">
                             {lists.map((list, index) => (
                               <li
                               key={list._id} 
@@ -115,7 +115,7 @@ export default function Category() {
                                   setStatus(list.key)
                                   setSearchValue("")
                                 }}
-                                class={`courses-top-bar__selection-item ${
+                                className={`courses-top-bar__selection-item ${
                                   list.key == status &&
                                   "courses-top-bar__selection-item--active "
                                 }`}
@@ -126,11 +126,11 @@ export default function Category() {
                           </ul>
                         </div>
                       </div>
-                      <div class="courses-top-bar__left">
-                        <form action="#" class="courses-top-bar__form">
+                      <div className="courses-top-bar__left">
+                        <form action="#" className="courses-top-bar__form">
                           <input
                             type="text"
-                            class="courses-top-bar__input"
+                            className="courses-top-bar__input"
                             placeholder="جستجوی دوره ..."
                             value={searchValue}
                             onChange={(e) => {
@@ -143,7 +143,7 @@ export default function Category() {
                               setCoursesOrdered(filteredCours)
                             }}
                           />
-                          <AiOutlineSearch class="courses-top-bar__search-icon" />
+                          <AiOutlineSearch className="courses-top-bar__search-icon" />
                         </form>
                       </div>
                     </div>
@@ -158,67 +158,67 @@ export default function Category() {
                         ) : (
                           <>
                             {shownCourses.map((course) => (
-                              <div key={course._id}  class="col-12">
-                                <div class="course-box">
-                                  <div class="course__box-header">
-                                    <div class="course__box-right">
+                              <div key={course._id}  className="col-12">
+                                <div className="course-box">
+                                  <div className="course__box-header">
+                                    <div className="course__box-right">
                                       <a
-                                        class="course__box-right-link"
+                                        className="course__box-right-link"
                                         href="#"
                                       >
                                         <img
                                           src={`/images/courses/${course.cover}`}
-                                          class="course__box-right-img"
+                                          className="course__box-right-img"
                                         />
                                       </a>
                                     </div>
-                                    <div class="course__box-left">
-                                      <div class="course__box-left-top">
+                                    <div className="course__box-left">
+                                      <div className="course__box-left-top">
                                         <a
                                           href="#"
-                                          class="course__box-left-link"
+                                          className="course__box-left-link"
                                         >
                                           {course.name}
                                         </a>
                                       </div>
-                                      <div class="course__box-left-center">
-                                        <div class="course__box-left-teacher">
-                                          <FaChalkboardTeacher class="course__box-left-icon ms-2"/> 
-                                          <span class="course__box-left-name">
+                                      <div className="course__box-left-center">
+                                        <div className="course__box-left-teacher">
+                                          <FaChalkboardTeacher className="course__box-left-icon ms-2"/> 
+                                          <span className="course__box-left-name">
                                            {course.creator}
                                           </span>
                                         </div>
-                                        <div class="course__box-left-stars">
-                                          <span class="course__box-left-star">
+                                        <div className="course__box-left-stars">
+                                          <span className="course__box-left-star">
                                             <img src="/images/svgs/star_fill.svg" />
                                           </span>
-                                          <span class="course__box-left-star">
+                                          <span className="course__box-left-star">
                                             <img src="/images/svgs/star_fill.svg" />
                                           </span>
-                                          <span class="course__box-left-star">
+                                          <span className="course__box-left-star">
                                             <img src="/images/svgs/star_fill.svg" />
                                           </span>
-                                          <span class="course__box-left-star">
+                                          <span className="course__box-left-star">
                                             <img src="/images/svgs/star_fill.svg" />
                                           </span>
-                                          <span class="course__box-left-star">
+                                          <span className="course__box-left-star">
                                             <img src="/images/svgs/star_fill.svg" />
                                           </span>
                                         </div>
                                       </div>
-                                      <div class="course__box-left-bottom">
-                                        <div class="course__box-left-des">
+                                      <div className="course__box-left-bottom">
+                                        <div className="course__box-left-des">
                                           <p>{course.description}</p>
                                         </div>
                                       </div>
-                                      <div class="course__box-footer">
-                                        <div class="course__box-footer-right">
-                                          <FaUsers class="course__box-footer-icon ms-2"/>
-                                          <span class="course__box-footer-count">
+                                      <div className="course__box-footer">
+                                        <div className="course__box-footer-right">
+                                          <FaUsers className="course__box-footer-icon ms-2"/>
+                                          <span className="course__box-footer-count">
                                             202
                                           </span>
                                         </div>
-                                        <span class="course__box-footer-left">
+                                        <span className="course__box-footer-left">
                                           {course.price === 0
                                             ? "رایگان"
                                             : course.price.toLocaleString()}
@@ -233,7 +233,7 @@ export default function Category() {
                         )}
                       </>
                     ) : (
-                      <div class="alert alert-warning">
+                      <div className="alert alert-warning">
                         هیچ دوره ای یافت نشد !
                       </div>
                     )}
@@ -246,7 +246,7 @@ export default function Category() {
                     />
                   </>
                 ) : (
-                  <div class="alert alert-warning">
+                  <div className="alert alert-warning">
                     هنوز هیچ دوره ای برای این دسته بندی ضبط نشده !
                   </div>
                 )}

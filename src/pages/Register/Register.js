@@ -102,7 +102,6 @@ export default function Register() {
           })
         })
         .catch((err) => {
-          console.log(err)
           if (err == 'Error: {"message":"this phone number banned!"}') {
             swal({
               text: "متاسفیم!شما از طرف مدیران سایت مسدود شدین..",

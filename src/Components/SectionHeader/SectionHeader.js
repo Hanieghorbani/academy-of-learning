@@ -4,16 +4,16 @@ import { AiOutlineArrowLeft } from "react-icons/ai"
 import { Link } from "react-router-dom"
 export default function SectionHeader({ title, desc, btnTitle ,btnHref}) {
   return (
-    <div class="courses-header container my-5">
-      <div class="courses-header__right">
-        <span class="courses-header__title title">{title}</span>
-        <span class="courses-header__text">{desc}</span>
+    <div className="courses-header container my-5">
+      <div className="courses-header__right">
+        <span className="courses-header__title title">{title}</span>
+        <span className="courses-header__text">{desc}</span>
       </div>
       {btnTitle && (
-        <div class="courses-header__left">
-          <Link to={btnHref} class="courses-header__link">
+        <div className="courses-header__left">
+          <Link to={btnHref} className="courses-header__link">
             {btnTitle}
-            <AiOutlineArrowLeft class="courses-header__icon" />
+            <AiOutlineArrowLeft className="courses-header__icon" />
           </Link>
         </div>
       )}

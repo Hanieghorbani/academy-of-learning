@@ -111,7 +111,11 @@ export default function Articles() {
           getAllArticles()
         })
       } else {
-        console.log(res.text())
+        swal({
+          title: 'مقاله جدید با مشکل مواجه شد',
+          icon: "error",
+          buttons: "تایید",
+        })
       }
     })
     }else{
@@ -149,7 +153,11 @@ export default function Articles() {
           getAllArticles()
         })
       } else {
-        console.log(res.text())
+        swal({
+          title: "مقاله جدید پیش نویس نشد!!",
+          icon: "error",
+          buttons: "تایید",
+        })
       }
     })
   }
