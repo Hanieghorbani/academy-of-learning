@@ -21,7 +21,6 @@ export default function Index() {
   }, [])
 
   const handleShowScroll = () => {
-    console.log(window.scrollY)
     if (window.scrollY > 500) {
       setIsScrollBtnVisible(true)
     } else {

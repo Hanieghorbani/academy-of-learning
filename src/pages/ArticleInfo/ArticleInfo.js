@@ -17,14 +17,34 @@ import {
   FaArrowRight,
   FaArrowLeft,
 } from "react-icons/fa"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import DOMPurify from "dompurify"
-
+import ScrollToTop from "../../Components/ScrollToTop/ScrollToTop"
 export default function ArticleInfo() {
   const { articleName } = useParams()
   const [article, setArticle] = useState({})
   const [creator, setCreator] = useState([])
   const [loading, setLoading] = useState(true)
+  const [popularCourses, setPopularCourses] = useState([])
+
+  //start scroll to top handler
+  const [isScrollBtnVisible, setIsScrollBtnVisible] = useState(false)
+  useEffect(() => {
+    window.addEventListener("scroll", handleShowScroll)
+    return () => {
+      window.removeEventListener("scroll", handleShowScroll)
+    }
+  }, [])
+
+  const handleShowScroll = () => {
+    if (window.scrollY > 400) {
+      setIsScrollBtnVisible(true)
+    } else {
+      setIsScrollBtnVisible(false)
+    }
+  }
+  //finish scroll to top handler
+
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
     fetch(`http://localhost:4000/v1/articles/${articleName}`, {
@@ -44,6 +64,12 @@ export default function ArticleInfo() {
         setArticle(result)
         setCreator(result.creator)
         setLoading(false)
+      })
+
+    fetch("http://localhost:4000/v1/courses/popular")
+      .then((res) => res.json())
+      .then((result) => {
+        setPopularCourses(result)
       })
   }, [articleName])
   return (
@@ -66,7 +92,7 @@ export default function ArticleInfo() {
       />
 
       {!loading && (
-        <main className="main">
+        <main className="main border-0">
           <div className="container">
             <div className="row">
               <div className="col-8">
@@ -211,54 +237,23 @@ export default function ArticleInfo() {
                       پر امتیازترین دوره ها
                     </span>
                     <ul className="course-info__courses-list">
-                      <li className="course-info__courses-list-item">
-                        <a href="#" className="course-info__courses-link">
-                          <img
-                            src="/images/courses/js_project.png"
-                            alt="Course Cover"
-                            className="course-info__courses-img"
-                          />
-                          <span className="course-info__courses-text">
-                            پروژه های تخصصی با جاوا اسکریپت
-                          </span>
-                        </a>
-                      </li>
-                      <li className="course-info__courses-list-item">
-                        <a href="#" className="course-info__courses-link">
-                          <img
-                            src="/images/courses/fareelancer.png"
-                            alt="Course Cover"
-                            className="course-info__courses-img"
-                          />
-                          <span className="course-info__courses-text">
-                            تعیین قیمت پروژه های فریلنسری
-                          </span>
-                        </a>
-                      </li>
-                      <li className="course-info__courses-list-item">
-                        <a href="#" className="course-info__courses-link">
-                          <img
-                            src="/images/courses/nodejs.png"
-                            alt="Course Cover"
-                            className="course-info__courses-img"
-                          />
-                          <span className="course-info__courses-text">
-                            دوره Api نویسی
-                          </span>
-                        </a>
-                      </li>
-                      <li className="course-info__courses-list-item">
-                        <a href="#" className="course-info__courses-link">
-                          <img
-                            src="/images/courses/jango.png"
-                            alt="Course Cover"
-                            className="course-info__courses-img"
-                          />
-                          <span className="course-info__courses-text">
-                            متخصص جنگو
-                          </span>
-                        </a>
-                      </li>
+                      {popularCourses.slice(0, 4).map((course) => (
+                        <li className="course-info__courses-list-item">
+                          <Link
+                            to={`/course-info/${course.shortName}`}
+                            className="course-info__courses-link"
+                          >
+                            <img
+                              src={`http://localhost:4000/courses/covers/${course.cover}`}
+                              alt="Course Cover"
+                              className="course-info__courses-img"
+                            />
+                            <span className="course-info__courses-text">
+                              {course.name}
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
                     </ul>
                   </div>
 
@@ -270,33 +265,36 @@ export default function ArticleInfo() {
                       <li className="sidebar-articles__item">
                         <IoIosArrowBack className="sidebar-articles__icon" />
 
-                        <a href="#" className="sidebar-articles__link">
+                        <Link to={"/"} className="sidebar-articles__link">
                           صفحه اصلی
-                        </a>
+                        </Link>
                       </li>
                       <li className="sidebar-articles__item">
                         <IoIosArrowBack className="sidebar-articles__icon" />
-                        <a href="#" className="sidebar-articles__link">
+                        <Link
+                          to={"/category-info/frontend/1"}
+                          className="sidebar-articles__link"
+                        >
                           فرانت اند
-                        </a>
+                        </Link>
                       </li>
                       <li className="sidebar-articles__item">
                         <IoIosArrowBack className="sidebar-articles__icon" />
-                        <a href="#" className="sidebar-articles__link">
-                          امنیت
-                        </a>
+                        <Link
+                          to={"/category-info/backend/1"}
+                          className="sidebar-articles__link"
+                        >
+                          بک اند
+                        </Link>
                       </li>
                       <li className="sidebar-articles__item">
                         <IoIosArrowBack className="sidebar-articles__icon" />
-                        <a href="#" className="sidebar-articles__link">
-                          پایتون
-                        </a>
-                      </li>
-                      <li className="sidebar-articles__item">
-                        <IoIosArrowBack className="sidebar-articles__icon" />
-                        <a href="#" className="sidebar-articles__link">
-                          مهارت های نرم
-                        </a>
+                        <Link
+                          to={"/category-info/skill-up/1"}
+                          className="sidebar-articles__link"
+                        >
+                          ارتقای مهارت ها
+                        </Link>
                       </li>
                     </ul>
                   </div>
@@ -428,6 +426,7 @@ export default function ArticleInfo() {
       )}
 
       <Footer />
+      {isScrollBtnVisible && <ScrollToTop />}
     </>
   )
 }

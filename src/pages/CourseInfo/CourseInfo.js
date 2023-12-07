@@ -44,7 +44,6 @@ export default function CourseInfo() {
   }, [])
 
   const handleShowScroll = () => {
-    console.log(window.scrollY)
     if (window.scrollY > 400) {
       setIsScrollBtnVisible(true)
     } else {

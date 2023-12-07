@@ -34,10 +34,6 @@ export default function Menus() {
       .then((res) => res.json())
       .then((allMenus) => {
         setMenus(allMenus)
-        console.log(allMenus)
-        allMenus.forEach((item) => {
-          console.log(item.parent)
-        })
       })
   }
 
