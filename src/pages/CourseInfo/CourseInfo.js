@@ -6,7 +6,6 @@ import CourseDetailsBox from "../../Components/CourseDetailBox/CourseDetailBox"
 import Breadcrumb from "../../Components/Breadcrumb/Breadcrumb"
 import CommentsTextArea from "../../Components/CommentsTextArea/CommentsTextArea"
 import swal from "sweetalert"
-
 import { Accordion } from "react-bootstrap"
 import { BsTelegram, BsFacebook } from "react-icons/bs"
 import { BiLogoTwitter } from "react-icons/bi"
@@ -21,7 +20,7 @@ import {
 import { AiFillWechat } from "react-icons/ai"
 import { PiStudentBold } from "react-icons/pi"
 import { useParams, useNavigate, Link } from "react-router-dom"
-
+import ScrollToTop from "../../Components/ScrollToTop/ScrollToTop"
 export default function CourseInfo() {
   const navigate = useNavigate()
   const [comments, setComments] = useState([])
@@ -34,6 +33,26 @@ export default function CourseInfo() {
   const [relatedCourses, setRelatedCourses] = useState([])
   const { courseName } = useParams()
   const localStorageToken = JSON.parse(localStorage.getItem("user"))
+  
+  //start scroll to top handler
+  const [isScrollBtnVisible, setIsScrollBtnVisible] = useState(false)
+  useEffect(() => {
+    window.addEventListener("scroll", handleShowScroll)
+    return () => {
+      window.removeEventListener("scroll", handleShowScroll)
+    }
+  }, [])
+
+  const handleShowScroll = () => {
+    console.log(window.scrollY)
+    if (window.scrollY > 400) {
+      setIsScrollBtnVisible(true)
+    } else {
+      setIsScrollBtnVisible(false)
+    }
+  }
+  //finish scroll to top handler
+
   useEffect(() => {
     getAllInfosCourse()
   }, [courseName])
@@ -692,6 +711,7 @@ export default function CourseInfo() {
       </main>
 
       <Footer />
+      {isScrollBtnVisible && <ScrollToTop />}
     </div>
   )
 }

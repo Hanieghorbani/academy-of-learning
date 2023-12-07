@@ -106,7 +106,7 @@
   border-radius: 0.5rem;
   transform: rotate(-10deg);
   transition: all 400ms ease;
-  z-index: 99999;
+  z-index: 999;
 }
 .course-box:hover .courses-box__discount {
   transform: rotate(0deg);

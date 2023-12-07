@@ -238,7 +238,7 @@ export default function SendTicket() {
             </div>
             <div className="col-12">
               <button className="ticket-form__btn" onClick={sendTicketHandler}>
-                <IoIosSend classNameName="ticket-form__btn-icon" />
+                <IoIosSend className="ticket-form__btn-icon" />
                 ارسال تیکت
               </button>
             </div>

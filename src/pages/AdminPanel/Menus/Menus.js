@@ -32,7 +32,13 @@ export default function Menus() {
   function getAllMenus() {
     fetch("http://localhost:4000/v1/menus/all")
       .then((res) => res.json())
-      .then((allMenus) => setMenus(allMenus))
+      .then((allMenus) => {
+        setMenus(allMenus)
+        console.log(allMenus)
+        allMenus.forEach((item) => {
+          console.log(item.parent)
+        })
+      })
   }
 
   function removeMenu(id) {
@@ -76,7 +82,7 @@ export default function Menus() {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorageToken.token}`,
-        'Content-Type' : 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(menuInfos),
     }).then((res) => {
@@ -144,11 +150,13 @@ export default function Menus() {
               >
                 <option value="-1">منوی اصلی را انتخاب کنید</option>
                 {menus.map((menu) => (
-                  <div key={menu._id}>
-                    {!Boolean(menu.parent) && (
-                      <option value={menu._id}>{menu.title}</option>
+                  <>
+                    {menu.parent === undefined && (
+                      <option value={menu._id} key={menu._id}>
+                        {menu.title}
+                      </option>
                     )}
-                  </div>
+                  </>
                 ))}
               </select>
               <span className="error-message text-danger"></span>
@@ -184,7 +192,7 @@ export default function Menus() {
                 <td>{menu.href}</td>
                 <td>{menu.parent ? menu.parent.title : <FaCheck />}</td>
                 <td>
-                  <button type="button" classNameName="btn btn-primary edit-btn">
+                  <button type="button" className="btn btn-primary edit-btn">
                     ویرایش
                   </button>
                 </td>

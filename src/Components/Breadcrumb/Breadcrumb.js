@@ -6,7 +6,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import "./Breadcrumb.css"
 export default function Breadcrumb({ links }) {
   return (
-    <section className="breadcrumb">
+    <section className="breadcrumb mt-4">
       <div className="container">
         <div className="breadcrumb__content">
           <div className="breadcrumb__home-content-icon">

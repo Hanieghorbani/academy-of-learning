@@ -9,7 +9,7 @@ import { BsChevronDown } from "react-icons/bs"
 import { FaChalkboardTeacher, FaUsers, FaArrowLeft } from "react-icons/fa"
 
 import "./Category.css"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 export default function Category() {
   const { categoryName } = useParams()
   const [courses, setCourses] = useState([])
@@ -72,7 +72,7 @@ export default function Category() {
   return (
     <div>
       <Header />
-      <section className="courses">
+      <section className="courses border-0">
         <div className="container">
           <div className="courses-content">
             <div className="container">
@@ -109,7 +109,7 @@ export default function Category() {
                           <ul className="courses-top-bar__selection-list">
                             {lists.map((list, index) => (
                               <li
-                              key={list._id} 
+                                key={list._id}
                                 onClick={(e) => {
                                   setStatusTitle(e.target.textContent)
                                   setStatus(list.key)
@@ -152,58 +152,63 @@ export default function Category() {
                         {showCourses == "grid" ? (
                           <>
                             {shownCourses.map((course) => (
-                              <CourseBox key={course._id}  {...course} />
+                              <CourseBox key={course._id} {...course} />
                             ))}
                           </>
                         ) : (
                           <>
                             {shownCourses.map((course) => (
-                              <div key={course._id}  className="col-12">
+                              <div key={course._id} className="col-12">
                                 <div className="course-box">
                                   <div className="course__box-header">
                                     <div className="course__box-right">
-                                      <a
+                                      <Link
                                         className="course__box-right-link"
-                                        href="#"
+                                        to={`/course-info/${course.shortName}`}
                                       >
                                         <img
-                                          src={`/images/courses/${course.cover}`}
+                                          src={`http://localhost:4000/courses/covers/${course.cover}`}
                                           className="course__box-right-img"
                                         />
-                                      </a>
+                                      </Link>
                                     </div>
                                     <div className="course__box-left">
                                       <div className="course__box-left-top">
-                                        <a
-                                          href="#"
+                                        <Link
+                                          to={`/course-info/${course.shortName}`}
                                           className="course__box-left-link"
                                         >
                                           {course.name}
-                                        </a>
+                                        </Link>
                                       </div>
                                       <div className="course__box-left-center">
                                         <div className="course__box-left-teacher">
-                                          <FaChalkboardTeacher className="course__box-left-icon ms-2"/> 
+                                          <FaChalkboardTeacher className="course__box-left-icon ms-2" />
                                           <span className="course__box-left-name">
-                                           {course.creator}
+                                            {course.creator}
                                           </span>
                                         </div>
                                         <div className="course__box-left-stars">
-                                          <span className="course__box-left-star">
-                                            <img src="/images/svgs/star_fill.svg" />
-                                          </span>
-                                          <span className="course__box-left-star">
-                                            <img src="/images/svgs/star_fill.svg" />
-                                          </span>
-                                          <span className="course__box-left-star">
-                                            <img src="/images/svgs/star_fill.svg" />
-                                          </span>
-                                          <span className="course__box-left-star">
-                                            <img src="/images/svgs/star_fill.svg" />
-                                          </span>
-                                          <span className="course__box-left-star">
-                                            <img src="/images/svgs/star_fill.svg" />
-                                          </span>
+                                          {Array(5 - course.courseAverageScore)
+                                            .fill("0")
+                                            .map((item, index) => (
+                                              <img
+                                                key={index}
+                                                src="/images/svgs/star.svg"
+                                                alt="rating"
+                                                className="course-box__star"
+                                              />
+                                            ))}
+                                          {Array(course.courseAverageScore)
+                                            .fill(1)
+                                            .map((item, index) => (
+                                              <img
+                                                key={index}
+                                                src="/images/svgs/star_fill.svg"
+                                                alt="rating"
+                                                className="course-box__star"
+                                              />
+                                            ))}
                                         </div>
                                       </div>
                                       <div className="course__box-left-bottom">
@@ -213,16 +218,44 @@ export default function Category() {
                                       </div>
                                       <div className="course__box-footer">
                                         <div className="course__box-footer-right">
-                                          <FaUsers className="course__box-footer-icon ms-2"/>
+                                          <FaUsers className="course__box-footer-icon ms-2" />
                                           <span className="course__box-footer-count">
-                                            202
+                                            {course.registers}
                                           </span>
                                         </div>
-                                        <span className="course__box-footer-left">
-                                          {course.price === 0
-                                            ? "رایگان"
-                                            : course.price.toLocaleString()}
-                                        </span>
+                                        <div>
+                                          <span
+                                            className={`course-box__price ${
+                                              course.price !== 0 &&
+                                              course.discount !== 0 &&
+                                              "text-decoration-line-through"
+                                            } `}
+                                          >
+                                            {course.price !== 0
+                                              ? course.price.toLocaleString()
+                                              : "رایگان"}
+                                          </span>
+
+                                          {course.price !== 0 &&
+                                            course.discount !== 0 && (
+                                              <>
+                                                <span className="course-box__price ms-3">
+                                                  {(
+                                                    course.price -
+                                                    (course.price *
+                                                      course.discount) /
+                                                      100
+                                                  ).toLocaleString()}
+                                                </span>
+                                              </>
+                                            )}
+                                        </div>
+                                        {course.price !== 0 &&
+                                          course.discount !== 0 && (
+                                            <span className="courses-box__discount">
+                                              %{course.discount}
+                                            </span>
+                                          )}
                                       </div>
                                     </div>
                                   </div>

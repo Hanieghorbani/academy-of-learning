@@ -9,6 +9,7 @@ export default function App() {
   const [token, setToken] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userInfos, setUserInfos] = useState({})
+  const [subTitleInPUser,setSubTitleInPUser] = useState('پیشخوان')
 
   const [indexInfos, setIndexInfos] = useState([])
   useEffect(() => {
@@ -56,7 +57,9 @@ export default function App() {
         userInfos,
         login,
         logout,
-        indexInfos
+        indexInfos,
+        setSubTitleInPUser,
+        subTitleInPUser
       }}
     >
       {router}

@@ -78,7 +78,7 @@ export default function CourseBox(props) {
 
                 {props.price !== 0 && props.discount !== 0 && (
                   <>
-                    <span classNameName="course-box__price ms-3">
+                    <span className="course-box__price ms-3">
                       {(
                         props.price -
                         (props.price * props.discount) / 100

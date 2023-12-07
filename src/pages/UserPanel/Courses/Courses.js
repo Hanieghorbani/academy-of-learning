@@ -137,7 +137,7 @@ export default function Courses() {
                     </div>
                   </div>
                 </div>
-              ))}</>) : (<div classNameName="alert alert-warning">هیچ دوره ای برای این دسته بندی یافت نشد!</div>)}
+              ))}</>) : (<div className="alert alert-warning">هیچ دوره ای برای این دسته بندی یافت نشد!</div>)}
               
             </div>
           </div>

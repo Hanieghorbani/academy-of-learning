@@ -11,8 +11,10 @@ export default function Index() {
         <div className="main__title">
           <span className="main__title-text">
             سلام{" "}
-            <span className="main__title-name">{authContext.userInfos.name}</span>،
-            به پنل کاربری خوش اومدی
+            <span className="main__title-name">
+              {authContext.userInfos.name}
+            </span>
+            ، به پنل کاربری خوش اومدی
           </span>
         </div>
         <p className="main__desc">
@@ -24,7 +26,6 @@ export default function Index() {
           <div className="row">
             <MainBox title="سفارشات" href="orders" />
             <MainBox title="دوره های خریداری شده" href="courses" />
-            <MainBox title="کیف پول من" href="wallet" />
             <MainBox title="جزئیات حساب کاربری" href="edit-account" />
             <MainBox title="تیکت های پشتیبانی" href="tickets" />
           </div>
