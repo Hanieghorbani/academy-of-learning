@@ -1,0 +1,150 @@
+
+/* ============================== Content Header Style ============================== */
+
+/* ============================== Content Sidebar Style ============================== */
+.content-main {
+  margin: 3rem 0;
+}
+.sidebar__name {
+  color: var(--dark-color);
+  font-size: 1.7rem;
+}
+.sidebar__list {
+  margin-top: 0.7rem;
+}
+.sidebar__link {
+  display: block;
+  padding: 1rem 0;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+/* ============================== Content Sidebar Style ============================== */
+
+/* ============================== Content Main Style ============================== */
+.courses {
+  border-right: 2px solid #2bce56;
+  padding-right: 3rem;
+}
+.courses-header__title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.courses-header__list {
+  display: flex;
+  border-bottom: 2px solid #2bce56;
+}
+.courses-header__item {
+  margin: 1rem 0 1rem 3.5rem;
+}
+.courses-header__link__panel {
+  font-size: 1.5rem;
+}
+.courses-header__link-active {
+  color: #2bce56;
+  font-weight: bold;
+}
+
+.main__box {
+  display: flex;
+  margin: 2rem 0;
+  border: 2px solid #2bce56;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.main__box-right {
+  width: 30%;
+}
+.main__box-img {
+  height: 100%;
+}
+.main__box-left {
+  padding-right: 2rem;
+}
+.main__box-title {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+.main__box-bottom {
+  display: flex;
+  margin-top: 0.5rem;
+}
+.main__box-all {
+  margin-left: 3rem;
+}
+.main__box-all-text {
+  font-weight: bold;
+  color: #2bce56;
+}
+
+.main__box-completed {
+  margin-left: 3rem;
+}
+.main__box-completed-text {
+  font-weight: bold;
+  color: #2bce56;
+}
+
+/* ============================== Content Main Style ============================== */
+
+/* ============================== Footer Style ============================== */
+
+/* ============================== Footer Style ============================== */
+
+/* ============================== Helper Class ============================== */
+.title::before {
+  content: "";
+  position: absolute;
+  right: -1rem;
+  width: 0.4rem;
+  height: 4.4rem;
+  border-radius: 5rem;
+  background-color: var(--primary-color);
+  transform: rotate(8deg);
+}
+.title::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 250px;
+  height: 60%;
+  background-color: rgba(43, 206, 86, 0.2);
+}
+.title {
+  font-size: 2.3rem;
+  color: #444446;
+  font-weight: bold;
+  line-height: 1.2;
+  position: relative;
+}
+/* ============================== Helper Class ============================== */
+
+/* ============================== Slider Style ============================== */
+.swiper-container {
+  height: 36rem;
+  cursor: grab;
+  overflow: hidden;
+}
+/* .swiper-pagination {
+  position: absolute;
+  bottom: -4rem !important;
+} */
+.swiper-pagination-bullet {
+  width: 13px;
+  height: 13px;
+  transition: all 400ms ease;
+  opacity: 1 !important;
+  background: transparent;
+  border: 2px solid var(--primary-color);
+}
+.swiper-pagination-bullet-active {
+  background-color: var(--primary-color);
+  transition: all 400ms ease;
+  opacity: 1 !important;
+  width: 35px !important;
+  border-radius: 10px;
+}
+/* ============================== Slider Style ============================== */
