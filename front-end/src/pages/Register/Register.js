@@ -74,7 +74,7 @@ export default function Register() {
         password: formState.inputs.registerPassword.value,
         confirmPassword: formState.inputs.registerConfirmPassword.value,
       }
-      fetch(`https://back-end-sabzlearn.vercel.app/auth/register`, {
+      fetch(`http://localhost:4000/v1/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -44,7 +44,7 @@ export default function Login() {
       password: formState.inputs.loginPassword.value,
     }
 
-    fetch("https://back-end-sabzlearn.vercel.app/auth/login", {
+    fetch("http://localhost:4000/v1/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

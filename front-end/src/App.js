@@ -13,12 +13,7 @@ export default function App() {
 
   const [indexInfos, setIndexInfos] = useState([])
   useEffect(() => {
-    // fetch("http://localhost:4000/v1/infos/index")
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setIndexInfos(data)
-    //   })
-    fetch("https://back-end-sabzlearn.vercel.app/infos/index")
+    fetch("http://localhost:4000/v1/infos/index")
       .then((res) => res.json())
       .then((data) => {
         setIndexInfos(data)
@@ -41,7 +36,7 @@ export default function App() {
   useEffect(() => {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
     if (localStorageToken) {
-      fetch(`https://back-end-sabzlearn.vercel.app/auth/me`, {
+      fetch(`http://localhost:4000/v1/auth/me`, {
         method: "GET",
         headers: {
           Authorization: `Brearer ${localStorageToken.token}`,

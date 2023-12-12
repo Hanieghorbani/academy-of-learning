@@ -6,7 +6,7 @@ export default function Topbar() {
   const [isShowNotifs, setIsShowNotifs] = useState(false)
   useEffect(() => {
      const localStorageToken = JSON.parse(localStorage.getItem("user"))
-    fetch("https://back-end-sabzlearn.vercel.app/auth/me", {
+    fetch("http://localhost:4000/v1/auth/me", {
       headers: {
         Authorization: `Bearer ${localStorageToken.token}`,
       },
@@ -20,7 +20,7 @@ export default function Topbar() {
 
   function seeNotifHandler(id) {
     const localStorageToken = JSON.parse(localStorage.getItem("user"))
-    fetch(`https://back-end-sabzlearn.vercel.app/notifications/see/${id}`, {
+    fetch(`http://localhost:4000/v1/notifications/see/${id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${localStorageToken.token}`,

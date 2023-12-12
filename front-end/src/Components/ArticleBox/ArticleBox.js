@@ -12,7 +12,7 @@ export default function ArticleBox({ title, description, cover, shortName }) {
             className="article-card__link-img"
           >
             <img
-              src={`https://back-end-sabzlearn.vercel.app/courses/covers/${cover}`}
+              src={`http://localhost:4000/v1/courses/covers/${cover}`}
               className="article-card__img w-100"
               alt="Article Cover"
             />

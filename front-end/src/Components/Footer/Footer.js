@@ -25,7 +25,7 @@ export default function Footer() {
   },[])
   function addNewEmail(event) {
     event.preventDefault()
-    fetch("https://back-end-sabzlearn.vercel.app/newsletters", {
+    fetch("http://localhost:4000/v1/newsletters", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export default function Footer() {
   }
 
   function getAllArticles() {
-    fetch("https://back-end-sabzlearn.vercel.app/articles")
+    fetch("http://localhost:4000/v1/articles")
       .then((res) => res.json())
       .then((allArticles) => {
         setArticles(allArticles)
