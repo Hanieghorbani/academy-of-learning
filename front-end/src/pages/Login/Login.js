@@ -19,12 +19,10 @@ import AuthContext from "../../userContext/authContext"
 import { useNavigate } from "react-router-dom"
 import { MdVisibility, MdVisibilityOff } from "react-icons/md"
 
-import ReCAPTCHA from "react-google-recaptcha"
 export default function Login() {
   const navigate = useNavigate()
   const [isShowPass, setIsShowPass] = useState(false)
   const contextData = useContext(AuthContext)
-  const [isVarifyRecaptcha, setIsVarifyRecaptcha] = useState(false)
   const [formState, onInputHandler] = useForm(
     {
       loginUsername: {
@@ -46,7 +44,7 @@ export default function Login() {
       password: formState.inputs.loginPassword.value,
     }
 
-    fetch("http://localhost:4000/v1/auth/login", {
+    fetch("https://back-end-sabzlearn.vercel.app/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -148,20 +146,13 @@ export default function Login() {
                 />
               )}
             </div>
-
-            <ReCAPTCHA
-              sitekey="6LdplhQpAAAAAHk9zONwQxXMxr8P3BMceKCxN8Iv"
-              onChange={() => setIsVarifyRecaptcha(true)}
-            />
             <Button
               className={`login-form__btn ${
-                formState.isFormValid && isVarifyRecaptcha
-                  ? "bg-success"
-                  : "bg-danger"
+                formState.isFormValid ? "bg-success" : "bg-danger"
               }`}
               type="submit"
               onClick={userLogin}
-              disabled={!formState.isFormValid || !isVarifyRecaptcha}
+              disabled={!formState.isFormValid}
             >
               <MdInput className="login-form__btn-icon" />
               <span className="login-form__btn-text">ورود</span>
