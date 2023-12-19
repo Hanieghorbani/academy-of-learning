@@ -6,9 +6,12 @@ export default function PAdminPrivate({ children }) {
   const contextData = useContext(AuthContext)
   const navigate = useNavigate()
   useEffect(() => {
-    if (contextData.userInfos && contextData.userInfos.role == "USER") {
+    if (
+    (contextData.userInfos && contextData.userInfos.role == "USER")
+    ) {
       navigate("/login")
     }
+    
   }, [contextData.userInfos])
 
   return (

@@ -120,9 +120,10 @@ export default function Users() {
 
   function registerNewUser(event) {
     event.preventDefault()
+    console.log(formState.inputs);
     if (
-      formState.inputs.registerPassword.value ===
-      formState.inputs.registerConfirmPassword.value
+      formState.inputs.password.value ===
+      formState.inputs.confirmPassword.value
     ) {
       const newUserInfo = {
         name: formState.inputs.name.value,
@@ -132,6 +133,8 @@ export default function Users() {
         password: formState.inputs.password.value,
         confirmPassword: formState.inputs.password.value,
       }
+      
+      
 
       fetch("http://localhost:4000/v1/auth/register", {
         method: "POST",

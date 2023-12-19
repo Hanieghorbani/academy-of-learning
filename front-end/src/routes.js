@@ -84,10 +84,6 @@ const routes = [
       { path: "send-ticket", element: <SendTicket /> },
       { path: "tickets/answer/:id", element: <TicketAnswer /> },
       { path: "edit-account", element: <EditAccount /> },
-      // { path: 'contacts', element: <AdminContacts/> },
-      // { path: 'sessions', element: <Sessions/> },
-      // { path: 'comments', element: <Comments/> },
-      // { path: 'offs', element: <Offs/> },
     ],
   },
 ]

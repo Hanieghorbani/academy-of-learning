@@ -20,9 +20,9 @@ export default function Footer() {
     false
   )
 
-  useEffect(()=>{
+  useEffect(() => {
     getAllArticles()
-  },[])
+  }, [])
   function addNewEmail(event) {
     event.preventDefault()
     fetch("http://localhost:4000/v1/newsletters", {
@@ -75,11 +75,15 @@ export default function Footer() {
 
             <FooterItem title="آخرین مطالب">
               <div className="footer-widgets__links">
-              {articles.slice(0,7).map(article=>(
-                <Link to={`/article-info/${article.shortName}`} className="footer-widgets__link">
-                 {article.title}
-                </Link>
-              ))}
+                {articles.slice(0, 7).map((article) => (
+                  <Link
+                    key={article._id}
+                    to={`/article-info/${article.shortName}`}
+                    className="footer-widgets__link"
+                  >
+                    {article.title}
+                  </Link>
+                ))}
               </div>
             </FooterItem>
 

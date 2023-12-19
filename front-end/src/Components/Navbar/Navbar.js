@@ -37,7 +37,7 @@ export default function Navbar() {
               </li>
               {allNavbarLinks.map((link) => (
                 <li key={link._id} className="main-header__item">
-                  <Link to={`${link.href}/1`} className="main-header__link">
+                  <Link to={`/category-info/${link.href}/1`} className="main-header__link">
                     {link.title}
                     {link.submenus.length !== 0 && (
                       <>
@@ -49,7 +49,7 @@ export default function Navbar() {
                               className="main-header__dropdown-item"
                             >
                               <Link
-                                to={sub.href}
+                                to={`/course-info/${sub.href}`} 
                                 className="main-header__dropdown-link"
                               >
                                 {sub.title}
